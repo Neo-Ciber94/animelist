@@ -1,0 +1,13 @@
+{
+  "name": "@mal/core",
+  "version": "0.0.1",
+  "description": "Common functionality of @mal",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "5.2.2"
+  }
+}

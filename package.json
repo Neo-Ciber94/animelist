@@ -1,0 +1,16 @@
+{
+  "name": "root",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "lerna": "^7.3.0",
+    "rimraf": "^5.0.1"
+  },
+  "scripts": {
+    "build": "npx lerna run build",
+    "clean": "rimraf dist"
+  }
+}

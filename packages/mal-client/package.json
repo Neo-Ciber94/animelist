@@ -1,0 +1,16 @@
+{
+  "name": "@mal/client",
+  "author": "Freddy L. Paredes",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@mal/core": "*",
+    "typescript": "5.2.2"
+  }
+}

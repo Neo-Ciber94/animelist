@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "module": "esnext",
+    "baseUrl": ".",
+    "outDir": "./dist",
+    "lib": [
+      "esnext",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "paths": {
+      "@mal/core/*": [
+        "packages/core/src/*",
+      ],
+      "@mal/core": [
+        "packages/core/src",
+      ]
+    }
+  }
+}
