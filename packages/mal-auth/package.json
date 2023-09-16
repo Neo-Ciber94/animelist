@@ -1,6 +1,6 @@
 {
   "name": "@mal/auth",
-  "version": "0.0.1",
+  "version": "0.0.1-beta1",
   "description": "",
   "scripts": {
     "build": "tsc",
