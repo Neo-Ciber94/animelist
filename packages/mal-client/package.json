@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "description": "",
   "keywords": [],
-  "license": "ISC",
+  "license": "MIT",
   "main": "index.js",
   "scripts": {
     "build": "tsc"

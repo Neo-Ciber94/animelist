@@ -2,13 +2,12 @@
   "name": "@mal/auth",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "build": "tsc"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Freddy L. Paredes",
+  "license": "MIT",
   "devDependencies": {
     "@mal/core": "*",
     "@types/node": "20.6.2",

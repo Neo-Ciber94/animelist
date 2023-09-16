@@ -2,8 +2,8 @@
   "name": "@mal/core",
   "version": "0.0.1",
   "description": "Common functionality of @mal",
-  "main": "index.js",
   "license": "MIT",
+  "author": "Freddy L. Paredes",
   "scripts": {
     "build": "tsc"
   },
