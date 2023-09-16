@@ -9,5 +9,6 @@
   },
   "devDependencies": {
     "typescript": "5.2.2"
-  }
+  },
+  "gitHead": "589c8eed719aba14645ba998142fe563d75b3c8c"
 }
