@@ -6,6 +6,14 @@ const MY_ANIME_LIST_CLIENT_ID = process.env.MY_ANIME_LIST_CLIENT_ID!;
 const MY_ANIME_LIST_CLIENT_SECRET = process.env.MY_ANIME_LIST_CLIENT_SECRET!;
 const MY_ANIME_LIST_OAUTH2_URL = "https://myanimelist.net/v1/oauth2";
 
+if (MY_ANIME_LIST_CLIENT_ID == null) {
+    throw new Error("MyAnimeList client id is required")
+}
+
+if (MY_ANIME_LIST_CLIENT_SECRET == null) {
+    throw new Error("MyAnimeList client secret is required")
+}
+
 /**
  * Options to create the authentication url.
  */

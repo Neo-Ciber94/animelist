@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "keywords": [],
   "author": "Freddy L. Paredes",
@@ -11,7 +13,9 @@
   "devDependencies": {
     "@mal/core": "*",
     "@types/node": "20.6.2",
-    "typescript": "5.2.2"
+    "dotenv": "^16.3.1",
+    "typescript": "5.2.2",
+    "vitest": "^0.34.4"
   },
   "dependencies": {
     "crypto-es": "2.0.4",
