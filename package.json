@@ -18,6 +18,7 @@
     "build": "npx lerna run build",
     "clean": "rimraf dist",
     "typecheck": "npx lerna run typecheck",
-    "lint": "npx lerna run lint"
+    "lint": "npx lerna run lint",
+    "test": "npx lerna run test"
   }
 }
