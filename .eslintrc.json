@@ -14,7 +14,7 @@
         "sourceType": "module",
         "project": [
             "./packages/*/tsconfig.json",
-            "./tsconfig.base.json"
+            "./tsconfig.json"
         ]
     },
     "plugins": [

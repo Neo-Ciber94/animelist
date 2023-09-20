@@ -1,6 +1,6 @@
 import * as jose from 'jose';
 import { DEFAULT_SESSION_DURATION_SECONDS } from '../handlers/fetchHandler';
-import { Cookies } from './types';
+import type { Cookies } from './types';
 import { error } from './httpError';
 
 const SECRET_KEY = process.env.MAL_SECRET_KEY || getDefaultSecretKey();
