@@ -1,8 +1,8 @@
-import { User } from "@mal/core";
+import type { User } from "@mal/core";
 import { MALClient } from "@mal/client";
 import { COOKIE_AUTH_CSRF, COOKIE_AUTH_CODE_CHALLENGE, COOKIE_AUTH_SESSION, COOKIE_AUTH_ACCESS_TOKEN, generateJwt, getServerSession } from "../common/utils";
 import { Auth } from "../server";
-import { RequestEvent } from "../common/types";
+import type { RequestEvent } from "../common/types";
 import { HttpError, error, redirect } from "../common/httpError";
 
 // export const MY_ANIME_LIST_API_URL = "https://api.myanimelist.net/v2";
