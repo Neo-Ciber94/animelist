@@ -5,7 +5,13 @@ import { HttpError, error, redirect } from "../common/httpError";
 import type { RequestEvent } from "../common/types";
 import type { HandleAuthOptions } from "./types";
 
-// export const MY_ANIME_LIST_API_URL = "https://api.myanimelist.net/v2";
+const ALLOWED_FORWARD_HEADERS = [
+    "Authorization",
+    "X-MAL-CLIENT-ID",
+    "Content-Type"
+]
+
+export const MY_ANIME_LIST_API_URL = "https://api.myanimelist.net/v2";
 export const DEFAULT_SESSION_DURATION_SECONDS = 60 * 60 * 24 * 7; // 7 days;
 
 /**
@@ -208,4 +214,53 @@ async function getMyAnimeListAuthToken(event: RequestEvent) {
 function getAuthAction(pathname: string) {
     const lastSegment = pathname.lastIndexOf("/");
     return lastSegment < 0 ? pathname : pathname.slice(lastSegment);
+}
+
+/**
+ * Forwards a request to `MyAnimeList`.
+ * @param apiUrl The path to the current API endpoint. `/api/myanimelist`
+ * @param event The current request event.
+ */
+export async function proxyFetchRequestToMyAnimeList(apiUrl: string, event: RequestEvent) {
+    const forwardHeaders: Record<string, string> = {};
+
+    for (const [key, value] of event.request.headers.entries()) {
+        if (ALLOWED_FORWARD_HEADERS.some(x => x.toLowerCase() === key.toLowerCase())) {
+            forwardHeaders[key] = value;
+        }
+    }
+
+    const url = new URL(event.request.url);
+    const path = url.pathname.slice(apiUrl.length);
+    const search = url.search;
+    const myAnimeListApiUrl = `${MY_ANIME_LIST_API_URL}${path}${search}`
+
+    // 🍥 GET: https://api.example.com/users
+    console.log(`🍥 ${event.request.method}: ${myAnimeListApiUrl}`)
+
+    const res = await fetch(myAnimeListApiUrl, {
+        method: event.request.method,
+        body: event.request.body,
+        headers: forwardHeaders,
+        signal: event.request.signal,
+        cache: event.request.cache,
+        credentials: event.request.credentials,
+        integrity: event.request.integrity,
+        keepalive: event.request.keepalive,
+        mode: event.request.mode,
+        redirect: event.request.redirect,
+        referrer: event.request.referrer,
+        referrerPolicy: event.request.referrerPolicy,
+
+        // @ts-expect-error This property is required to send a body
+        // https://github.com/nodejs/node/issues/46221#issuecomment-1482439958
+        duplex: 'half'
+    });
+
+    if (!res.ok) {
+        // ❌ GET (404) Not Found: https://api.example.com/users
+        console.error(`❌ ${event.request.method} (${res.status}) ${res.statusText}: ${myAnimeListApiUrl}`)
+    }
+
+    return res;
 }
