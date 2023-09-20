@@ -1,4 +1,4 @@
-# @MAL
+# @mal
 
 This repository provide a `Javascript` library for interacting with the `MyAnimeList` API,
 both authorization and anime api.
