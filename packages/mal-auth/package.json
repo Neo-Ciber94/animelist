@@ -8,6 +8,8 @@
     "test": "vitest run",
     "test:watch": "vitest"
   },
+  "main": "dist/mal-auth/src/index.js",
+  "typings": "dist/mal-auth/src/index.d.ts",
   "keywords": [],
   "author": "Freddy L. Paredes",
   "license": "MIT",

@@ -33,5 +33,9 @@
         "packages/mal-client/src",
       ]
     }
-  }
+  },
+  "exclude": [
+    "**/**/*.test.ts",
+    "**/**/*.spec.ts",
+  ]
 }

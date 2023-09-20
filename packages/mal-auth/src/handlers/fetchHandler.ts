@@ -88,7 +88,6 @@ export interface MyAnimeListHandlerOptions {
     callbacks?: AuthCallbacks
 }
 
-
 export type HandleAuthOptions = MyAnimeListHandlerOptions & {
     /**
      * The base path for the api.
@@ -100,7 +99,7 @@ export type HandleAuthOptions = MyAnimeListHandlerOptions & {
     /**
      * Duration of a session.
      */
-    sessionDurationSeconds: number,
+    sessionDurationSeconds?: number,
 
     /**
      * If the app is running in development mode.
@@ -128,7 +127,12 @@ export async function handleAuthFetchRequest(event: RequestEvent, options: Handl
 }
 
 async function handleAuth(event: RequestEvent, options: HandleAuthOptions) {
-    const { apiUrl, sessionDurationSeconds, dev = true } = options;
+    const {
+        apiUrl,
+        sessionDurationSeconds = DEFAULT_SESSION_DURATION_SECONDS,
+        dev = true
+    } = options;
+
     const url = new URL(event.request.url);
     const action = getAuthAction(url.pathname);
     const originUrl = `${url.origin}${apiUrl}/auth`;

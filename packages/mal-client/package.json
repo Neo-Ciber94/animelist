@@ -5,7 +5,8 @@
   "description": "",
   "keywords": [],
   "license": "MIT",
-  "main": "index.js",
+  "main": "dist/mal-client/src/index.js",
+  "typings": "dist/mal-client/src/index.d.ts",
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit"

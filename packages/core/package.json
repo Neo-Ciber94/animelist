@@ -4,6 +4,8 @@
   "description": "Common functionality of @mal",
   "license": "MIT",
   "author": "Freddy L. Paredes",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit"
