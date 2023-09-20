@@ -12,6 +12,7 @@
   },
   "scripts": {
     "build": "npx lerna run build",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "typecheck": "npx lerna run typecheck"
   }
 }

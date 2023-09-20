@@ -5,7 +5,8 @@
   "license": "MIT",
   "author": "Freddy L. Paredes",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "typescript": "5.2.2"

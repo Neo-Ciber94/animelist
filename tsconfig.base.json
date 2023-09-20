@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "forceConsistentCasingInFileNames": true,
+    "noEmitOnError": true,
     "esModuleInterop": true,
     "declaration": true,
     "skipLibCheck": true,
