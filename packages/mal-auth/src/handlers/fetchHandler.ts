@@ -3,21 +3,25 @@ import { MALClient } from "@mal/client";
 import { COOKIE_AUTH_CSRF, COOKIE_AUTH_CODE_CHALLENGE, COOKIE_AUTH_SESSION, COOKIE_AUTH_ACCESS_TOKEN, generateJwt, getServerSession } from "../common/utils";
 import { Auth } from "../server";
 import { RequestEvent } from "../common/types";
+import { HttpError, error, redirect } from "../common/httpError";
 
-export const MY_ANIME_LIST_API_URL = "https://api.myanimelist.net/v2";
+// export const MY_ANIME_LIST_API_URL = "https://api.myanimelist.net/v2";
 export const DEFAULT_SESSION_DURATION_SECONDS = 60 * 60 * 24 * 7; // 7 days;
 
-function redirect(status: number, url: string) {
-    return new Error(`${status} redirect`);
-}
-
-function error(status: number, message = "Something went wrong") {
-    return new Error(`${status} ${message}`)
-}
-
 type OnSessionData = {
+    /**
+     * The `MyAnimeList` user.
+     */
     user: User,
+
+    /**
+     * The `MyAnimeList` access token of the user.
+     */
     accessToken: string,
+
+    /**
+     * Expiration date of the session.
+     */
     expiresAt: Date
 }
 
@@ -84,18 +88,49 @@ export interface MyAnimeListHandlerOptions {
     callbacks?: AuthCallbacks
 }
 
-// export type AuthAction = '/sign-in' | '/sign-out' | '/callback' | '/token' | '/session';
 
-type HandleAuthOptions = MyAnimeListHandlerOptions & {
-    action: string, // AuthAction
+export type HandleAuthOptions = MyAnimeListHandlerOptions & {
+    /**
+     * The base path for the api.
+     * 
+     * @example `/api/myanimelist`
+     */
     apiUrl: string,
+
+    /**
+     * Duration of a session.
+     */
     sessionDurationSeconds: number,
+
+    /**
+     * If the app is running in development mode.
+     */
     dev?: boolean
 }
 
+/**
+ * Handle an authentication request.
+ * @param event The request event.
+ * @param options The authentication options.
+ * @returns The response object.
+ */
 export async function handleAuthFetchRequest(event: RequestEvent, options: HandleAuthOptions) {
-    const { action, apiUrl, sessionDurationSeconds, dev = true } = options;
+    try {
+        return handleAuth(event, options);
+    }
+    catch (err) {
+        if (err instanceof HttpError) {
+            return err.toResponse();
+        }
+
+        throw err;
+    }
+}
+
+async function handleAuth(event: RequestEvent, options: HandleAuthOptions) {
+    const { apiUrl, sessionDurationSeconds, dev = true } = options;
     const url = new URL(event.request.url);
+    const action = getAuthAction(url.pathname);
     const originUrl = `${url.origin}${apiUrl}/auth`;
 
     switch (action) {
@@ -133,6 +168,7 @@ export async function handleAuthFetchRequest(event: RequestEvent, options: Handl
             // sign-out callback
             options.callbacks?.onSignOut?.(event);
 
+            // Redirect
             throw redirect(307, options.redirectAfterSignInUrl ?? '/');
         }
         case '/callback': {
@@ -150,7 +186,6 @@ export async function handleAuthFetchRequest(event: RequestEvent, options: Handl
             }
 
             const csrf = event.cookies.get(COOKIE_AUTH_CSRF);
-            //console.log({ codeChallenge, state, csrf })
 
             if (state == null || state != csrf) {
                 throw error(401, "Invalid auth state");
@@ -194,6 +229,7 @@ export async function handleAuthFetchRequest(event: RequestEvent, options: Handl
             // auth callback
             options.callbacks?.onCallback?.(event);
 
+            // Redirect
             throw redirect(307, options.redirectAfterSignOutUrl ?? '/');
         }
         case '/token': {
@@ -252,7 +288,7 @@ async function getMyAnimeListAuthToken(event: RequestEvent) {
     const { refreshToken, userId } = authenticated;
     const { access_token: accessToken, expires_in } = await Auth.refreshToken({ refreshToken });
 
-    // OAuth2 expires_in is in seconds
+    // OAuth2 `expires_in` is in seconds
     // https://www.rfc-editor.org/rfc/rfc6749#section-5.1
     const accessTokenExpiresMs = expires_in * 1000;
 
@@ -261,4 +297,9 @@ async function getMyAnimeListAuthToken(event: RequestEvent) {
     const expiresAt = new Date(accessTokenExpiresMs + Date.now());
 
     return { accessToken, expiresAt, userId }
+}
+
+function getAuthAction(pathname: string) {
+    const lastSegment = pathname.lastIndexOf("/");
+    return lastSegment < 0 ? pathname : pathname.slice(lastSegment);
 }

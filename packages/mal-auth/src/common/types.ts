@@ -33,6 +33,9 @@ export type Cookies = {
     has(name: string): boolean;
 }
 
+/**
+ * The incoming request.
+ */
 export type RequestEvent = {
     /**
      * The current request.
