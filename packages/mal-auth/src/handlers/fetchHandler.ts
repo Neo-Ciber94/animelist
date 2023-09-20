@@ -115,7 +115,8 @@ export type HandleAuthOptions = MyAnimeListHandlerOptions & {
  */
 export async function handleAuthFetchRequest(event: RequestEvent, options: HandleAuthOptions) {
     try {
-        return handleAuth(event, options);
+        // FIXME: eslint is not warning about forgetting the await
+        return await handleAuth(event, options);
     }
     catch (err) {
         if (err instanceof HttpError) {

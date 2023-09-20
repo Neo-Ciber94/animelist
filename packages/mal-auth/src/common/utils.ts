@@ -140,7 +140,7 @@ export async function getRequiredServerSession(cookies: Cookies, message = "unab
     const session = await getServerSession(cookies);
 
     if (session == null) {
-        throw error(401, "Unable to get user session");
+        throw error(401, message);
     }
 
     return session;

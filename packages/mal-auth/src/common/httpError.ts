@@ -73,7 +73,7 @@ export function redirect(status: RedirectionStatus, url: string) {
 export function error(status: number, message = "Something went wrong") {
     if (status < 400) {
         throw new Error(`'${status}' is not a valid http error status`)
-    };
+    }
 
     return new HttpError({ status, message })
 }

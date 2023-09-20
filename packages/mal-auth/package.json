@@ -7,7 +7,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "lint": "eslint"
+    "lint": "eslint ./src"
   },
   "main": "dist/mal-auth/src/index.js",
   "typings": "dist/mal-auth/src/index.d.ts",

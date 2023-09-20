@@ -11,14 +11,21 @@
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaVersion": "latest",
-        "sourceType": "module"
+        "sourceType": "module",
+        "project": [
+            "./packages/*/tsconfig.json",
+            "./tsconfig.json"
+        ]
     },
     "plugins": [
         "@typescript-eslint"
     ],
+    "ignorePatterns": [
+        "*.test.ts"
+    ],
     "rules": {
         "require-await": "off",
         "@typescript-eslint/require-await": "error",
-        "@typescript-eslint/explicit-function-return-type": "error"
+        "@typescript-eslint/no-floating-promises": "error"
     }
 }
