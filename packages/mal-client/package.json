@@ -9,10 +9,14 @@
   "typings": "dist/mal-client/src/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint"
   },
   "devDependencies": {
     "@mal/core": "*",
     "typescript": "5.2.2"
+  },
+  "dependencies": {
+    "eslint": "^8.49.0"
   }
 }

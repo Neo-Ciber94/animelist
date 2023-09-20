@@ -6,7 +6,8 @@
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "lint": "eslint"
   },
   "main": "dist/mal-auth/src/index.js",
   "typings": "dist/mal-auth/src/index.d.ts",
@@ -24,6 +25,7 @@
   "dependencies": {
     "@mal/client": "*",
     "crypto-es": "2.0.4",
+    "eslint": "^8.49.0",
     "jose": "4.14.6",
     "zod": "3.22.2"
   }
