@@ -115,7 +115,7 @@ export type HandleAuthOptions = MyAnimeListHandlerOptions & {
  */
 export async function handleAuthFetchRequest(event: RequestEvent, options: HandleAuthOptions) {
     try {
-        return handleAuth(event, options);
+        return await handleAuth(event, options);
     }
     catch (err) {
         if (err instanceof HttpError) {
