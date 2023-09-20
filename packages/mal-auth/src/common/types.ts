@@ -1,8 +1,36 @@
+import type { CookieSerializeOptions } from 'cookie';
 
+/**
+ * Request cookies.
+ */
 export type Cookies = {
-    get(name: string): string;
-    set(name: string, value: string, options?: unknown): void;
-    delete(name: string, options?: unknown): void;
+    /**
+     * Gets the value for the cookie with the given name.
+     * 
+     * @param name The name of the cookie to get.
+     */
+    get(name: string): string | null;
+
+    /**
+     * Sets the value for a cookie.
+     * @param name The name of the cookie to set.
+     * @param value The value of the cookie.
+     * @param options The options to set the cookie.
+     */
+    set(name: string, value: string, options?: CookieSerializeOptions): void;
+
+    /**
+     * Deletes the cookie with the given name.
+     * @param name The name of the cookie to delete.
+     * @param options The options to delete the cookie.
+     */
+    delete(name: string, options?: CookieSerializeOptions): void;
+
+    /**
+     * Checks if the given cookie exists.
+     * @param name The name of the cookie.
+     */
+    has(name: string): boolean;
 }
 
 export type RequestEvent = {
