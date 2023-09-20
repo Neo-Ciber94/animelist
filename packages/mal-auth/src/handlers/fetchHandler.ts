@@ -1,111 +1,12 @@
-import type { User } from "@mal/core";
 import { MALClient } from "@mal/client";
 import { COOKIE_AUTH_CSRF, COOKIE_AUTH_CODE_CHALLENGE, COOKIE_AUTH_SESSION, COOKIE_AUTH_ACCESS_TOKEN, generateJwt, getServerSession } from "../common/utils";
 import { Auth } from "../server";
-import type { RequestEvent } from "../common/types";
 import { HttpError, error, redirect } from "../common/httpError";
+import type { RequestEvent } from "../common/types";
+import type { HandleAuthOptions } from "./types";
 
 // export const MY_ANIME_LIST_API_URL = "https://api.myanimelist.net/v2";
 export const DEFAULT_SESSION_DURATION_SECONDS = 60 * 60 * 24 * 7; // 7 days;
-
-type OnSessionData = {
-    /**
-     * The `MyAnimeList` user.
-     */
-    user: User,
-
-    /**
-     * The `MyAnimeList` access token of the user.
-     */
-    accessToken: string,
-
-    /**
-     * Expiration date of the session.
-     */
-    expiresAt: Date
-}
-
-/**
- * Auth callbacks.
- */
-export type AuthCallbacks = {
-    /**
-     * Called after sign-in.
-     */
-    onSignIn?: (event: RequestEvent) => void,
-
-    /**
-     * Called after sign-out.
-     */
-    onSignOut?: (event: RequestEvent) => void,
-
-    /**
-     * Called after the auth callback.
-     */
-    onCallback?: (event: RequestEvent) => void,
-
-    /**
-     * Called after generating a session token.
-     */
-    onToken?: (event: RequestEvent) => void,
-
-    /**
-     * Called after generating an user session.
-     */
-    onSession?: (session: OnSessionData, event: RequestEvent) => void,
-
-    /**
-     * Called before a proxy request.
-     * @param event The current request.
-     * @param next The proxy request.
-     * @returns The response of the request.
-     */
-    onProxyRequest?: (event: RequestEvent, next: (event: RequestEvent) => Promise<Response>) => Promise<Response>,
-}
-
-/**
- * Options for the auth handler.
- */
-export interface MyAnimeListHandlerOptions {
-    /**
-     * Duration per session, defaults to 7 days.
-     */
-    sessionDurationSeconds?: number;
-
-    /**
-     * Url to redirect after sign-in.
-     */
-    redirectAfterSignInUrl?: string;
-
-    /**
-     * Url to redirect after sign-out.
-     */
-    redirectAfterSignOutUrl?: string;
-
-    /**
-     * Callbacks.
-     */
-    callbacks?: AuthCallbacks
-}
-
-export type HandleAuthOptions = MyAnimeListHandlerOptions & {
-    /**
-     * The base path for the api.
-     * 
-     * @example `/api/myanimelist`
-     */
-    apiUrl: string,
-
-    /**
-     * Duration of a session.
-     */
-    sessionDurationSeconds?: number,
-
-    /**
-     * If the app is running in development mode.
-     */
-    dev?: boolean
-}
 
 /**
  * Handle an authentication request.
