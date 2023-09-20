@@ -1,5 +1,5 @@
 import * as jose from 'jose';
-import { DEFAULT_SESSION_DURATION_SECONDS } from '../handlers/fetchHandler';
+import { DEFAULT_SESSION_DURATION_SECONDS } from '../server/handlers/fetchHandler';
 import type { Cookies } from './types';
 import { error } from './httpError';
 

@@ -1,5 +1,5 @@
 import type { User } from "@mal/core/index";
-import type { RequestEvent } from "../common/types";
+import type { RequestEvent } from "../../common/types";
 
 export type OnSessionData = {
     /**

@@ -1,8 +1,8 @@
 import { type RequestEvent } from "@mal/auth/common/types";
-import { DEFAULT_SESSION_DURATION_SECONDS, handleAuthFetchRequest, proxyFetchRequestToMyAnimeList } from "@mal/auth/handlers/fetchHandler";
-import { type MyAnimeListHandlerOptions } from "@mal/auth/handlers/types";
+import { DEFAULT_SESSION_DURATION_SECONDS, handleAuthFetchRequest, proxyFetchRequestToMyAnimeList } from "@mal/auth/server";
+import { type MyAnimeListHandlerOptions } from "@mal/auth/server";
 import { type Handle } from "@sveltejs/kit";
-import { getApiUrl } from "@mal/auth/getApiUrl";
+import { getApiUrl } from "@mal/auth/common";
 
 export function createMyAnimeListHandler(options: MyAnimeListHandlerOptions = {}): Handle {
     const { sessionDurationSeconds = DEFAULT_SESSION_DURATION_SECONDS } = options;

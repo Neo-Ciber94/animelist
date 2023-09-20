@@ -1,6 +1,6 @@
 import { z } from "zod";
 import type { User } from "@mal/core";
-import { getApiUrl } from "./getApiUrl";
+import { getApiUrl } from "../common/getApiUrl";
 
 const userTokenSchema = z.object({
     accessToken: z.string(),

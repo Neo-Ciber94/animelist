@@ -1,8 +1,8 @@
 import { MALClient } from "@mal/client";
-import { COOKIE_AUTH_CSRF, COOKIE_AUTH_CODE_CHALLENGE, COOKIE_AUTH_SESSION, COOKIE_AUTH_ACCESS_TOKEN, generateJwt, getServerSession } from "../common/utils";
+import { COOKIE_AUTH_CSRF, COOKIE_AUTH_CODE_CHALLENGE, COOKIE_AUTH_SESSION, COOKIE_AUTH_ACCESS_TOKEN, generateJwt, getServerSession } from "../../common/utils";
 import { Auth } from "../server";
-import { HttpError, error, redirect } from "../common/httpError";
-import type { RequestEvent } from "../common/types";
+import { HttpError, error, redirect } from "../../common/httpError";
+import type { RequestEvent } from "../../common/types";
 import type { HandleAuthOptions } from "./types";
 
 const ALLOWED_FORWARD_HEADERS = [
