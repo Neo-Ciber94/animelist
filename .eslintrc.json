@@ -14,7 +14,7 @@
         "sourceType": "module",
         "project": [
             "./packages/*/tsconfig.json",
-            "./tsconfig.json"
+            "./tsconfig.base.json"
         ]
     },
     "plugins": [
@@ -26,6 +26,7 @@
     "rules": {
         "require-await": "off",
         "@typescript-eslint/require-await": "error",
-        "@typescript-eslint/no-floating-promises": "error"
+        "@typescript-eslint/no-floating-promises": "error",
+        "@typescript-eslint/consistent-type-imports": "error"
     }
 }
