@@ -58,15 +58,21 @@ export class HttpError extends Error {
 
 type RedirectionStatus = 301 | 302 | 303 | 304 | 305 | 306 | 307;
 
-// Returns a redirection `HttpError`.
+/**
+ * Returns a redirection `HttpError`.
+ * @internal 
+ */
 export function redirect(status: RedirectionStatus, url: string) {
     return new HttpError({ status, headers: { 'Location': url } })
 }
 
-// Returns an `HttpError` for the given status code.
+/** 
+ * Returns an `HttpError` for the given status code.
+ * @internal 
+ * */
 export function error(status: number, message = "Something went wrong") {
     if (status < 400) {
-        throw new Error(`${status} is not a valid http error`)
+        throw new Error(`'${status}' is not a valid http error status`)
     };
 
     return new HttpError({ status, message })

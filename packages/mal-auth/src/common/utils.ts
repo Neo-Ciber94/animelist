@@ -1,8 +1,18 @@
 import * as jose from 'jose';
 import { DEFAULT_SESSION_DURATION_SECONDS } from '../handlers/fetchHandler';
 import { Cookies } from './types';
+import { error } from './httpError';
 
-const SECRET_KEY = process.env.SECRET_KEY || crypto.randomUUID();
+const SECRET_KEY = process.env.MAL_SECRET_KEY || getDefaultSecretKey();
+
+function getDefaultSecretKey() {
+    if (process.env.NODE_ENV === 'production') {
+        throw new Error("You must generate a secret key and set it to 'process.env.MAL_SECRET_KEY'");
+    }
+
+    console.warn(`⚠️ 'process.env.MAL_SECRET_KEY' was not set, using a default secret key`)
+    return "nsuI9j2wnlH2dQ4I23g/0Ou/kCAwS8jhWh/lNcU7Yd1DS4wdNCQ5Nso+P/zukcIelBsZ9gomJhqichVYvKasaA==";
+}
 
 /**
  * Name of the `session` cookie.
@@ -130,8 +140,7 @@ export async function getRequiredServerSession(cookies: Cookies, message = "unab
     const session = await getServerSession(cookies);
 
     if (session == null) {
-        // Throw unauthorized error
-        throw new Error('Unable to get user session')
+        throw error(401, "Unable to get user session");
     }
 
     return session;
