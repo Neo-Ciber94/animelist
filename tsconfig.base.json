@@ -26,17 +26,26 @@
       "@mal/core": [
         "packages/core/src",
       ],
+      //
       "@mal/client/*": [
         "packages/mal-client/src/*",
       ],
       "@mal/client": [
         "packages/mal-client/src",
       ],
+      //
       "@mal/auth/*": [
         "packages/mal-auth/src/*",
       ],
       "@mal/auth": [
         "packages/mal-auth/src",
+      ],
+      //
+      "@mal/auth-sveltekit/*": [
+        "packages/mal-auth-sveltekit/src/*",
+      ],
+      "@mal/auth-sveltekit": [
+        "packages/mal-auth-sveltekit/src",
       ]
     }
   },
