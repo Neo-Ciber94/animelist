@@ -1,7 +1,7 @@
 {
   "name": "@mal/auth",
   "version": "0.0.1",
-  "description": "",
+  "description": "Provides an API to authenticate users with `MyAnimeList`",
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",

@@ -1,5 +1,4 @@
 
-
 /**
  * Returns the path of the `MyAnimeList` api.
  * 

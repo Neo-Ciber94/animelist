@@ -31,6 +31,12 @@
       ],
       "@mal/client": [
         "packages/mal-client/src",
+      ],
+      "@mal/auth/*": [
+        "packages/mal-auth/src/*",
+      ],
+      "@mal/auth": [
+        "packages/mal-auth/src",
       ]
     }
   },

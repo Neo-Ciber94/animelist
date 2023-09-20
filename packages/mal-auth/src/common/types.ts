@@ -9,7 +9,7 @@ export type Cookies = {
      * 
      * @param name The name of the cookie to get.
      */
-    get(name: string): string | null;
+    get(name: string): string | null | undefined;
 
     /**
      * Sets the value for a cookie.
@@ -25,12 +25,6 @@ export type Cookies = {
      * @param options The options to delete the cookie.
      */
     delete(name: string, options?: CookieSerializeOptions): void;
-
-    /**
-     * Checks if the given cookie exists.
-     * @param name The name of the cookie.
-     */
-    has(name: string): boolean;
 }
 
 /**

@@ -1,0 +1,19 @@
+{
+  "name": "@mal/auth-sveltekit",
+  "version": "0.0.1",
+  "description": "Integration with the @mal/auth for SvelteKit",
+  "main": "dist/mal-auth/src/index.js",
+  "typings": "dist/mal-auth/src/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint ./src"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@mal/auth": "*",
+    "@sveltejs/kit": "^1.25.0"
+  }
+}
