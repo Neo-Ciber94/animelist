@@ -267,7 +267,7 @@ export interface MALClientConfig {
     clientId?: string;
 
     /**
-     * The url to proxy all the requests to.
+     * The url to send all the requests to.
      * 
      * @default 
      * `https://api.myanimelist.net/v2`

@@ -25,6 +25,12 @@
       ],
       "@mal/core": [
         "packages/core/src",
+      ],
+      "@mal/client/*": [
+        "packages/mal-client/src/*",
+      ],
+      "@mal/client": [
+        "packages/mal-client/src",
       ]
     }
   }
