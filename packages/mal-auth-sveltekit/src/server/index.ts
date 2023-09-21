@@ -1,6 +1,6 @@
 import { type RequestEvent } from "@mal/auth/common/types";
 import { DEFAULT_SESSION_DURATION_SECONDS, handleAuthFetchRequest, proxyFetchRequestToMyAnimeList } from "@mal/auth/server";
-import { type MyAnimeListHandlerOptions } from "@mal/auth/dist/mal-auth/src";
+import { type MyAnimeListHandlerOptions } from "@mal/auth";
 import { type Handle } from "@sveltejs/kit";
 import { getApiUrl } from "@mal/auth/common";
 
