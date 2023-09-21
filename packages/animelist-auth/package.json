@@ -3,7 +3,7 @@
   "version": "0.0.1-alpha.0",
   "description": "Provides an API to authenticate users with `MyAnimeList`",
   "scripts": {
-    "build": "tsc",
+    "build": "npx rimraf dist && tsc",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",

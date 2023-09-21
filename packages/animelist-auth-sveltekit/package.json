@@ -6,7 +6,7 @@
   "module": "dist/animelist-auth-sveltekit/src/index.js",
   "typings": "dist/animelist-auth-sveltekit/src/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "npx rimraf dist && tsc",
     "typecheck": "tsc --noEmit",
     "lint": "eslint ./src"
   },

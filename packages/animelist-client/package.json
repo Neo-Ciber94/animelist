@@ -9,7 +9,7 @@
   "module": "dist/animelist-client/src/index.js",
   "typings": "dist/animelist-client/src/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "npx rimraf dist && tsc",
     "typecheck": "tsc --noEmit",
     "lint": "eslint ./src"
   },
