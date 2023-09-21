@@ -6,6 +6,7 @@
   "keywords": [],
   "license": "MIT",
   "main": "dist/mal-client/src/index.js",
+  "module": "dist/mal-client/src/index.js",
   "typings": "dist/mal-client/src/index.d.ts",
   "scripts": {
     "build": "tsc",
@@ -13,7 +14,7 @@
     "lint": "eslint ./src"
   },
   "devDependencies": {
-    "@mal/core": "*",
+    "@mal/core": "workspace:*",
     "typescript": "5.2.2"
   },
   "dependencies": {

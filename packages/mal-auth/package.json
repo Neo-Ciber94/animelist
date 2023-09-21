@@ -10,23 +10,24 @@
     "lint": "eslint ./src"
   },
   "main": "dist/mal-auth/src/index.js",
+  "module": "dist/mal-auth/src/index.js",
   "typings": "dist/mal-auth/src/index.d.ts",
   "keywords": [],
   "author": "Freddy L. Paredes",
   "license": "MIT",
+  "dependencies": {
+    "@mal/client": "workspace:*",
+    "crypto-es": "2.0.4",
+    "jose": "4.14.6",
+    "zod": "3.22.2"
+  },
   "devDependencies": {
-    "@mal/core": "*",
+    "@mal/core": "workspace:*",
     "@types/cookie": "^0.5.2",
     "@types/node": "20.6.2",
     "dotenv": "^16.3.1",
-    "typescript": "5.2.2",
-    "vitest": "^0.34.4"
-  },
-  "dependencies": {
-    "@mal/client": "*",
-    "crypto-es": "2.0.4",
-    "eslint": "^8.49.0",
-    "jose": "4.14.6",
-    "zod": "3.22.2"
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.4",
+    "eslint": "^8.49.0"
   }
 }

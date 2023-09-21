@@ -1,9 +1,13 @@
 import { type RequestEvent } from "@mal/auth/common/types";
 import { DEFAULT_SESSION_DURATION_SECONDS, handleAuthFetchRequest, proxyFetchRequestToMyAnimeList } from "@mal/auth/server";
-import { type MyAnimeListHandlerOptions } from "@mal/auth/server";
+import { type MyAnimeListHandlerOptions } from "@mal/auth/dist/mal-auth/src";
 import { type Handle } from "@sveltejs/kit";
 import { getApiUrl } from "@mal/auth/common";
 
+/**
+ * Creates a sveltekit `Handler` for `MyAnimeList` requests.
+ * @param options The options for the handler.
+ */
 export function createMyAnimeListHandler(options: MyAnimeListHandlerOptions = {}): Handle {
     const { sessionDurationSeconds = DEFAULT_SESSION_DURATION_SECONDS } = options;
 

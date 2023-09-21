@@ -150,7 +150,7 @@ async function handleAuth(event: RequestEvent, options: HandleAuthOptions) {
             // token callback
             options.callbacks?.onToken?.(event);
 
-            return Response.json({ accessToken, expiresAt })
+            return json({ accessToken, expiresAt })
         }
         case '/session': {
             const { accessToken, expiresAt } = await getMyAnimeListAuthToken(event);
@@ -171,7 +171,7 @@ async function handleAuth(event: RequestEvent, options: HandleAuthOptions) {
             // session callback
             options.callbacks?.onSession?.({ user, accessToken, expiresAt }, event);
 
-            return Response.json({
+            return json({
                 user,
                 accessToken,
                 expiresAt
@@ -263,4 +263,13 @@ export async function proxyFetchRequestToMyAnimeList(apiUrl: string, event: Requ
     }
 
     return res;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function json(data: any) {
+    return new Response(JSON.stringify(data), {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
 }

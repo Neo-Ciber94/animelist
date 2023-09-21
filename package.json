@@ -19,10 +19,12 @@
     "rimraf": "^5.0.1"
   },
   "scripts": {
-    "build": "npx lerna run build",
-    "clean": "rimraf dist",
-    "typecheck": "npx lerna run typecheck",
-    "lint": "npx lerna run lint",
-    "test": "npx lerna run test"
+    "clean:dist": "rimraf packages/core/dist packages/mal-auth/dist packages/mal-client/dist packages/mal-auth-sveltekit/dist",
+    "clean:node_modules": "rimraf packages/core/node_modules packages/mal-auth/node_modules packages/mal-client/node_modules packages/mal-auth-sveltekit/node_modules",
+    "clean": "npm run clean:dist && npm run clean:node_modules",
+    "build": "npx lerna run --scope '@mal/*' build",
+    "typecheck": "npx lerna run --scope '@mal/*' typecheck",
+    "lint": "npx lerna run --scope '@mal/*' lint",
+    "test": "npx lerna run --scope '@mal/*' test"
   }
 }

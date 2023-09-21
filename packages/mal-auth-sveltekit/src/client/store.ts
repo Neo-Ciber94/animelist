@@ -1,4 +1,4 @@
-import { dev } from "$app/environment";
+// import { dev } from "$app/environment";
 import { type User } from "@mal/core";
 import { getSession } from "@mal/auth/client";
 import { get, writable } from "svelte/store";
@@ -60,9 +60,9 @@ async function fetchUserSession() {
             return sessionStore.set({ loading: false, accessToken: null, user: null });
         }
 
-        if (dev) {
-            console.log("🍥 User session loaded: ", JSON.stringify(session, null, 2));
-        }
+        // if (dev) {
+        //     console.log("🍥 User session loaded: ", JSON.stringify(session, null, 2));
+        // }
 
         // Currently the expiration of the access token is 31 days, which is really long,
         // so we don't have reason to refresh it, each time the user log in a new token will be created.

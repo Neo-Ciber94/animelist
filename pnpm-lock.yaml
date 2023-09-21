@@ -28,6 +28,16 @@ importers:
         version: 5.0.1
 
   examples/sveltekit-mal-auth:
+    dependencies:
+      '@mal/auth':
+        specifier: '*'
+        version: link:../../packages/mal-auth
+      '@mal/auth-sveltekit':
+        specifier: '*'
+        version: link:../../packages/mal-auth-sveltekit
+      '@mal/client':
+        specifier: '*'
+        version: link:../../packages/mal-client
     devDependencies:
       '@sveltejs/adapter-auto':
         specifier: ^2.0.0
@@ -88,14 +98,11 @@ importers:
   packages/mal-auth:
     dependencies:
       '@mal/client':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../mal-client
       crypto-es:
         specifier: 2.0.4
         version: 2.0.4
-      eslint:
-        specifier: ^8.49.0
-        version: 8.49.0
       jose:
         specifier: 4.14.6
         version: 4.14.6
@@ -104,7 +111,7 @@ importers:
         version: 3.22.2
     devDependencies:
       '@mal/core':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../core
       '@types/cookie':
         specifier: ^0.5.2
@@ -115,8 +122,11 @@ importers:
       dotenv:
         specifier: ^16.3.1
         version: 16.3.1
+      eslint:
+        specifier: ^8.49.0
+        version: 8.49.0
       typescript:
-        specifier: 5.2.2
+        specifier: ^5.2.2
         version: 5.2.2
       vitest:
         specifier: ^0.34.4
@@ -125,11 +135,18 @@ importers:
   packages/mal-auth-sveltekit:
     dependencies:
       '@mal/auth':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../mal-auth
       '@sveltejs/kit':
         specifier: ^1.25.0
         version: 1.25.0(svelte@4.2.1)(vite@4.4.9)
+    devDependencies:
+      eslint:
+        specifier: ^8.49.0
+        version: 8.49.0
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
 
   packages/mal-client:
     dependencies:
@@ -138,7 +155,7 @@ importers:
         version: 8.49.0
     devDependencies:
       '@mal/core':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../core
       typescript:
         specifier: 5.2.2
@@ -458,7 +475,7 @@ packages:
     resolution: {integrity: sha512-rA+fGUo2j/LEq6w1w8s6oVikLbJTWoIDVpYMc7bUCtwDOUuZKMQiRtjmpavY3fTm7ltu42f4AKflc2A70K4wvA==}
     engines: {node: ^14.17.0 || >=16.0.0}
     dependencies:
-      chalk: 4.1.0
+      chalk: 4.1.2
       execa: 5.0.0
       strong-log-transformer: 2.1.0
     dev: true
@@ -3140,7 +3157,7 @@ packages:
     resolution: {integrity: sha512-LMIgiIrhigmPrs03JHpxUh2yISK3vLFPkAodPeo0+BuF7wA2FoQbkEg1u8gBYBThncu7e1oEDUfIXVuTqLRUjw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
     dependencies:
-      chalk: 4.1.0
+      chalk: 4.1.2
       diff-sequences: 29.6.3
       jest-get-type: 29.6.3
       pretty-format: 29.7.0
@@ -3775,7 +3792,7 @@ packages:
       array-differ: 3.0.0
       array-union: 2.1.0
       arrify: 2.0.1
-      minimatch: 3.0.5
+      minimatch: 3.1.2
     dev: true
 
   /mute-stream@0.0.8:
@@ -4018,7 +4035,7 @@ packages:
       '@yarnpkg/parsers': 3.0.0-rc.46
       '@zkochan/js-yaml': 0.0.6
       axios: 1.5.0
-      chalk: 4.1.0
+      chalk: 4.1.2
       cli-cursor: 3.1.0
       cli-spinners: 2.6.1
       cliui: 7.0.4
