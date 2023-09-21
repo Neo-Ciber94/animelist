@@ -1,4 +1,4 @@
-import type { User } from "@mal/core/index";
+import type { User } from "@animelist/core/index";
 import type { RequestEvent } from "../../common/types";
 
 export type OnSessionData = {

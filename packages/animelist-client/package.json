@@ -1,18 +1,20 @@
 {
-  "name": "@mal/core",
-  "version": "0.0.1-alpha.0",
-  "description": "Common functionality of @mal",
-  "license": "MIT",
+  "name": "@animelist/client",
   "author": "Freddy L. Paredes",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "version": "0.0.1-alpha.0",
+  "description": "",
+  "keywords": [],
+  "license": "MIT",
+  "main": "dist/animelist-client/src/index.js",
+  "module": "dist/animelist-client/src/index.js",
+  "typings": "dist/animelist-client/src/index.d.ts",
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "lint": "eslint ./src"
   },
   "devDependencies": {
+    "@animelist/core": "workspace:*",
     "typescript": "5.2.2"
   },
   "dependencies": {

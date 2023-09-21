@@ -19,12 +19,12 @@
     "rimraf": "^5.0.1"
   },
   "scripts": {
-    "clean:dist": "rimraf packages/core/dist packages/mal-auth/dist packages/mal-client/dist packages/mal-auth-sveltekit/dist",
-    "clean:node_modules": "rimraf packages/core/node_modules packages/mal-auth/node_modules packages/mal-client/node_modules packages/mal-auth-sveltekit/node_modules",
+    "clean:dist": "rimraf packages/animelist-core/dist packages/animelist-auth/dist packages/animelist-client/dist packages/animelist-auth-sveltekit/dist",
+    "clean:node_modules": "rimraf packages/animelist-core/node_modules packages/animelist-auth/node_modules packages/animelist-client/node_modules packages/animelist-auth-sveltekit/node_modules",
     "clean": "npm run clean:dist && npm run clean:node_modules",
-    "build": "npx lerna run --scope '@mal/*' build",
-    "typecheck": "npx lerna run --scope '@mal/*' typecheck",
-    "lint": "npx lerna run --scope '@mal/*' lint",
-    "test": "npx lerna run --scope '@mal/*' test"
+    "build": "npx lerna run --scope '@animelist/*' build",
+    "typecheck": "npx lerna run --scope '@animelist/*' typecheck",
+    "lint": "npx lerna run --scope '@animelist/*' lint",
+    "test": "npx lerna run --scope '@animelist/*' test"
   }
 }

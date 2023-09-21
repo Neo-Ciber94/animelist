@@ -1,4 +1,4 @@
-# @mal/client
+# @animelist/client
 
 ## Contents
 

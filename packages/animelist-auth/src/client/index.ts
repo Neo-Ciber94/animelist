@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { User } from "@mal/core";
+import type { User } from "@animelist/core";
 import { getApiUrl } from "../common/getApiUrl";
 
 const userTokenSchema = z.object({

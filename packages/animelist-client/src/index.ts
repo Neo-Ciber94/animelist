@@ -10,7 +10,7 @@ import type {
     RankingType,
     WatchStatus,
     User
-} from "@mal/core";
+} from "@animelist/core";
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type Empty = {}

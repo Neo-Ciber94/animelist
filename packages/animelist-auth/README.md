@@ -1,4 +1,4 @@
-# @mal/auth
+# @animelist/auth
 
 ## Contents
 

@@ -1,5 +1,5 @@
 import type { Handle } from "@sveltejs/kit";
-import { createMyAnimeListHandler } from "@mal/auth-sveltekit";
+import { createMyAnimeListHandler } from "@animelist/auth-sveltekit";
 
 const handler = createMyAnimeListHandler({
     callbacks: {

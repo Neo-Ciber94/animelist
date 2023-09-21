@@ -1,6 +1,6 @@
 // import { dev } from "$app/environment";
-import { type User } from "@mal/core";
-import { getSession } from "@mal/auth/client";
+import { type User } from "@animelist/core";
+import { getSession } from "@animelist/auth/client";
 import { get, writable } from "svelte/store";
 
 let initialized = false;

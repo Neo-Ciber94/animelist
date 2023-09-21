@@ -1,10 +1,10 @@
 {
-  "name": "@mal/auth-sveltekit",
+  "name": "@animelist/auth-sveltekit",
   "version": "0.0.1-alpha.0",
-  "description": "Integration with the @mal/auth for SvelteKit",
-  "main": "dist/mal-auth-sveltekit/src/index.js",
-  "module": "dist/mal-auth-sveltekit/src/index.js",
-  "typings": "dist/mal-auth-sveltekit/src/index.d.ts",
+  "description": "Integration with the @animelist/auth for SvelteKit",
+  "main": "dist/animelist-auth-sveltekit/src/index.js",
+  "module": "dist/animelist-auth-sveltekit/src/index.js",
+  "typings": "dist/animelist-auth-sveltekit/src/index.d.ts",
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@mal/auth": "workspace:*",
+    "@animelist/auth": "workspace:*",
     "@sveltejs/kit": "^1.25.0"
   },
   "devDependencies": {

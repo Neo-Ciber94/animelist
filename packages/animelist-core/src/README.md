@@ -1,4 +1,4 @@
-# @mal/core
+# @animelist/core
 
 ## Contents
 

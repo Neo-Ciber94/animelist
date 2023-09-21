@@ -29,15 +29,15 @@ importers:
 
   examples/sveltekit-mal-auth:
     dependencies:
-      '@mal/auth':
+      '@animelist/auth':
         specifier: '*'
-        version: link:../../packages/mal-auth
-      '@mal/auth-sveltekit':
+        version: link:../../packages/animelist-auth
+      '@animelist/auth-sveltekit':
         specifier: '*'
-        version: link:../../packages/mal-auth-sveltekit
-      '@mal/client':
+        version: link:../../packages/animelist-auth-sveltekit
+      '@animelist/client':
         specifier: '*'
-        version: link:../../packages/mal-client
+        version: link:../../packages/animelist-client
     devDependencies:
       '@sveltejs/adapter-auto':
         specifier: ^2.0.0
@@ -85,21 +85,11 @@ importers:
         specifier: ^0.34.0
         version: 0.34.4
 
-  packages/core:
+  packages/animelist-auth:
     dependencies:
-      eslint:
-        specifier: ^8.49.0
-        version: 8.49.0
-    devDependencies:
-      typescript:
-        specifier: 5.2.2
-        version: 5.2.2
-
-  packages/mal-auth:
-    dependencies:
-      '@mal/client':
+      '@animelist/client':
         specifier: workspace:*
-        version: link:../mal-client
+        version: link:../animelist-client
       crypto-es:
         specifier: 2.0.4
         version: 2.0.4
@@ -110,9 +100,9 @@ importers:
         specifier: 3.22.2
         version: 3.22.2
     devDependencies:
-      '@mal/core':
+      '@animelist/core':
         specifier: workspace:*
-        version: link:../core
+        version: link:../animelist-core
       '@types/cookie':
         specifier: ^0.5.2
         version: 0.5.2
@@ -132,11 +122,11 @@ importers:
         specifier: ^0.34.4
         version: 0.34.4
 
-  packages/mal-auth-sveltekit:
+  packages/animelist-auth-sveltekit:
     dependencies:
-      '@mal/auth':
+      '@animelist/auth':
         specifier: workspace:*
-        version: link:../mal-auth
+        version: link:../animelist-auth
       '@sveltejs/kit':
         specifier: ^1.25.0
         version: 1.25.0(svelte@4.2.1)(vite@4.4.9)
@@ -148,15 +138,25 @@ importers:
         specifier: ^5.2.2
         version: 5.2.2
 
-  packages/mal-client:
+  packages/animelist-client:
     dependencies:
       eslint:
         specifier: ^8.49.0
         version: 8.49.0
     devDependencies:
-      '@mal/core':
+      '@animelist/core':
         specifier: workspace:*
-        version: link:../core
+        version: link:../animelist-core
+      typescript:
+        specifier: 5.2.2
+        version: 5.2.2
+
+  packages/animelist-core:
+    dependencies:
+      eslint:
+        specifier: ^8.49.0
+        version: 8.49.0
+    devDependencies:
       typescript:
         specifier: 5.2.2
         version: 5.2.2

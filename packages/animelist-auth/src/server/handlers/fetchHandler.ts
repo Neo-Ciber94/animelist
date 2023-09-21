@@ -1,4 +1,4 @@
-import { MALClient } from "@mal/client";
+import { MALClient } from "@animelist/client";
 import { COOKIE_AUTH_CSRF, COOKIE_AUTH_CODE_CHALLENGE, COOKIE_AUTH_SESSION, COOKIE_AUTH_ACCESS_TOKEN, generateJwt, getServerSession } from "../../common/utils";
 import { Auth } from "../server";
 import { HttpError, error, redirect } from "../../common/httpError";

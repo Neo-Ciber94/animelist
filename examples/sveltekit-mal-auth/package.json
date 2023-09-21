@@ -13,9 +13,9 @@
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"dependencies": {
-		"@mal/auth-sveltekit": "*",
-		"@mal/auth": "*",
-		"@mal/client": "*"
+		"@animelist/auth-sveltekit": "*",
+		"@animelist/auth": "*",
+		"@animelist/client": "*"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
