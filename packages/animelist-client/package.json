@@ -5,16 +5,20 @@
   "description": "",
   "keywords": [],
   "license": "MIT",
-  "main": "dist/animelist-client/src/index.js",
-  "module": "dist/animelist-client/src/index.js",
-  "typings": "dist/animelist-client/src/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "typings": "dist/index.d.ts",
   "scripts": {
-    "build": "npx rimraf dist && tsc",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "build:types": "tsc",
+    "build:cjs": "esbuild src/**/*.ts --outdir=dist --format=cjs",
+    "build:esm": "esbuild src/**/*.ts --outdir=dist --format=esm --out-extension:.js=.mjs",
+    "build": "npm run build:cjs && npm run build:esm && npm run build:types"
   },
   "devDependencies": {
     "@animelist/core": "workspace:*",
+    "esbuild": "^0.19.3",
     "typescript": "5.2.2"
   },
   "dependencies": {
@@ -22,5 +26,13 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
   }
 }

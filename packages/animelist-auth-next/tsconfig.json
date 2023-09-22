@@ -6,6 +6,7 @@
     "compilerOptions": {
         "outDir": "./dist",
         "declarationDir": "dist",
+        "emitDeclarationOnly": true,
         "jsx": "react"
     },
 }

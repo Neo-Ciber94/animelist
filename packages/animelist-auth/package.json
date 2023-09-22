@@ -3,22 +3,25 @@
   "version": "0.0.1-alpha.0",
   "description": "Provides an API to authenticate users with `MyAnimeList`",
   "scripts": {
-    "build": "npx rimraf dist && tsc",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "build:types": "tsc --declaration --emitDeclarationOnly",
+    "build:cjs": "esbuild src/**/*.ts --outdir=dist --format=cjs",
+    "build:esm": "esbuild src/**/*.ts --outdir=dist --format=esm --out-extension:.js=.mjs",
+    "build": "npm run build:cjs && npm run build:esm && npm run build:types"
   },
-  "main": "dist/animelist-auth/src/index.js",
-  "module": "dist/animelist-auth/src/index.js",
-  "typings": "dist/animelist-auth/src/index.d.ts",
+  "main": "dist/src/index.js",
+  "module": "dist/src/index.mjs",
+  "typings": "dist/src/index.d.ts",
   "keywords": [],
   "author": "Freddy L. Paredes",
   "license": "MIT",
   "dependencies": {
     "@animelist/client": "workspace:*",
     "crypto-es": "2.0.4",
-    "jose": "4.14.6",
+    "jose": "^4.14.0",
     "zod": "3.22.2"
   },
   "devDependencies": {
@@ -26,11 +29,28 @@
     "@types/cookie": "^0.5.2",
     "@types/node": "20.6.2",
     "dotenv": "^16.3.1",
+    "esbuild": "^0.19.3",
+    "eslint": "^8.49.0",
     "typescript": "^5.2.2",
-    "vitest": "^0.34.4",
-    "eslint": "^8.49.0"
+    "vitest": "^0.34.4"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "./package.json": "./package.json",
+  "./client": {
+    "import": "./dist/client/index.mjs",
+    "require": "./dist/client/index.js",
+    "default": "./dist/client/index.js"
+  },
+  "./server": {
+    "import": "./dist/server/index.mjs",
+    "require": "./dist/server/index.js",
+    "default": "./dist/server/index.js"
+  },
+  "./common": {
+    "import": "./dist/common/index.mjs",
+    "require": "./dist/common/index.js",
+    "default": "./dist/common/index.js"
   }
 }

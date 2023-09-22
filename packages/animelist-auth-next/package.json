@@ -2,13 +2,16 @@
   "name": "@animelist/auth-next",
   "version": "0.0.1-alpha.0",
   "description": "Integration with the @animelist/auth for NextJS",
-  "main": "dist/animelist-auth-next/src/index.js",
-  "module": "dist/animelist-auth-next/src/index.js",
-  "typings": "dist/animelist-auth-next/src/index.d.ts",
+  "main": "dist/src/index.js",
+  "module": "dist/src/index.mjs",
+  "typings": "dist/src/index.d.ts",
   "scripts": {
-    "build": "npx rimraf dist && tsc",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "build:types": "tsc --declaration --emitDeclarationOnly",
+    "build:cjs": "esbuild src/**/*.ts --outdir=dist --format=cjs",
+    "build:esm": "esbuild src/**/*.ts --outdir=dist --format=esm --out-extension:.js=.mjs",
+    "build": "npm run build:cjs && npm run build:esm && npm run build:types"
   },
   "keywords": [],
   "author": "",
@@ -20,10 +23,22 @@
   },
   "devDependencies": {
     "@types/react": "^18.2.22",
+    "esbuild": "^0.19.3",
     "eslint": "^8.49.0",
     "typescript": "^5.2.2"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "./package.json": "./package.json",
+  "./client": {
+    "import": "./dist/client/index.mjs",
+    "require": "./dist/client/index.js",
+    "default": "./dist/client/index.js"
+  },
+  "./server": {
+    "import": "./dist/server/index.mjs",
+    "require": "./dist/server/index.js",
+    "default": "./dist/server/index.js"
   }
 }
