@@ -5,15 +5,15 @@
   "description": "",
   "keywords": [],
   "license": "MIT",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "typings": "dist/index.d.ts",
+  "main": "dist/animelist-client/src/index.js",
+  "module": "dist/animelist-client/src/index.mjs",
+  "typings": "dist/animelist-client/src/index.d.ts",
   "scripts": {
     "typecheck": "tsc --noEmit",
     "lint": "eslint ./src",
     "build:types": "tsc",
-    "build:cjs": "esbuild src/**/*.ts --outdir=dist --format=cjs",
-    "build:esm": "esbuild src/**/*.ts --outdir=dist --format=esm --out-extension:.js=.mjs",
+    "build:cjs": "esbuild src/**/*.ts --outdir=dist/animelist-client/src --format=cjs",
+    "build:esm": "esbuild src/**/*.ts --outdir=dist/animelist-client/src --format=esm --out-extension:.js=.mjs",
     "build": "npm run build:cjs && npm run build:esm && npm run build:types"
   },
   "devDependencies": {
@@ -30,9 +30,9 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "default": "./dist/index.js"
+      "import": "./dist/animelist-client/src/index.mjs",
+      "require": "./dist/animelist-client/src/index.js",
+      "default": "./dist/animelist-client/src/index.js"
     }
   }
 }

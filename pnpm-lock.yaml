@@ -39,6 +39,28 @@ importers:
         specifier: ^16.3.1
         version: 16.3.1
 
+  examples/import_test:
+    dependencies:
+      '@animelist/auth':
+        specifier: workspace:*
+        version: link:../../packages/animelist-auth
+      '@animelist/auth-next':
+        specifier: workspace:*
+        version: link:../../packages/animelist-auth-next
+      '@animelist/auth-sveltekit':
+        specifier: workspace:*
+        version: link:../../packages/animelist-auth-sveltekit
+      '@animelist/client':
+        specifier: workspace:*
+        version: link:../../packages/animelist-client
+      '@animelist/core':
+        specifier: workspace:*
+        version: link:../../packages/animelist-core
+    devDependencies:
+      dotenv:
+        specifier: ^16.3.1
+        version: 16.3.1
+
   examples/next-mal-auth:
     dependencies:
       '@animelist/auth':

@@ -6,13 +6,16 @@ const MY_ANIME_LIST_CLIENT_ID = process.env.MY_ANIME_LIST_CLIENT_ID!;
 const MY_ANIME_LIST_CLIENT_SECRET = process.env.MY_ANIME_LIST_CLIENT_SECRET!;
 const MY_ANIME_LIST_OAUTH2_URL = "https://myanimelist.net/v1/oauth2";
 
-if (MY_ANIME_LIST_CLIENT_ID == null) {
-    throw new Error("MyAnimeList client id is required")
+function assertMyAnimeListEnv() {
+    if (MY_ANIME_LIST_CLIENT_ID == null) {
+        throw new Error("MyAnimeList client id is required")
+    }
+
+    if (MY_ANIME_LIST_CLIENT_SECRET == null) {
+        throw new Error("MyAnimeList client secret is required")
+    }
 }
 
-if (MY_ANIME_LIST_CLIENT_SECRET == null) {
-    throw new Error("MyAnimeList client secret is required")
-}
 
 /**
  * Options to create the authentication url.
@@ -80,6 +83,8 @@ export namespace Auth {
      * @see https://myanimelist.net/apiconfig/references/authorization#obtaining-oauth-2.0-access-tokens
      */
     export function getAuthenticationUrl(options: GetAuthenticationUrlOptions) {
+        assertMyAnimeListEnv();
+
         const { redirectTo } = options;
         const state = crypto.randomUUID();
         const codeChallenge = options.codeVerifier ?? createCodeChallenge();
@@ -106,6 +111,8 @@ export namespace Auth {
      * @returns Returns the tokens to access the `MyAnimeList` API.
      */
     export async function getToken(options: GetTokenOptions) {
+        assertMyAnimeListEnv();
+        
         const { code, redirectTo } = options;
         const url = new URL(`${MY_ANIME_LIST_OAUTH2_URL}/token`);
         const searchParams = new URLSearchParams({
@@ -149,6 +156,8 @@ export namespace Auth {
      * Refresh the access token using a refresh token.
      */
     export async function refreshToken(options: RefreshTokenOptions) {
+        assertMyAnimeListEnv();
+        
         const { refreshToken } = options;
         const url = new URL(`${MY_ANIME_LIST_OAUTH2_URL}/token`);
         const searchParams = new URLSearchParams({

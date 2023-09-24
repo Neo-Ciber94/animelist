@@ -11,13 +11,13 @@
     "test:watch": "vitest",
     "lint": "eslint ./src",
     "build:types": "tsc --declaration --emitDeclarationOnly",
-    "build:cjs": "esbuild src/**/*.ts --outdir=dist --format=cjs",
-    "build:esm": "esbuild src/**/*.ts --outdir=dist --format=esm --out-extension:.js=.mjs",
+    "build:cjs": "esbuild src/**/*.ts --outdir=dist/animelist-auth/src --format=cjs",
+    "build:esm": "esbuild src/**/*.ts --outdir=dist/animelist-auth/src --format=esm --out-extension:.js=.mjs",
     "build": "npm run build:cjs && npm run build:esm && npm run build:types"
   },
-  "main": "dist/src/index.js",
-  "module": "dist/src/index.mjs",
-  "typings": "dist/src/index.d.ts",
+  "main": "dist/animelist-auth/src/index.js",
+  "module": "dist/animelist-auth/src/index.mjs",
+  "typings": "dist/animelist-auth/src/index.d.ts",
   "dependencies": {
     "@animelist/client": "workspace:*",
     "crypto-es": "2.0.4",
@@ -39,18 +39,18 @@
   },
   "./package.json": "./package.json",
   "./client": {
-    "import": "./dist/client/index.mjs",
-    "require": "./dist/client/index.js",
-    "default": "./dist/client/index.js"
+    "import": "./dist/animelist-auth/src/client/index.mjs",
+    "require": "./dist/animelist-auth/src/client/index.js",
+    "default": "./dist/animelist-auth/src/client/index.js"
   },
   "./server": {
-    "import": "./dist/server/index.mjs",
-    "require": "./dist/server/index.js",
-    "default": "./dist/server/index.js"
+    "import": "./dist/animelist-auth/src/server/index.mjs",
+    "require": "./dist/animelist-auth/src/server/index.js",
+    "default": "./dist/animelist-auth/src/server/index.js"
   },
   "./common": {
-    "import": "./dist/common/index.mjs",
-    "require": "./dist/common/index.js",
-    "default": "./dist/common/index.js"
+    "import": "./dist/animelist-auth/src/common/index.mjs",
+    "require": "./dist/animelist-auth/src/common/index.js",
+    "default": "./dist/animelist-auth/src/common/index.js"
   }
 }

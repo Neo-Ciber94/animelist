@@ -2,15 +2,15 @@
   "name": "@animelist/auth-next",
   "version": "0.0.1-alpha.0",
   "description": "Integration with the @animelist/auth for NextJS",
-  "main": "dist/src/index.js",
-  "module": "dist/src/index.mjs",
-  "typings": "dist/src/index.d.ts",
+  "main": "dist/animelist-auth-next/src/index.js",
+  "module": "dist/animelist-auth-next/src/index.mjs",
+  "typings": "dist/animelist-auth-next/src/index.d.ts",
   "scripts": {
     "typecheck": "tsc --noEmit",
     "lint": "eslint ./src",
     "build:types": "tsc --declaration --emitDeclarationOnly",
-    "build:cjs": "esbuild src/**/*.ts --outdir=dist --format=cjs",
-    "build:esm": "esbuild src/**/*.ts --outdir=dist --format=esm --out-extension:.js=.mjs",
+    "build:cjs": "esbuild src/**/*.ts src/**/*.tsx --outdir=dist/animelist-auth-next/src --format=cjs",
+    "build:esm": "esbuild src/**/*.ts src/**/*.tsx --outdir=dist/animelist-auth-next/src --format=esm --out-extension:.js=.mjs",
     "build": "npm run build:cjs && npm run build:esm && npm run build:types"
   },
   "keywords": [],
@@ -32,13 +32,13 @@
   },
   "./package.json": "./package.json",
   "./client": {
-    "import": "./dist/client/index.mjs",
-    "require": "./dist/client/index.js",
-    "default": "./dist/client/index.js"
+    "import": "./dist/animelist-auth-next/src/client/index.mjs",
+    "require": "./dist/animelist-auth-next/src/client/index.js",
+    "default": "./dist/animelist-auth-next/src/client/index.js"
   },
   "./server": {
-    "import": "./dist/server/index.mjs",
-    "require": "./dist/server/index.js",
-    "default": "./dist/server/index.js"
+    "import": "./dist/animelist-auth-next/src/server/index.mjs",
+    "require": "./dist/animelist-auth-next/src/server/index.js",
+    "default": "./dist/animelist-auth-next/src/server/index.js"
   }
 }
