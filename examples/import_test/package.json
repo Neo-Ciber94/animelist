@@ -1,0 +1,23 @@
+{
+  "name": "require_test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@animelist/auth": "workspace:*",
+    "@animelist/auth-next": "workspace:*",
+    "@animelist/auth-sveltekit": "workspace:*",
+    "@animelist/client": "workspace:*",
+    "@animelist/core": "workspace:*"
+  },
+  "devDependencies": {
+    "dotenv": "^16.3.1"
+  }
+}

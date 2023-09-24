@@ -13,8 +13,8 @@
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
     "module": "esnext",
-    "baseUrl": ".",
     "outDir": "./dist",
+    "jsx": "react",
     "lib": [
       "esnext",
       "DOM",
@@ -44,6 +44,9 @@
       ],
       "@animelist/auth-sveltekit": [
         "packages/animelist-auth-sveltekit/src"
+      ],
+      "tslib": [
+        "./node_modules/tslib/tslib.d.ts"
       ]
     }
   },
