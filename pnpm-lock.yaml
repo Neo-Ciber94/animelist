@@ -204,8 +204,8 @@ importers:
         version: 3.22.2
     devDependencies:
       '@animelist/core':
-        specifier: workspace:*
-        version: link:../animelist-core
+        specifier: file:../../packages/animelist-auth
+        version: file:packages/animelist-auth
       '@types/cookie':
         specifier: ^0.5.2
         version: 0.5.2
@@ -239,6 +239,9 @@ importers:
       '@animelist/auth':
         specifier: workspace:*
         version: link:../animelist-auth
+      '@animelist/core':
+        specifier: workspace:*
+        version: link:../animelist-core
       next:
         specifier: ^13.5.2
         version: 13.5.2(react-dom@18.2.0)(react@18.2.0)
@@ -2947,7 +2950,6 @@ packages:
 
   /crypto-es@2.0.4:
     resolution: {integrity: sha512-GJxgJJ7HjGzwT7iQF0K9RertKkzgSKUXd8X2aQ7RGDS8yMVDzIBFMNHID9hnj48Ep8NAICHWV1CFIETlVNZ/Lg==}
-    dev: false
 
   /css-tree@2.3.1:
     resolution: {integrity: sha512-6Fv1DV/TYw//QF5IzQdqsNDjx/wc8TrMBZsqjL9eW01tWb7R7k/mq+/VXfJCl7SoD5emsJop9cOByJZfs8hYIw==}
@@ -8159,4 +8161,12 @@ packages:
 
   /zod@3.22.2:
     resolution: {integrity: sha512-wvWkphh5WQsJbVk1tbx1l1Ly4yg+XecD+Mq280uBGt9wa5BKSWf4Mhp6GmrkPixhMxmabYY7RbzlwVP32pbGCg==}
-    dev: false
+
+  file:packages/animelist-auth:
+    resolution: {directory: packages/animelist-auth, type: directory}
+    name: '@animelist/auth'
+    dependencies:
+      '@animelist/client': link:packages/animelist-client
+      crypto-es: 2.0.4
+      zod: 3.22.2
+    dev: true

@@ -25,7 +25,7 @@
     "zod": "3.22.2"
   },
   "devDependencies": {
-    "@animelist/core": "workspace:*",
+    "@animelist/core": "file:../../packages/animelist-auth",
     "@types/cookie": "^0.5.2",
     "@types/node": "20.6.2",
     "dotenv": "^16.3.1",
