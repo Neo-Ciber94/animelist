@@ -5,7 +5,9 @@ import { ENTRYPOINT_MARKER } from "./entrypoints";
 
 function main() {
     console.log("Removing entry points...")
-    const entryPointMarkers = glob.sync(`**/**/${ENTRYPOINT_MARKER}`);
+    const entryPointMarkers = glob.sync(`**/**/${ENTRYPOINT_MARKER}`, {
+        ignore: ["**/node_modules"]
+    });
 
     for (const entryPointFile of entryPointMarkers) {
         if (!fse.exists(entryPointFile)) {
