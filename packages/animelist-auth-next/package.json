@@ -32,10 +32,10 @@
     "access": "public"
   },
   "./package.json": "./package.json",
-  "./client": {
-    "import": "./dist/client/index.mjs",
-    "require": "./dist/client/index.js",
-    "default": "./dist/client/index.js"
+  ".": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js",
+    "default": "./dist/index.js"
   },
   "./server": {
     "import": "./dist/server/index.mjs",

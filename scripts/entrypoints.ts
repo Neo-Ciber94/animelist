@@ -12,7 +12,7 @@ function writeFileSync(filePath: string, contents: string) {
     fse.writeFileSync(filePath, contents)
 }
 
-export function generateEntrypoints(packageDir: string) {
+export function generateEntrypoints(packageDir: string, additionalInputs?: string[]) {
     const srcDir = path.resolve(packageDir, 'src');
 
     if (!fse.existsSync(srcDir)) {
@@ -20,9 +20,12 @@ export function generateEntrypoints(packageDir: string) {
     }
 
     cleanUpEntrypoints(packageDir);
+
+    const additionalFiles = (additionalInputs || []).map(file => path.resolve(packageDir, file));
+
     const indexFiles = [
         ...glob.sync(`${srcDir}/**/index.ts`),
-        ...glob.sync(`${srcDir}/**/index.tsx`)
+        ...additionalFiles
     ];
 
     for (const indexFile of indexFiles) {

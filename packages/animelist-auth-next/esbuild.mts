@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 const packageDir = path.dirname(fileURLToPath(import.meta.url));
 
 await esbuildProject({
-  inputs: ["src/**/*.ts"],
+  inputs: ["src/**/*.ts", "src/**/*.tsx"],
   exclude: ["**/*.test.ts"],
   packageDir,
 });
