@@ -249,6 +249,9 @@ importers:
       '@animelist/auth':
         specifier: workspace:*
         version: link:../animelist-auth
+      '@animelist/core':
+        specifier: workspace:*
+        version: link:../animelist-core
       '@sveltejs/kit':
         specifier: ^1.25.0
         version: 1.25.0(svelte@4.2.1)(vite@4.4.9)
