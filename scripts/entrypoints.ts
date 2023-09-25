@@ -32,11 +32,11 @@ export function generateEntrypoints(packageDir: string) {
 
         const moduleEntryPointFilePath = path.join(packageDir, relativePath, "index.js");
         const typeEntryPointFilePath = path.join(packageDir, relativePath, "index.d.ts");
-        const entryPointMarker = path.join(packageDir, relativePath, "entrypoint.txt");
+        const gitignoreFilePath = path.join(packageDir, relativePath, ".gitignore");
 
         writeFileSync(moduleEntryPointFilePath, moduleExport);
         writeFileSync(typeEntryPointFilePath, typesExport);
-        writeFileSync(entryPointMarker, Date.now().toString());
+        writeFileSync(gitignoreFilePath, "*");
 
         console.log({
             moduleEntryPointFilePath,
