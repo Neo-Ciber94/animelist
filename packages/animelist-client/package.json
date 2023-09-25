@@ -11,16 +11,13 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "lint": "eslint ./src",
-    "build:types": "tsc",
-    "rollup": "rollup --config rollup.config.ts --configPlugin rollup-plugin-swc3",
-    "build:cjs": "esbuild src/**/*.ts --outdir=dist --format=cjs",
-    "build:esm": "esbuild src/**/*.ts --outdir=dist --format=esm --out-extension:.js=.mjs",
-    "build": "rimraf dist && npm run build:cjs && npm run build:esm && npm run build:types"
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:lib": "tsx esbuild.mts",
+    "build": "rimraf dist && pnpm build:types && pnpm build:lib"
   },
   "devDependencies": {
     "@animelist/core": "workspace:*",
     "esbuild": "^0.19.3",
-    "rollup": "^3.29.3",
     "typescript": "5.2.2"
   },
   "dependencies": {

@@ -8,10 +8,9 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "lint": "eslint ./src",
-    "build:types": "tsc --declaration --emitDeclarationOnly",
-    "build:cjs": "esbuild src/**/*.ts src/**/*.tsx --outdir=dist --format=cjs",
-    "build:esm": "esbuild src/**/*.ts src/**/*.tsx --outdir=dist --format=esm --out-extension:.js=.mjs",
-    "build": "rimraf dist && npm run build:cjs && npm run build:esm && npm run build:types"
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:lib": "tsx esbuild.mts",
+    "build": "rimraf dist && pnpm build:types && pnpm build:lib"
   },
   "keywords": [],
   "author": "",

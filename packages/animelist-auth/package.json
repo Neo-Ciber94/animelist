@@ -10,11 +10,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint ./src",
-    "rollup": "rollup --config rollup.config.ts --configPlugin rollup-plugin-swc3",
-    "build:types": "tsc --declaration --emitDeclarationOnly",
-    "build:cjs": "esbuild src/**/*.ts --outdir=dist --format=cjs",
-    "build:esm": "esbuild src/**/*.ts --outdir=dist --format=esm --out-extension:.js=.mjs",
-    "build": "rimraf dist && npm run build:cjs && npm run build:esm && npm run build:types"
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:lib": "tsx esbuild.mts",
+    "build": "rimraf dist && pnpm build:types && pnpm build:lib"
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -32,7 +30,6 @@
     "esbuild": "^0.19.3",
     "eslint": "^8.49.0",
     "jose": "^4.14.6",
-    "rollup": "^3.29.3",
     "typescript": "^5.2.2",
     "vitest": "^0.34.4"
   },

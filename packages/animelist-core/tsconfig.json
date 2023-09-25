@@ -2,7 +2,9 @@
     "extends": "../../tsconfig.build.json",
     "compilerOptions": {
         "declarationDir": "dist",
-        "baseUrl": "."
+        "baseUrl": ".",
+        "moduleResolution": "node",
+        "esModuleInterop": true
     },
     "include": [
         "src"
