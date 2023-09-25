@@ -19,6 +19,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Generate entrypoints
+        run: pnpm run entrypoints
+
       - name: Build and check types
         run: pnpm run build
 

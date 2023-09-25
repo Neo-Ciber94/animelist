@@ -10,7 +10,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint ./src",
-    "build:entry": "tsx entrypoints.script.ts",
+    "entrypoints": "tsx entrypoints.script.ts",
     "build:types": "tsc --emitDeclarationOnly",
     "build:lib": "tsx esbuild.mts",
     "build": "rimraf dist && pnpm build:types && pnpm build:lib && pnpm build:entry"
