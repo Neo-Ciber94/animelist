@@ -24,9 +24,10 @@
     "rimraf": "^5.0.1"
   },
   "scripts": {
+    "clean:root": "rimraf node_modules",
     "clean:dist": "rimraf --glob packages/**/dist/",
     "clean:node_modules": "rimraf --glob packages/**/node_modules",
-    "clean": "npm run clean:dist && npm run clean:node_modules",
+    "clean": "tsx ./scripts/cleanUpEntrypoints.ts && npm run clean:dist && npm run clean:node_modules",
     "build": "npx lerna run --scope '@animelist/*' build",
     "typecheck": "npx lerna run --scope '@animelist/*' typecheck",
     "lint": "npx lerna run --scope '@animelist/*' lint",
