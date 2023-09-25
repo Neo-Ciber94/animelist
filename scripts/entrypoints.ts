@@ -33,8 +33,17 @@ export function generateEntrypoints(packageDir: string) {
             continue;
         }
 
-        const moduleExport = `module.exports = require("./dist/${relativePath}/index.js")`;
-        const typesExport = `export * from "./dist/${relativePath}/index.js"`
+        const importDepth = relativePath.split(path.sep).length || 1;
+        const resolvedImport = path.join(
+            ...Array(importDepth).fill('..'),
+            "dist",
+            relativePath,
+        )
+
+        const resolvedModuleExport = path.join(resolvedImport, "index.js").replace(/\\/g, '/');
+        const resolvedTypesExport = path.join(resolvedImport, "index.d.ts").replace(/\\/g, '/');
+        const moduleExport = `module.exports = require("${resolvedModuleExport}")`;
+        const typesExport = `export * from "${resolvedTypesExport}"`
 
         const moduleEntryPointFilePath = path.join(packageDir, relativePath, "index.js");
         const typeEntryPointFilePath = path.join(packageDir, relativePath, "index.d.ts");
@@ -47,7 +56,9 @@ export function generateEntrypoints(packageDir: string) {
         writeFileSync(entryPointMarkerFilePath, new Date().toUTCString());
 
         console.log({
+            moduleExport,
             moduleEntryPointFilePath,
+            typesExport,
             typeEntryPointFilePath
         })
     }
