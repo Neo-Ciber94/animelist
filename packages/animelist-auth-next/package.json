@@ -11,7 +11,8 @@
     "entrypoints": "tsx entrypoints.script.ts",
     "build:types": "tsc --emitDeclarationOnly",
     "build:lib": "tsx esbuild.mts",
-    "build": "rimraf dist && pnpm build:types && pnpm build:lib"
+    "build": "rimraf dist && pnpm build:types && pnpm build:lib",
+    "build:all": "pnpm entrypoints && pnpm build"
   },
   "keywords": [],
   "author": "",

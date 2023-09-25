@@ -1,4 +1,4 @@
-import type { Cookies, RequestEvent } from "@animelist/auth/common/types";
+import type { Cookies, RequestEvent } from "@animelist/auth/common";
 import { DEFAULT_SESSION_DURATION_SECONDS, handleAuthFetchRequest, proxyFetchRequestToMyAnimeList } from "@animelist/auth/server";
 import { type MyAnimeListHandlerOptions } from "@animelist/auth";
 import { getApiUrl } from "@animelist/auth/common";

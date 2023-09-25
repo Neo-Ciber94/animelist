@@ -13,7 +13,7 @@ function writeFileSync(filePath: string, contents: string) {
 }
 
 export function generateEntrypoints(packageDir: string) {
-    const srcDir = path.resolve(packageDir, 'dist');
+    const srcDir = path.resolve(packageDir, 'src');
 
     if (!fse.existsSync(srcDir)) {
         throw new Error(`'src' directory does not exist on ${srcDir}`);
