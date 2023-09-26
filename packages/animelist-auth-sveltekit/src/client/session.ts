@@ -1,5 +1,8 @@
-import { type Session, getSession } from "@animelist/auth/client";
+import { getSession } from "@animelist/auth/client";
+import { type User } from "@animelist/core";
 import { get, writable, derived } from "svelte/store";
+
+export type Session = { user: User, accessToken: string }
 
 const DAY_MILLIS = 1000 * 60 * 60 * 24;
 
@@ -95,7 +98,7 @@ function createSession() {
          */
         get isAuthenticated() {
             return get(baseSessionStore).session != null
-        },  
+        },
     }
 }
 

@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { session } from '@animelist/auth-sveltekit/client';
-	// import type { LayoutServerData } from './$types';
+	import type { LayoutServerData } from './$types';
 
-    session.initialize();
+	export let data: LayoutServerData;
+
+	session.initialize(data.session);
 </script>
-
 
 <slot />

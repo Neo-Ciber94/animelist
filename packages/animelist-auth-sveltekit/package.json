@@ -23,13 +23,8 @@
     "@sveltejs/kit": "^1.25.0"
   },
   "devDependencies": {
-    "@sveltejs/package": "^2.2.2",
     "eslint": "^8.49.0",
-    "svelte": "^4.0.5",
     "typescript": "^5.2.2"
-  },
-  "peerDependencies": {
-    "svelte": "^4.0.5"
   },
   "publishConfig": {
     "access": "public"
