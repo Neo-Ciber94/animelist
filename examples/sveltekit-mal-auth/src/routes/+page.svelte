@@ -8,7 +8,9 @@
 	});
 </script>
 
-{#if $session.user}
+{#if $session.loading}
+	<p>Loading...</p>
+{:else if $session.user}
 	<p>Welcome {$session.user.name}</p>
 	<button on:click={signOut}>Sign Out</button>
 {:else}
