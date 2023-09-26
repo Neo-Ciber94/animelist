@@ -1,4 +1,4 @@
-import { generateEntrypoints } from "../../scripts/entrypoints.js";
+import { generateEntrypoints } from "../../scripts/entrypoints.mjs";
 import path from "path";
 import { fileURLToPath } from "url";
 
