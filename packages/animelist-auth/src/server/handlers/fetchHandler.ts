@@ -4,6 +4,7 @@ import { Auth } from "../server";
 import { HttpError, error, redirect } from "../../common/httpError";
 import type { RequestEvent } from "../../common/types";
 import type { HandleAuthOptions } from "./types";
+import { CookieJar } from "src/common/cookieJar";
 
 const ALLOWED_FORWARD_HEADERS = [
     "Authorization",
@@ -16,22 +17,30 @@ export const DEFAULT_SESSION_DURATION_SECONDS = 60 * 60 * 24 * 7; // 7 days;
 
 /**
  * Handle an authentication request.
- * @param event The request event.
+ * @param request The request event.
  * @param options The authentication options.
  * @returns The response object.
  */
-export async function handleAuthFetchRequest(event: RequestEvent, options: HandleAuthOptions) {
+export async function handleAuthFetchRequest(request: Request, options: HandleAuthOptions) {
+    const cookies = new CookieJar(request.headers.get("cookie"));
+    let response: Response;
+
     try {
-        // FIXME: eslint is not warning about forgetting the await
-        return await handleAuth(event, options);
+        response = await handleAuth({ request, cookies }, options);
     }
     catch (err) {
         if (err instanceof HttpError) {
-            return err.toResponse();
+            response = err.toResponse();
+        } else {
+            throw err;
         }
-
-        throw err;
     }
+
+    if (cookies.size > 0) {
+        response.headers.set("Set-Cookie", cookies.serialize());
+    }
+
+    return response;
 }
 
 async function handleAuth(event: RequestEvent, options: HandleAuthOptions) {
@@ -219,38 +228,38 @@ function getAuthAction(pathname: string) {
 /**
  * Forwards a request to `MyAnimeList`.
  * @param apiUrl The path to the current API endpoint. `/api/myanimelist`
- * @param event The current request event.
+ * @param request The current request event.
  */
-export async function proxyFetchRequestToMyAnimeList(apiUrl: string, event: RequestEvent) {
+export async function proxyFetchRequestToMyAnimeList(apiUrl: string, request: Request) {
     const forwardHeaders: Record<string, string> = {};
 
-    for (const [key, value] of event.request.headers.entries()) {
+    for (const [key, value] of request.headers.entries()) {
         if (ALLOWED_FORWARD_HEADERS.some(x => x.toLowerCase() === key.toLowerCase())) {
             forwardHeaders[key] = value;
         }
     }
 
-    const url = new URL(event.request.url);
+    const url = new URL(request.url);
     const path = url.pathname.slice(apiUrl.length);
     const search = url.search;
     const myAnimeListApiUrl = `${MY_ANIME_LIST_API_URL}${path}${search}`
 
     // 🍥 GET: https://api.example.com/users
-    console.log(`🍥 ${event.request.method}: ${myAnimeListApiUrl}`)
+    console.log(`🍥 ${request.method}: ${myAnimeListApiUrl}`)
 
     const res = await fetch(myAnimeListApiUrl, {
-        method: event.request.method,
-        body: event.request.body,
+        method: request.method,
+        body: request.body,
         headers: forwardHeaders,
-        signal: event.request.signal,
-        cache: event.request.cache,
-        credentials: event.request.credentials,
-        integrity: event.request.integrity,
-        keepalive: event.request.keepalive,
-        mode: event.request.mode,
-        redirect: event.request.redirect,
-        referrer: event.request.referrer,
-        referrerPolicy: event.request.referrerPolicy,
+        signal: request.signal,
+        cache: request.cache,
+        credentials: request.credentials,
+        integrity: request.integrity,
+        keepalive: request.keepalive,
+        mode: request.mode,
+        redirect: request.redirect,
+        referrer: request.referrer,
+        referrerPolicy: request.referrerPolicy,
 
         // @ts-expect-error This property is required to send a body
         // https://github.com/nodejs/node/issues/46221#issuecomment-1482439958
@@ -259,7 +268,7 @@ export async function proxyFetchRequestToMyAnimeList(apiUrl: string, event: Requ
 
     if (!res.ok) {
         // ❌ GET (404) Not Found: https://api.example.com/users
-        console.error(`❌ ${event.request.method} (${res.status}) ${res.statusText}: ${myAnimeListApiUrl}`)
+        console.error(`❌ ${request.method} (${res.status}) ${res.statusText}: ${myAnimeListApiUrl}`)
     }
 
     return res;

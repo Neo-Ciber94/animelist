@@ -21,6 +21,7 @@
   "dependencies": {
     "@animelist/client": "workspace:*",
     "@animelist/core": "workspace:*",
+    "cookie": "^0.5.0",
     "crypto-es": "2.0.4",
     "zod": "3.22.2"
   },

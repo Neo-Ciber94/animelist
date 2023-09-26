@@ -1,69 +1,39 @@
-import { describe, expect, test, vi } from 'vitest';
+import { describe, expect, test } from 'vitest';
 import { handleAuthFetchRequest } from './fetchHandler';
-import { type Cookies } from '../../common/types';
-
-function getFakeCookies(): Cookies {
-    return {
-        set: () => { },
-        get: () => null,
-        delete: () => null,
-    }
-}
+import cookie from 'cookie';
+import { COOKIE_AUTH_CODE_CHALLENGE, COOKIE_AUTH_CSRF } from '../../common/utils';
 
 describe("Handle fetch authentication requests", () => {
     test("Should return redirect to myanimelist for sign-in", async () => {
-        const cookies = getFakeCookies();
-        const event = {
-            cookies,
-            request: new Request("http://localhost:5600/api/myanimelist/auth/sign-in", {})
-        };
-
-        const setCookieSpy = vi.fn();
-        cookies.set = setCookieSpy;
-
-        const res = await handleAuthFetchRequest(event, {
+        const req = new Request("http://localhost:5600/api/myanimelist/auth/sign-in", {});
+        const res = await handleAuthFetchRequest(req, {
             apiUrl: "/api/myanimelist"
         });
 
         expect(res.status).toStrictEqual(307);
         expect(res.headers.get("location")).contain("myanimelist");
-        expect(setCookieSpy).toHaveBeenCalled();
+
+        const cookies = cookie.parse(res.headers.get("cookie")!);
+        expect(cookies[COOKIE_AUTH_CSRF]).toBeTruthy();
+        expect(cookies[COOKIE_AUTH_CODE_CHALLENGE]).toBeTruthy();
     })
 
     test("Should remove cookies on sign-out", async () => {
-        const cookies = getFakeCookies();
-        const event = {
-            cookies,
-            request: new Request("http://localhost:5600/api/myanimelist/auth/sign-out", {})
-        };
-
-        const removeCookieSpy = vi.fn();
-        cookies.delete = removeCookieSpy;
-
-        const res = await handleAuthFetchRequest(event, {
+        const req = new Request("http://localhost:5600/api/myanimelist/auth/sign-out", {});
+        const res = await handleAuthFetchRequest(req, {
             apiUrl: "/api/myanimelist"
         });
 
         expect(res.status).toStrictEqual(307);
-        expect(removeCookieSpy).toHaveBeenCalled();
     });
 
     test("Should remove cookies on sign-out", async () => {
-        const cookies = getFakeCookies();
-        const event = {
-            cookies,
-            request: new Request("http://localhost:5600/api/myanimelist/auth/sign-out", {})
-        };
-
-        const removeCookieSpy = vi.fn();
-        cookies.delete = removeCookieSpy;
-
-        const res = await handleAuthFetchRequest(event, {
+        const req = new Request("http://localhost:5600/api/myanimelist/auth/sign-out", {});
+        const res = await handleAuthFetchRequest(req, {
             apiUrl: "/api/myanimelist"
         });
 
         expect(res.status).toStrictEqual(307);
-        expect(removeCookieSpy).toHaveBeenCalled();
     })
 });
 

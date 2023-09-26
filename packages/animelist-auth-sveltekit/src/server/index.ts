@@ -1,4 +1,3 @@
-import { type RequestEvent } from "@animelist/auth/common";
 import { DEFAULT_SESSION_DURATION_SECONDS, handleAuthFetchRequest, proxyFetchRequestToMyAnimeList } from "@animelist/auth/server";
 import { type MyAnimeListHandlerOptions } from "@animelist/auth/server/handlers";
 import { type Handle } from "@sveltejs/kit";
@@ -30,7 +29,7 @@ export function createMyAnimeListHandler(options: MyAnimeListHandlerOptions = {}
         }
 
         if (startsWithPathSegment(pathname, authPath)) {
-            return handleAuthFetchRequest(event, {
+            return handleAuthFetchRequest(event.request, {
                 ...options,
                 apiUrl,
                 sessionDurationSeconds,
@@ -38,11 +37,11 @@ export function createMyAnimeListHandler(options: MyAnimeListHandlerOptions = {}
         }
 
         if (options.callbacks?.onProxyRequest) {
-            const next = (event: RequestEvent) => proxyFetchRequestToMyAnimeList(apiUrl, event);
-            return options.callbacks.onProxyRequest(event, next);
+            const next = (request: Request) => proxyFetchRequestToMyAnimeList(apiUrl, request);
+            return options.callbacks.onProxyRequest(event.request, next);
         }
 
-        return proxyFetchRequestToMyAnimeList(apiUrl, event);
+        return proxyFetchRequestToMyAnimeList(apiUrl, event.request);
     }
 }
 

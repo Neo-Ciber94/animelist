@@ -53,7 +53,7 @@ export type AuthCallbacks = {
      * @param next The proxy request.
      * @returns The response of the request.
      */
-    onProxyRequest?: (event: RequestEvent, next: (event: RequestEvent) => Promise<Response>) => Promise<Response>,
+    onProxyRequest?: (request: Request, next: (event: Request) => Promise<Response>) => Promise<Response>,
 }
 
 /**

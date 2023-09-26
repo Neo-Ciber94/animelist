@@ -1,8 +1,6 @@
-import type { Cookies, RequestEvent } from "@animelist/auth/common";
 import { DEFAULT_SESSION_DURATION_SECONDS, handleAuthFetchRequest, proxyFetchRequestToMyAnimeList } from "@animelist/auth/server";
 import { type MyAnimeListHandlerOptions } from "@animelist/auth/server/handlers";
 import { getApiUrl } from "@animelist/auth/common";
-import { cookies } from 'next/headers';
 
 type RequestHandler = (req: Request) => Promise<Response>
 
@@ -26,28 +24,13 @@ export function createMyAnimeListHandler(options: MyAnimeListHandlerOptions = {}
 
     return async (request) => {
         const pathname = new URL(request.url).pathname;
-        const nextCookies = cookies();
-        const event = {
-            request,
-            cookies: {
-                get(name) {
-                    return nextCookies.get(name)?.value;
-                },
-                set(name, value, opts) {
-                    nextCookies.set(name, value, opts);
-                },
-                delete(name) {
-                    nextCookies.delete(name)
-                }
-            } satisfies Cookies
-        }
 
         if (!startsWithPathSegment(pathname, apiUrl)) {
             return new Response(null, { status: 404 });
         }
 
         if (startsWithPathSegment(pathname, authPath)) {
-            return handleAuthFetchRequest(event, {
+            return handleAuthFetchRequest(request, {
                 ...options,
                 apiUrl,
                 sessionDurationSeconds,
@@ -55,11 +38,11 @@ export function createMyAnimeListHandler(options: MyAnimeListHandlerOptions = {}
         }
 
         if (options.callbacks?.onProxyRequest) {
-            const next = (event: RequestEvent) => proxyFetchRequestToMyAnimeList(apiUrl, event);
-            return options.callbacks.onProxyRequest(event, next);
+            const next = (request: Request) => proxyFetchRequestToMyAnimeList(apiUrl, request);
+            return options.callbacks.onProxyRequest(request, next);
         }
 
-        return proxyFetchRequestToMyAnimeList(apiUrl, event);
+        return proxyFetchRequestToMyAnimeList(apiUrl, request);
     }
 }
 

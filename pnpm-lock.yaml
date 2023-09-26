@@ -169,6 +169,9 @@ importers:
       '@animelist/core':
         specifier: workspace:*
         version: link:../animelist-core
+      cookie:
+        specifier: ^0.5.0
+        version: 0.5.0
       crypto-es:
         specifier: 2.0.4
         version: 2.0.4
