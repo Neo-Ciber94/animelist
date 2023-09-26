@@ -1,6 +1,6 @@
 import { type CookieSerializeOptions, parse as parseCookie, serialize as serializeCookie } from "cookie";
 
-type CookieValue = { value: string, options?: CookieSerializeOptions };
+type CookieValue = { value: string, options?: CookieSerializeOptions, fromHeader?: boolean };
 
 export class CookieJar {
     private cookies = new Map<string, CookieValue>();
@@ -13,7 +13,7 @@ export class CookieJar {
                 const obj = parseCookie(cookieHeader);
                 for (const key in obj) {
                     const value = obj[key];
-                    cookies.set(key, { value })
+                    cookies.set(key, { value, fromHeader: true })
                 }
 
                 this.cookies = cookies;
@@ -32,11 +32,12 @@ export class CookieJar {
         return this.cookies.get(name)?.value;
     }
 
-    delete(name: string) {
+    delete(name: string, options?: CookieSerializeOptions) {
         this.cookies.set(name, {
             value: '',
             options: {
-                expires: new Date(0)
+                ...options,
+                maxAge: -1
             }
         });
     }
@@ -49,11 +50,24 @@ export class CookieJar {
         const serializedCookies: string[] = [];
 
         for (const [name, cookieValue] of this.cookies.entries()) {
-            const { value, options } = cookieValue;
-            const serializedCookie = serializeCookie(name, value, options);
-            serializedCookies.push(serializedCookie);
+            const { value, options, fromHeader = false } = cookieValue;
+
+            if (!fromHeader) {
+                const serializedCookie = serializeCookie(name, value, options);
+                serializedCookies.push(serializedCookie);
+            }
         }
 
-        return serializedCookies.join("; ");
+        return serializedCookies.join(", ");
+    }
+
+    toJSON() {
+        const obj: Record<string, string> = {};
+
+        for (const [name, cookiesValue] of this.cookies.entries()) {
+            obj[name] = cookiesValue.value;
+        }
+
+        return obj;
     }
 }

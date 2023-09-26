@@ -4,7 +4,7 @@ import { Auth } from "../server";
 import { HttpError, error, redirect } from "../../common/httpError";
 import type { RequestEvent } from "../../common/types";
 import type { HandleAuthOptions } from "./types";
-import { CookieJar } from "src/common/cookieJar";
+import { CookieJar } from "../../common/cookieJar";
 
 const ALLOWED_FORWARD_HEADERS = [
     "Authorization",
