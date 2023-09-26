@@ -1,11 +1,6 @@
 <script>
 	import { signIn, signOut } from '@animelist/auth/client';
 	import { session } from '@animelist/auth-sveltekit/client';
-	import { onMount } from 'svelte';
-
-	onMount(async () => {
-		await session.initialize();
-	});
 </script>
 
 {#if $session.loading}

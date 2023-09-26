@@ -11,7 +11,8 @@
     "entrypoints": "tsx entrypoints.script.mts",
     "build:types": "tsc --emitDeclarationOnly",
     "build:lib": "tsx esbuild.mts",
-    "build": "rimraf dist && pnpm build:types && pnpm build:lib && pnpm entrypoints"
+    "build:svelte": "svelte-package -i src/client -o dist/client",
+    "build": "rimraf dist && pnpm build:types && pnpm build:lib && pnpm run build:svelte && rimraf .svelte-kit && pnpm entrypoints"
   },
   "keywords": [],
   "author": "",
@@ -22,8 +23,13 @@
     "@sveltejs/kit": "^1.25.0"
   },
   "devDependencies": {
+    "@sveltejs/package": "^2.2.2",
     "eslint": "^8.49.0",
+    "svelte": "^4.0.5",
     "typescript": "^5.2.2"
+  },
+  "peerDependencies": {
+    "svelte": "^4.0.5"
   },
   "publishConfig": {
     "access": "public"
@@ -33,6 +39,9 @@
     "./client": {
       "import": "./dist/client/index.mjs",
       "default": "./dist/client/index.mjs"
+    },
+    "./client/SessionProvider.svelte": {
+      "svelte": "./dist/client/SessionProvider.svelte"
     },
     "./server": {
       "import": "./dist/server/index.mjs",

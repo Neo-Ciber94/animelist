@@ -2,11 +2,17 @@
 // for information about these interfaces
 declare global {
 	namespace App {
+		interface Locals {
+			session?: {
+				user: User,
+				accessToken: string;
+			} | null;
+		}
+
 		// interface Error {}
-		// interface Locals {}
 		// interface PageData {}
 		// interface Platform {}
 	}
 }
 
-export {};
+export { };

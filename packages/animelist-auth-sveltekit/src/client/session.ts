@@ -1,107 +1,109 @@
-// import { dev } from "$app/environment";
-import { type User } from "@animelist/core";
-import { getSession } from "@animelist/auth/client";
-import { get, writable } from "svelte/store";
+import { type Session, getSession } from "@animelist/auth/client";
+import { get, writable, derived } from "svelte/store";
 
-let initialized = false;
+/**
+ * @internal
+ */
+export const INITIALIZE_SESSION = Symbol("INITIALIZE_SESSION");
+
+const DAY_MILLIS = 1000 * 60 * 60 * 24;
 
 export type SessionState = {
-    user: User | null;
-    accessToken: string | null;
+    session: Session | null,
     loading: boolean;
 }
 
-const sessionStore = writable<SessionState>({
-    user: null,
-    accessToken: null,
-    loading: false
-});
+function createSession() {
+    const baseSessionStore = writable<SessionState>({
+        session: null,
+        loading: false
+    });
 
-type InitializeSession = Omit<SessionState, 'loading'>;
-
-function setUserSession(session: InitializeSession | null) {
-    if (session) {
-        initialized = true;
-        sessionStore.set({
-            loading: false,
-            accessToken: session.accessToken,
-            user: session.user
-        })
-    } else {
-        initialized = false;
-        sessionStore.set({
-            loading: false,
-            accessToken: null,
-            user: null
-        });
-    }
-}
-
-async function fetchUserSession() {
-    if (typeof window === 'undefined') {
-        return;
-    }
-
-    initialized = true;
-
-    try {
-        // Set state to loading
-        const currentSession = get(sessionStore);
-        sessionStore.set({
-            loading: true,
-            accessToken: currentSession.accessToken,
-            user: currentSession.user
-        });
-
-        // fetch the current user session
-        const session = await getSession();
-
-        if (session == null) {
-            return sessionStore.set({ loading: false, accessToken: null, user: null });
+    async function fetchUserSession() {
+        if (typeof window === 'undefined') {
+            return null;
         }
 
-        // if (dev) {
-        //     console.log("🍥 User session loaded: ", JSON.stringify(session, null, 2));
-        // }
+        try {
+            // fetch the current user session
+            const session = await getSession();
 
-        // Currently the expiration of the access token is 31 days, which is really long,
-        // so we don't have reason to refresh it, each time the user log in a new token will be created.
-        const { accessToken, user } = session;
-        sessionStore.set({ user, accessToken, loading: false })
-    }
-    catch (err) {
-        console.error(err);
-        initialized = false;
-        sessionStore.set({ user: null, accessToken: null, loading: false })
-    }
-}
+            if (session == null) {
+                baseSessionStore.set({ loading: false, session });
+                return null;
+            }
 
-async function initialize(session?: InitializeSession | null) {
-    if (session && initialized) {
-        return;
+            baseSessionStore.set({ session, loading: false });
+
+            // We use 1 day as a threshold because we don't expect an user to stay 24 hours
+            // without any interaction. in most cases this is not reached because the default session is 7 days
+            const expiresAt = new Date(session.expiresAt);
+
+            if (expiresAt.getTime() < DAY_MILLIS) {
+                window.setTimeout(
+                    fetchUserSession,
+                    expiresAt.getTime()
+                );
+            }
+
+            return session;
+        }
+        catch (err) {
+            console.error(err);
+            baseSessionStore.set({ session: null, loading: false });
+        }
+
+        return null;
     }
 
-    if (session !== undefined) {
-        setUserSession(session);
-    }
-    else {
-        await fetchUserSession();
-    }
-}
+    async function initialize(session?: Session | null) {
+        if (session === undefined) {
+            // Set state to loading
+            baseSessionStore.update(s => ({ ...s, loading: true }));
 
-function destroy() {
-    sessionStore.set({
-        accessToken: null,
-        loading: false,
-        user: null,
+            // Fetch the current session
+            await fetchUserSession();
+        } else {
+            baseSessionStore.set({
+                session,
+                loading: false
+            })
+        }
+    }
+
+    const sessionStore = derived(baseSessionStore, ($store) => {
+        return {
+            /**
+         * Returns the current user.
+         */
+            get user() {
+                return $store?.session?.user || null;
+            },
+
+            /**
+             * Returns the current user access token.
+             */
+            get accessToken() {
+                return $store?.session?.accessToken || null
+            },
+
+            ...$store
+        }
     })
-}
 
-export const session = {
-    initialize,
-    destroy,
-    subscribe: sessionStore.subscribe,
-    get current() {
-        return get(sessionStore);
+    return {
+        subscribe: sessionStore.subscribe,
+
+        /**
+         * Returns `true` if the user is authenticated.
+         */
+        get isAuthenticated() {
+            return get(baseSessionStore).session != null
+        },
+
+        // @internal
+        [INITIALIZE_SESSION]: initialize
     }
 }
+
+export const session = createSession();
