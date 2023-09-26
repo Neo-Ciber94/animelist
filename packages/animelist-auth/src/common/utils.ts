@@ -93,13 +93,7 @@ export async function getServerSession(cookies: Cookies): Promise<UserSession | 
     const sessionToken = cookies.get(COOKIE_AUTH_SESSION);
     const accessToken = cookies.get(COOKIE_AUTH_ACCESS_TOKEN);
 
-    if (sessionToken == null) {
-        console.warn("⚠️  session token is null");
-        return null;
-    }
-
-    if (accessToken == null) {
-        console.warn("⚠️  access token is null");
+    if (sessionToken == null || accessToken == null) {
         return null;
     }
 

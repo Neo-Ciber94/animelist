@@ -1,5 +1,5 @@
-import { getSession } from "@animelist/auth/client";
 import { type User } from "@animelist/core";
+import { getSession } from "@animelist/auth/client";
 import { get, writable, derived } from "svelte/store";
 
 export type Session = { user: User, accessToken: string }
@@ -7,8 +7,15 @@ export type Session = { user: User, accessToken: string }
 const DAY_MILLIS = 1000 * 60 * 60 * 24;
 
 export type SessionState = {
-    session: Session | null,
-    loading: boolean;
+    /**
+     * The current session.
+     */
+    readonly session: Session | null,
+
+    /**
+     * Whether if the session is loading.
+     */
+    readonly loading: boolean;
 }
 
 function createSession() {
@@ -54,6 +61,12 @@ function createSession() {
         return null;
     }
 
+    /**
+     * Initialize the session store.
+     * 
+     * This should be called before accessing the score, in the root layout.
+     * @param session The initial session.
+     */
     async function initialize(session?: Session | null) {
         if (session === undefined) {
             // Set state to loading
@@ -72,8 +85,8 @@ function createSession() {
     const sessionStore = derived(baseSessionStore, ($store) => {
         return {
             /**
-         * Returns the current user.
-         */
+             * Returns the current user.
+             */
             get user() {
                 return $store?.session?.user || null;
             },
