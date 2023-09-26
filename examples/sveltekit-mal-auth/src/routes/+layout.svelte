@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { SessionProvider } from '@animelist/auth-sveltekit/client';
+	import { session } from '@animelist/auth-sveltekit/client';
 	// import type { LayoutServerData } from './$types';
+
+    session.initialize();
 </script>
 
 
-<SessionProvider>
-	<slot />
-</SessionProvider>
+<slot />

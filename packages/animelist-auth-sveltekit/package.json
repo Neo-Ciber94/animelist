@@ -12,7 +12,7 @@
     "build:types": "tsc --emitDeclarationOnly",
     "build:lib": "tsx esbuild.mts",
     "build:svelte": "svelte-package -i src/client -o dist/client",
-    "build": "rimraf dist && pnpm build:types && pnpm build:lib && pnpm run build:svelte && rimraf .svelte-kit && pnpm entrypoints"
+    "build": "rimraf dist && pnpm build:types && pnpm build:lib && pnpm entrypoints"
   },
   "keywords": [],
   "author": "",
@@ -39,9 +39,6 @@
     "./client": {
       "import": "./dist/client/index.mjs",
       "default": "./dist/client/index.mjs"
-    },
-    "./client/SessionProvider.svelte": {
-      "svelte": "./dist/client/SessionProvider.svelte"
     },
     "./server": {
       "import": "./dist/server/index.mjs",

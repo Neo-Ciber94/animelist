@@ -1,11 +1,6 @@
 import { type Session, getSession } from "@animelist/auth/client";
 import { get, writable, derived } from "svelte/store";
 
-/**
- * @internal
- */
-export const INITIALIZE_SESSION = Symbol("INITIALIZE_SESSION");
-
 const DAY_MILLIS = 1000 * 60 * 60 * 24;
 
 export type SessionState = {
@@ -93,16 +88,14 @@ function createSession() {
 
     return {
         subscribe: sessionStore.subscribe,
+        initialize,
 
         /**
          * Returns `true` if the user is authenticated.
          */
         get isAuthenticated() {
             return get(baseSessionStore).session != null
-        },
-
-        // @internal
-        [INITIALIZE_SESSION]: initialize
+        },  
     }
 }
 

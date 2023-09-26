@@ -9,7 +9,7 @@ export const handle: Handle = async ({ event, resolve }) => {
     const session = await getServerSession(event.cookies);
 
     if (session) {
-        const { accessToken } = session;
+        const { accessToken, } = session;
         const client = new MALClient({ accessToken });
 
         try {
