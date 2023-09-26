@@ -444,8 +444,8 @@ export class MALClient {
      * @param animeId The id of the anime.
      * @param options The options.
      */
-    async getAnimeDetails(animeId: number, options: { fields?: AnimeFields[] }) {
-        const { fields = [] } = options;
+    async getAnimeDetails(animeId: number, options?: { fields?: AnimeFields[] }) {
+        const { fields = [] } = options || {};
 
         const result = await this.request<AnimeNode>({
             method: 'GET',
@@ -504,8 +504,8 @@ export class MALClient {
      * @see https://myanimelist.net/apiconfig/references/api/v2#operation/anime_suggestions_get
      * @param options The options.
      */
-    async getSuggestedAnime(options: GetSuggestedAnimeOptions) {
-        const { fields = [], ...params } = options;
+    async getSuggestedAnime(options?: GetSuggestedAnimeOptions) {
+        const { fields = [], ...params } = options || {};
 
         const result = await this.request<AnimeApiResponse>({
             method: 'GET',
@@ -572,8 +572,8 @@ export class MALClient {
      * @param userName The username.
      * @param options The options.
      */
-    async getUserAnimeList(userName: UserName, options: GetUserAnimeListOptions) {
-        const { fields = [], ...params } = options;
+    async getUserAnimeList(userName: UserName, options?: GetUserAnimeListOptions) {
+        const { fields = [], ...params } = options || {};
 
         const result = await this.request<AnimeStatusApiResponse>({
             method: 'GET',
@@ -592,8 +592,8 @@ export class MALClient {
      * @see https://myanimelist.net/apiconfig/references/api/v2#operation/users_user_id_get
      * @param options The options.
      */
-    async getMyUserInfo(options: GetMyUserInfoOptions, userId = "@me"): Promise<User> {
-        const { fields = [] } = options;
+    async getMyUserInfo(options?: GetMyUserInfoOptions, userId = "@me"): Promise<User> {
+        const { fields = [] } = options || {};
 
         const result = await this.request<User>({
             method: 'GET',
