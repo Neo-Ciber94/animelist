@@ -13,7 +13,7 @@ describe("Handle fetch authentication requests", () => {
         expect(res.status).toStrictEqual(307);
         expect(res.headers.get("location")).contain("myanimelist");
 
-        const cookies = cookie.parse(res.headers.get("cookie")!);
+        const cookies = cookie.parse(res.headers.get("set-cookie")!);
         expect(cookies[COOKIE_AUTH_CSRF]).toBeTruthy();
         expect(cookies[COOKIE_AUTH_CODE_CHALLENGE]).toBeTruthy();
     })
