@@ -1,7 +1,7 @@
 import * as glob from "glob";
 import fse from 'fs-extra';
 import path from "path";
-import { ENTRYPOINT_MARKER } from "./entrypoints";
+import { ENTRYPOINT_MARKER } from "./entrypoints.js";
 
 function main() {
     console.log("Removing entry points...")

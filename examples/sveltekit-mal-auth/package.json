@@ -13,8 +13,8 @@
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"dependencies": {
-		"@animelist/auth-sveltekit": "*",
 		"@animelist/auth": "*",
+		"@animelist/auth-sveltekit": "*",
 		"@animelist/client": "*"
 	},
 	"devDependencies": {

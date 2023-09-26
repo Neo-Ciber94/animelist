@@ -2,13 +2,13 @@
   "name": "@animelist/auth-sveltekit",
   "version": "0.0.1-alpha.0",
   "description": "Integration with the @animelist/auth for SvelteKit",
-  "main": "dist/src/index.js",
-  "module": "dist/src/index.mjs",
-  "typings": "dist/src/index.d.ts",
+  "type": "module",
+  "module": "dist/index.mjs",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "typecheck": "tsc --noEmit",
     "lint": "eslint ./src",
-    "entrypoints": "tsx entrypoints.script.ts",
+    "entrypoints": "tsx entrypoints.script.mts",
     "build:types": "tsc --emitDeclarationOnly",
     "build:lib": "tsx esbuild.mts",
     "build": "rimraf dist && pnpm build:types && pnpm build:lib && pnpm entrypoints"
@@ -27,5 +27,16 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    "./client": {
+      "import": "./dist/client/index.mjs",
+      "default": "./dist/client/index.mjs"
+    },
+    "./server": {
+      "import": "./dist/server/index.mjs",
+      "default": "./dist/server/index.mjs"
+    }
   }
 }

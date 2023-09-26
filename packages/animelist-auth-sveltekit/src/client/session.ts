@@ -97,7 +97,7 @@ function destroy() {
     })
 }
 
-export default {
+export const session = {
     initialize,
     destroy,
     subscribe: sessionStore.subscribe,
