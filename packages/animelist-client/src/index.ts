@@ -241,13 +241,31 @@ export interface GetUserAnimeListOptions {
     nsfw?: boolean;
 }
 
+type WithAccessToken = {
+    /**
+     * The access token.
+     */
+    accessToken: string;
+    clientId?: undefined;
+}
+
+type WithClientId = {
+    /**
+     * The client id.
+     */
+    clientId: string;
+    accessToken?: undefined;
+}
+
+type WithAccessTokenAndClientId = Pick<WithClientId, 'clientId'> & Pick<WithAccessToken, 'accessToken'>;
+
 /**
  * Configuration of the client.
  * 
  * You will need an `access token` or `client id` to use this client.
  * @see https://myanimelist.net/apiconfig/references/authorization
  */
-export interface MALClientConfig {
+export type MALClientConfig = (WithAccessToken | WithClientId | WithAccessTokenAndClientId) & {
     /**
      * Fetch implementation to use.
      * 
@@ -257,23 +275,13 @@ export interface MALClientConfig {
     fetch?: typeof fetch,
 
     /**
-     * The access token.
-     */
-    accessToken?: string;
-
-    /**
-     * The client id.
-     */
-    clientId?: string;
-
-    /**
      * The url to send all the requests to.
      * 
      * @default 
      * `https://api.myanimelist.net/v2`
      */
     proxyUrl?: string;
-}
+};
 
 /**
  * A `MyAnimeList` request.
@@ -333,7 +341,7 @@ export class MalHttpError extends Error {
 export class MALClient {
     #config: MALClientConfig;
 
-    constructor(config: MALClientConfig = {}) {
+    constructor(config: MALClientConfig) {
         if (config.accessToken == null && config.clientId == null) {
             throw new Error("access token or client id are required");
         }

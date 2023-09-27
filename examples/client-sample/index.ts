@@ -5,7 +5,7 @@ import type { AnimeSeason } from "@animelist/core"
 dotenv.config();
 
 const client = new MALClient({
-    clientId: process.env.MY_ANIME_LIST_CLIENT_ID,
+    clientId: process.env.MY_ANIME_LIST_CLIENT_ID!,
 });
 
 function getCurrentSeason(): AnimeSeason {
