@@ -1,9 +1,8 @@
 "use client";
 
-import * as client from "@animelist/auth-next";
+import { SessionProvider } from "@animelist/auth-next";
 
-console.log({ client })
+console.log({ SessionProvider });
 export default function Providers({ children }: { children: React.ReactNode }) {
-  return <client.SessionProvider>{children}</client.SessionProvider>;
+  return <SessionProvider>{children}</SessionProvider>;
 }
-

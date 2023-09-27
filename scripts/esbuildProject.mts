@@ -32,6 +32,7 @@ export async function esbuildProject({ packageDir, exclude, inputs, ...rest }: B
             entryPoints,
             logLevel: 'debug',
             outdir,
+            sourcemap: true,            
             format: 'cjs',
             outExtension: rest.outExtensions
         })
@@ -43,6 +44,7 @@ export async function esbuildProject({ packageDir, exclude, inputs, ...rest }: B
             entryPoints,
             logLevel: 'debug',
             outdir,
+            sourcemap: true,
             format: 'esm',
             outExtension: rest.outExtensions || {
                 ".js": ".mjs"
