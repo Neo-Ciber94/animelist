@@ -114,6 +114,9 @@ importers:
       '@animelist/client':
         specifier: '*'
         version: link:../../packages/animelist-client
+      svelte:
+        specifier: ^4.0.5
+        version: 4.2.1
     devDependencies:
       '@sveltejs/adapter-auto':
         specifier: ^2.0.0
@@ -142,9 +145,6 @@ importers:
       prettier-plugin-svelte:
         specifier: ^2.10.1
         version: 2.10.1(prettier@2.8.8)(svelte@4.2.1)
-      svelte:
-        specifier: ^4.0.5
-        version: 4.2.1
       svelte-check:
         specifier: ^3.4.3
         version: 3.5.2(postcss@8.4.30)(svelte@4.2.1)
