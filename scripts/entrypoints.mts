@@ -69,13 +69,11 @@ export function generateEntrypoints({ packageDir, additionalInputs }: GenerateEn
         const commonJsEntryFilePath = path.join(packageDir, basePath, `index.js`);
         const esmEntryFilePath = path.join(packageDir, basePath, `index.mjs`);
         const typeEntryPointFilePath = path.join(packageDir, basePath, `index.d.ts`);
-        const gitignoreFilePath = path.join(packageDir, basePath, ".gitignore");
         const entryPointMarkerFilePath = path.join(packageDir, basePath, ENTRYPOINT_MARKER);
 
         writeFileSync(commonJsEntryFilePath, commonJsExport);
         writeFileSync(esmEntryFilePath, esmExport);
         writeFileSync(typeEntryPointFilePath, typesExport);
-        writeFileSync(gitignoreFilePath, "*");
         writeFileSync(entryPointMarkerFilePath, timestamp);
 
         console.log({
