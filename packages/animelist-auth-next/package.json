@@ -36,9 +36,9 @@
     "import": "./dist/index.mjs",
     "default": "./dist/index.mjs"
   },
-  "./session": {
-    "import": "./dist/session/index.mjs",
-    "default": "./dist/session/index.mjs"
+  "./client2": {
+    "import": "./dist/client2/index.mjs",
+    "default": "./dist/client2/index.mjs"
   },
   "./server": {
     "import": "./dist/server/index.mjs",
