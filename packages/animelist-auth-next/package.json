@@ -32,16 +32,12 @@
     "access": "public"
   },
   "./package.json": "./package.json",
-  ".": {
-    "import": "./dist/index.mjs",
-    "default": "./dist/index.mjs"
-  },
-  "./client2": {
-    "import": "./dist/client2/index.mjs",
-    "default": "./dist/client2/index.mjs"
+  "./client": {
+    "import": "./dist/client.mjs",
+    "default": "./dist/client.mjs"
   },
   "./server": {
-    "import": "./dist/server/index.mjs",
-    "default": "./dist/server/index.mjs"
+    "import": "./dist/server.mjs",
+    "default": "./dist/server.mjs"
   }
 }

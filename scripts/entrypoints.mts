@@ -35,13 +35,23 @@ export function generateEntrypoints({ packageDir, additionalInputs }: GenerateEn
     ];
 
     for (const indexFile of indexFiles) {
-        const relativePath = path.dirname(path.relative(srcDir, indexFile));
-
-        // Not need to include the files in the root, those are already included
-        if (relativePath === ".") {
+        if (!fse.existsSync(indexFile)) {
+            console.warn(`'${indexFile}' does not exist`)
             continue;
         }
 
+        const relativePath = path.dirname(path.relative(srcDir, indexFile));
+        const fileName = path.basename(indexFile).replaceAll(/(\.ts|\.tsx)$/g, "");
+        const isIndex = fileName === "index";
+
+        // Not need to include `index.ts` the files in the root, those are already included
+        if (relativePath === "." && isIndex) {
+            continue;
+        } else if (relativePath === ".") {
+            fse.ensureDirSync(fileName);
+        }
+
+        const basePath = isIndex ? relativePath : `./${fileName}`;
         const importDepth = relativePath.split(path.sep).length || 1;
         const resolvedImport = path.join(
             ...Array(importDepth).fill('..'),
@@ -49,17 +59,17 @@ export function generateEntrypoints({ packageDir, additionalInputs }: GenerateEn
             relativePath,
         )
 
-        const resolvedModuleExport = path.join(resolvedImport, "index.js").replace(/\\/g, '/');
-        const resolvedTypesExport = path.join(resolvedImport, "index.d.ts").replace(/\\/g, '/');
+        const resolvedModuleExport = path.join(resolvedImport, `${fileName}.js`).replace(/\\/g, '/');
+        const resolvedTypesExport = path.join(resolvedImport, `${fileName}.d.ts`).replace(/\\/g, '/');
         const commonJsExport = `module.exports = require("${resolvedModuleExport}")`;
         const esmExport = `export * from "${resolvedModuleExport}"`.replace(".js", ".mjs");
         const typesExport = `export * from "${resolvedTypesExport}"`
 
-        const commonJsEntryFilePath = path.join(packageDir, relativePath, "index.js");
-        const esmEntryFilePath = path.join(packageDir, relativePath, "index.mjs");
-        const typeEntryPointFilePath = path.join(packageDir, relativePath, "index.d.ts");
-        const gitignoreFilePath = path.join(packageDir, relativePath, ".gitignore");
-        const entryPointMarkerFilePath = path.join(packageDir, relativePath, ".entrypoint");
+        const commonJsEntryFilePath = path.join(packageDir, basePath, `index.js`);
+        const esmEntryFilePath = path.join(packageDir, basePath, `index.mjs`);
+        const typeEntryPointFilePath = path.join(packageDir, basePath, `index.d.ts`);
+        const gitignoreFilePath = path.join(packageDir, basePath, ".gitignore");
+        const entryPointMarkerFilePath = path.join(packageDir, basePath, ENTRYPOINT_MARKER);
 
         writeFileSync(commonJsEntryFilePath, commonJsExport);
         writeFileSync(esmEntryFilePath, esmExport);

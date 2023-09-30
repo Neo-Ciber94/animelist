@@ -1,4 +1,4 @@
-import { createMyAnimeListHandler } from '@animelist/auth-next/dist/server'
+import { createMyAnimeListHandler } from '@animelist/auth-next/server'
 
 const handler = createMyAnimeListHandler();
 
