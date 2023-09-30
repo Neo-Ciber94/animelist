@@ -2,7 +2,6 @@
   "name": "@animelist/auth-next",
   "version": "0.0.1-alpha.1",
   "description": "Integration with the @animelist/auth for NextJS",
-  "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "typings": "dist/index.d.ts",
@@ -34,15 +33,15 @@
     "access": "public"
   },
   "./package.json": "./package.json",
-  "./client": {
-    "import": "./dist/client/index.mjs",
-    "require": "./dist/client/index.js",
-    "default": "./dist/client/index.js"
-  },
   "./server": {
     "import": "./dist/server/index.mjs",
     "require": "./dist/server/index.js",
     "default": "./dist/server/index.js"
+  },
+  "./session": {
+    "import": "./dist/session.mjs",
+    "require": "./dist/session.js",
+    "default": "./dist/session.js"
   },
   "files": [
     "src",
