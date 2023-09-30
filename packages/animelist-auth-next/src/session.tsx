@@ -22,7 +22,7 @@ type SessionProviderProps = {
 };
 
 export function SessionProvider({ session, children }: SessionProviderProps) {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(session == null);
   const [user, setUser] = useState<User | null>(session?.user ?? null);
   const [accessToken, setAccessToken] = useState<string | null>(
     session?.accessToken ?? null
