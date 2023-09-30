@@ -18,6 +18,7 @@ type GenerateEntryPointsOptions = {
 }
 
 export function generateEntrypoints({ packageDir, additionalInputs }: GenerateEntryPointsOptions) {
+    const timestamp = new Date().toISOString();
     const srcDir = path.resolve(packageDir, 'src');
 
     if (!fse.existsSync(srcDir)) {
@@ -75,7 +76,7 @@ export function generateEntrypoints({ packageDir, additionalInputs }: GenerateEn
         writeFileSync(esmEntryFilePath, esmExport);
         writeFileSync(typeEntryPointFilePath, typesExport);
         writeFileSync(gitignoreFilePath, "*");
-        writeFileSync(entryPointMarkerFilePath, new Date().toUTCString());
+        writeFileSync(entryPointMarkerFilePath, timestamp);
 
         console.log({
             commonJsExport,
