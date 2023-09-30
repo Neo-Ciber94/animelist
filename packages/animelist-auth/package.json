@@ -1,6 +1,6 @@
 {
   "name": "@animelist/auth",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.1-alpha.2",
   "description": "Provides an API to authenticate users with `MyAnimeList`",
   "keywords": [],
   "author": "Freddy L. Paredes",
