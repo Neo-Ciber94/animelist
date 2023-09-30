@@ -41,6 +41,9 @@ importers:
       rimraf:
         specifier: ^5.0.1
         version: 5.0.1
+      tsx:
+        specifier: ^3.13.0
+        version: 3.13.0
 
   examples/client-sample:
     dependencies:
