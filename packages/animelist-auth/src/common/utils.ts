@@ -1,4 +1,4 @@
-import * as jose from 'jose';
+import { SignJWT, jwtVerify } from 'jose';
 import { DEFAULT_SESSION_DURATION_SECONDS } from '../server/handlers/fetchHandler';
 import type { Cookies } from './types';
 import { error } from './httpError';
@@ -72,7 +72,7 @@ function getSecretKey() {
  * @returns A jwt token with the refresh token and user id.
  */
 export async function generateJwt(userId: number, refreshToken: string): Promise<string> {
-    const signJwt = new jose.SignJWT({ refreshToken, sub: String(userId) })
+    const signJwt = new SignJWT({ refreshToken, sub: String(userId) })
         .setExpirationTime(Date.now() + DEFAULT_SESSION_DURATION_SECONDS)
         .setAudience(JWT_AUDIENCE)
         .setIssuer(JWT_ISSUER)
@@ -99,7 +99,7 @@ export async function getServerSession(cookies: Cookies): Promise<UserSession | 
     }
 
     try {
-        const result = await jose.jwtVerify(sessionToken, key, {
+        const result = await jwtVerify(sessionToken, key, {
             audience: JWT_AUDIENCE,
             issuer: JWT_ISSUER
         });

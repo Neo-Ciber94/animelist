@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import CryptoES from 'crypto-es';
-import * as jose from 'jose';
+import { SHA256 } from 'crypto-es/lib/sha256';
+import { decodeJwt } from 'jose';
 
 const MY_ANIME_LIST_CLIENT_ID = process.env.MY_ANIME_LIST_CLIENT_ID!;
 const MY_ANIME_LIST_CLIENT_SECRET = process.env.MY_ANIME_LIST_CLIENT_SECRET!;
@@ -112,7 +112,7 @@ export namespace Auth {
      */
     export async function getToken(options: GetTokenOptions) {
         assertMyAnimeListEnv();
-        
+
         const { code, redirectTo } = options;
         const url = new URL(`${MY_ANIME_LIST_OAUTH2_URL}/token`);
         const searchParams = new URLSearchParams({
@@ -157,7 +157,7 @@ export namespace Auth {
      */
     export async function refreshToken(options: RefreshTokenOptions) {
         assertMyAnimeListEnv();
-        
+
         const { refreshToken } = options;
         const url = new URL(`${MY_ANIME_LIST_OAUTH2_URL}/token`);
         const searchParams = new URLSearchParams({
@@ -199,7 +199,7 @@ export namespace Auth {
      * @returns The user id in the jwt claims.
      */
     export function getUserIdFromToken(token: string): number | null {
-        const claims = jose.decodeJwt(token);
+        const claims = decodeJwt(token);
 
         if (claims.sub == null) {
             return null;
@@ -231,7 +231,7 @@ function createCodeChallenge(length = 43) {
     const codeVerifier = generateCodeVerifier(length);
 
     // Calculate the SHA-256 hash of the code verifier
-    const hash = CryptoES.SHA256(codeVerifier).toString();
+    const hash = SHA256(codeVerifier).toString();
 
     const hashBase64 = btoa(hash)
         .replace('+', '-')
