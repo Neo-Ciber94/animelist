@@ -1,6 +1,6 @@
 "use client";
 
-import { useSession } from "@animelist/auth-next/client";
+import { useSession } from "@animelist/auth-next/session";
 import { signIn, signOut } from "@animelist/auth/client";
 
 export default function Home() {
