@@ -2,6 +2,7 @@ import * as jose from 'jose';
 import { DEFAULT_SESSION_DURATION_SECONDS } from '../server/handlers/fetchHandler';
 import type { Cookies } from './types';
 import { error } from './httpError';
+import { warnOnce } from './logger';
 
 const SECRET_KEY = process.env.MAL_SECRET_KEY || getDefaultSecretKey();
 
@@ -10,7 +11,7 @@ function getDefaultSecretKey() {
         throw new Error("You must generate a secret key and set it to 'process.env.MAL_SECRET_KEY'");
     }
 
-    console.warn(`⚠️ 'process.env.MAL_SECRET_KEY' was not set, using a default secret key`)
+    warnOnce(`⚠️ 'process.env.MAL_SECRET_KEY' was not set, using a default secret key`)
     return "nsuI9j2wnlH2dQ4I23g/0Ou/kCAwS8jhWh/lNcU7Yd1DS4wdNCQ5Nso+P/zukcIelBsZ9gomJhqichVYvKasaA==";
 }
 
