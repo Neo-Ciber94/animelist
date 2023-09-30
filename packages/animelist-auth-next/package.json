@@ -1,6 +1,6 @@
 {
   "name": "@animelist/auth-next",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.1-alpha.3",
   "description": "Integration with the @animelist/auth for NextJS",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
