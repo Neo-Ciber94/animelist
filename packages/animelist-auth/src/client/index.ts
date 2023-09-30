@@ -65,15 +65,34 @@ export type Session = UserToken & {
 }
 
 /**
+ * Options for fetching the session.
+ */
+export type GetSessionOptions = {
+    /**
+     * An abort signal to cancel this request.
+     */
+    signal?: AbortSignal,
+
+    /**
+     * Loads the statistics of the user.
+     * @default true
+     */
+    includeStatistics?: boolean;
+}
+
+/**
  * Gets the current user session.
  */
-export async function getSession() {
+export async function getSession(opts?: GetSessionOptions) {
+    const { signal, includeStatistics = true } = opts || {};
     const url = `${getApiUrl()}/auth/session`;
-    const res = await fetch(`${url}?include_anime_statistics=true`);
+    const searchParams = includeStatistics ? '?include_anime_statistics=true' : '';
+    const res = await fetch(`${url}${searchParams}`, {
+        signal,
+    });
 
     if (!res.ok) {
         const msg = await res.text();
-        console.error(msg);
         throw new Error(msg);
     }
 

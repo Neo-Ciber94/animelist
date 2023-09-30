@@ -30,6 +30,7 @@ export function generateEntrypoints({ packageDir, additionalInputs }: GenerateEn
 
     const indexFiles = [
         ...glob.sync(`${srcDir}/**/index.ts`),
+        ...glob.sync(`${srcDir}/**/index.tsx`),
         ...additionalFiles
     ];
 

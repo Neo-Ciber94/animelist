@@ -6,7 +6,7 @@ import { getSession } from "@animelist/auth/client";
 
 const DAY_MILLIS = 1000 * 60 * 60 * 24;
 
-type UseSession = {
+export type UseSession = {
   user: User | null;
   accessToken: string | null;
   isLoading: boolean;
@@ -14,15 +14,32 @@ type UseSession = {
 
 const SessionContext = createContext<UseSession | null>(null);
 
-type InitialSession = { user: User; accessToken: string };
+export type Session = { user: User; accessToken: string };
 
-type SessionProviderProps = {
+export type SessionProviderProps = {
   children: React.ReactNode;
-  session?: InitialSession | null;
+
+  /**
+   * An initial session to use, if this is set to `null` or a session, the session will
+   * not be loaded from the server.
+   */
+  session?: Session | null;
+
+  /**
+   * Called when the session is loaded from the server.
+   */
+  onLoad?: (session: Session) => void;
 };
 
-export function SessionProvider({ session, children }: SessionProviderProps) {
-  const [isLoading, setIsLoading] = useState(session == null);
+/**
+ * Provides a session for your application.
+ */
+export function SessionProvider({
+  session,
+  children,
+  onLoad,
+}: SessionProviderProps) {
+  const [isLoading, setIsLoading] = useState(session === undefined);
   const [user, setUser] = useState<User | null>(session?.user ?? null);
   const [accessToken, setAccessToken] = useState<string | null>(
     session?.accessToken ?? null
@@ -40,14 +57,13 @@ export function SessionProvider({ session, children }: SessionProviderProps) {
         const session = await getSession();
         setUser(session.user);
         setAccessToken(session.accessToken);
+        onLoad?.(session);
 
         // We use 1 day as a threshold because we don't expect an user to stay 24 hours
         // without any interaction. in most cases this is not reached because the default session is 7 days
-        if (session.expiresAt.getTime() < DAY_MILLIS) {
-          timeout = window.setTimeout(
-            fetchSession,
-            session.expiresAt.getTime()
-          );
+        const expiresAt = new Date(session.expiresAt);
+        if (!isNaN(expiresAt.getTime()) && expiresAt.getTime() < DAY_MILLIS) {
+          timeout = window.setTimeout(fetchSession, expiresAt.getTime());
         }
       } catch (err) {
         console.error(err);

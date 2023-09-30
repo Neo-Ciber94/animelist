@@ -37,8 +37,8 @@
     "default": "./dist/index.mjs"
   },
   "./session": {
-    "import": "./dist/session.mjs",
-    "default": "./dist/session.mjs"
+    "import": "./dist/session/index.mjs",
+    "default": "./dist/session/index.mjs"
   },
   "./server": {
     "import": "./dist/server/index.mjs",
