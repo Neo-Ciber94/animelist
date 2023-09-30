@@ -13,7 +13,8 @@
     "entrypoints": "tsx entrypoints.script.mts",
     "build:types": "tsc --emitDeclarationOnly",
     "build:lib": "tsx esbuild.mts",
-    "build": "rimraf dist && pnpm build:types && pnpm build:lib && pnpm entrypoints"
+    "build": "rimraf dist && pnpm build:types && pnpm build:lib && pnpm entrypoints",
+    "prepublishOnly": "pnpm build"
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -53,5 +54,15 @@
     "import": "./dist/common/index.mjs",
     "require": "./dist/common/index.js",
     "default": "./dist/common/index.js"
-  }
+  },
+  "files": [
+    "src",
+    "dist",
+    "client",
+    "common",
+    "server",
+    "package.json",
+    "README.MD",
+    "!**/*.test.*"
+  ]
 }

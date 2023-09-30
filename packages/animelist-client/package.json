@@ -13,7 +13,8 @@
     "lint": "eslint ./src",
     "build:types": "tsc --emitDeclarationOnly",
     "build:lib": "tsx esbuild.mts",
-    "build": "rimraf dist && pnpm build:types && pnpm build:lib"
+    "build": "rimraf dist && pnpm build:types && pnpm build:lib",
+    "prepublishOnly": "pnpm build"
   },
   "devDependencies": {
     "@animelist/core": "workspace:*",
@@ -33,5 +34,12 @@
       "require": "./dist/index.js",
       "default": "./dist/index.js"
     }
-  }
+  },
+  "files": [
+    "src",
+    "dist",
+    "package.json",
+    "README.MD",
+    "!**/*.test.*"
+  ]
 }
