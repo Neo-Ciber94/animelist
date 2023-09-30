@@ -33,11 +33,11 @@
   },
   "./package.json": "./package.json",
   "./client": {
-    "import": "./dist/client.mjs",
-    "default": "./dist/client.mjs"
+    "import": "./dist/client/index.mjs",
+    "default": "./dist/client/index.mjs"
   },
   "./server": {
-    "import": "./dist/server.mjs",
-    "default": "./dist/server.mjs"
+    "import": "./dist/server/index.mjs",
+    "default": "./dist/server/index.mjs"
   }
 }
