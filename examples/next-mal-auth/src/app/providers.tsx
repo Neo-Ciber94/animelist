@@ -1,7 +1,15 @@
 "use client";
 
-import { SessionProvider } from "@animelist/auth-next/client";
+import { SessionProvider, type Session } from "@animelist/auth-next/client";
 
-export function MyAnimeListAuthProvider({ children }: { children: React.ReactNode }) {
-  return <SessionProvider>{children}</SessionProvider>;
+type MyAnimeListAuthProviderProps = {
+  children: React.ReactNode;
+  session?: Session;
+};
+
+export function MyAnimeListAuthProvider({
+  children,
+  session,
+}: MyAnimeListAuthProviderProps) {
+  return <SessionProvider session={session}>{children}</SessionProvider>;
 }

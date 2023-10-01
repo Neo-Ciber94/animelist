@@ -15,13 +15,13 @@ export {
 
 const DAY_MILLIS = 1000 * 60 * 60 * 24;
 
-export type UseSession = {
+export type UserSession = {
   user: User | null;
   accessToken: string | null;
   isLoading: boolean;
 };
 
-const SessionContext = createContext<UseSession | null>(null);
+const SessionContext = createContext<UserSession | null>(null);
 
 export type Session = { user: User; accessToken: string };
 
