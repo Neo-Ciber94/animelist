@@ -2,6 +2,8 @@
 	import { session, signIn, signOut } from '@animelist/auth-sveltekit/client';
 	import { MALClient, type AnimeObject } from '@animelist/client';
 	import { writable } from 'svelte/store';
+	import Auth from './Auth.svelte';
+	import AnimeListSuggestion from './AnimeListSuggestion.svelte';
 
 	const animeList = writable<AnimeObject[]>([]);
 
@@ -17,16 +19,7 @@
 	})();
 </script>
 
-{#if $session.loading}
-	<p>Loading...</p>
-{:else if $session.user}
-	<p>Welcome {$session.user.name}</p>
-	<button on:click={signOut}>Sign Out</button>
-
-	<div>
-		<h1>Suggested Anime</h1>
-		<pre>{JSON.stringify($animeList, null, 2)}</pre>
-	</div>
-{:else}
-	<button on:click={signIn}>Sign In</button>
-{/if}
+<Auth />
+<main class="container mx-auto p-4">
+	<AnimeListSuggestion />
+</main>
