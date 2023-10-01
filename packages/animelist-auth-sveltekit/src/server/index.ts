@@ -61,16 +61,3 @@ function startsWithPathSegment(pathname: string, other: string) {
 
     return true;
 }
-
-// export function myAnimeListMiddleware(): Handle {
-//     return ({ event, resolve }) => {
-//         const myAnimeListHandler = createMyAnimeListHandler();
-//         const pathname = event.url.pathname;
-
-//         if (pathname.startsWith("/api/myanimelist") && !event.isDataRequest) {
-//             return myAnimeListHandler({ event, resolve });
-//         }
-
-//         return resolve(event);
-//     }
-// }

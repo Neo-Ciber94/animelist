@@ -1,18 +1,14 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vitest/config';
-import { loadEnv } from 'vite';
+//import { loadEnv } from 'vite';
+import EnvironmentPlugin from 'vite-plugin-environment'
 
-export default defineConfig(({ mode }) => {
-	const env = loadEnv(mode, process.cwd(), '');
-
-	return {
-		plugins: [sveltekit()],
-		test: {
-			include: ['src/**/*.{test,spec}.{js,ts}']
-		},
-		define: {
-			'process.env.MY_ANIME_LIST_CLIENT_ID': JSON.stringify(env.MY_ANIME_LIST_CLIENT_ID),
-			'process.env.MY_ANIME_LIST_CLIENT_SECRET': JSON.stringify(env.MY_ANIME_LIST_CLIENT_SECRET),
-		}
+export default defineConfig({
+	plugins: [
+		sveltekit(),
+		EnvironmentPlugin(['MY_ANIME_LIST_CLIENT_ID', 'MY_ANIME_LIST_CLIENT_SECRET'])
+	],
+	test: {
+		include: ['src/**/*.{test,spec}.{js,ts}']
 	}
 });
