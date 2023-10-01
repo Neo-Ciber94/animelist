@@ -4,6 +4,15 @@ import React, { useState, useEffect, createContext, useContext } from "react";
 import type { User } from "@animelist/core";
 import { getSession } from "@animelist/auth/client";
 
+// Re-export client related stuff
+export {
+  signIn,
+  signOut,
+  getSession,
+  getUserToken,
+  type GetSessionOptions,
+} from "@animelist/auth/client";
+
 const DAY_MILLIS = 1000 * 60 * 60 * 24;
 
 export type UseSession = {
@@ -99,7 +108,7 @@ export function useSession() {
 
   if (ctx == null) {
     throw new Error(
-      `'useSession' cannot be called without a <SessionProvider> in the react tree`
+      `'useSession' cannot be called in a Server Component or without a <SessionProvider> in the react tree`
     );
   }
 
