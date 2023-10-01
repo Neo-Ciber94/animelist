@@ -9,10 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@animelist/auth": "workspace:*",
     "@animelist/auth-next": "workspace:*",
-    "@animelist/client": "workspace:0.0.1-alpha.3",
-    "@animelist/core": "workspace:0.0.1-alpha.3",
+    "@animelist/client": "workspace:*",
     "@types/node": "20.6.2",
     "@types/react": "^18.2.22",
     "@types/react-dom": "18.2.7",

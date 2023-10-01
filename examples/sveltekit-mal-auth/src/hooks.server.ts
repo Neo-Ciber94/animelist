@@ -1,6 +1,5 @@
 import type { Handle } from "@sveltejs/kit";
-import { createMyAnimeListFetchHandler } from "@animelist/auth-sveltekit/server";
-import { getServerSession } from "@animelist/auth/common";
+import { createMyAnimeListFetchHandler, getServerSession } from "@animelist/auth-sveltekit/server";
 import { MALClient } from "@animelist/client";
 
 const handler = createMyAnimeListFetchHandler();

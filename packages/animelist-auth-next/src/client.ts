@@ -1,4 +1,3 @@
-export * from "./session";
 
 // Re-export client related stuff
 export {

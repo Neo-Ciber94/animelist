@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { signIn, signOut } from '@animelist/auth/client';
-	import { session } from '@animelist/auth-sveltekit/client';
+	import { session, signIn, signOut } from '@animelist/auth-sveltekit/client';
+	import { MALClient, type AnimeObject } from '@animelist/client';
 	import { writable } from 'svelte/store';
-	import type { AnimeObject } from '@animelist/core';
-	import { MALClient } from '@animelist/client';
 
 	const animeList = writable<AnimeObject[]>([]);
 

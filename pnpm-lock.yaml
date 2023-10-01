@@ -63,18 +63,12 @@ importers:
 
   examples/next-mal-auth:
     dependencies:
-      '@animelist/auth':
-        specifier: workspace:*
-        version: link:../../packages/animelist-auth
       '@animelist/auth-next':
         specifier: workspace:*
         version: link:../../packages/animelist-auth-next
       '@animelist/client':
-        specifier: workspace:0.0.1-alpha.3
+        specifier: workspace:*
         version: link:../../packages/animelist-client
-      '@animelist/core':
-        specifier: workspace:0.0.1-alpha.3
-        version: link:../../packages/animelist-core
       '@types/node':
         specifier: 20.6.2
         version: 20.6.2
@@ -114,18 +108,12 @@ importers:
 
   examples/sveltekit-mal-auth:
     dependencies:
-      '@animelist/auth':
-        specifier: '*'
-        version: link:../../packages/animelist-auth
       '@animelist/auth-sveltekit':
         specifier: '*'
         version: link:../../packages/animelist-auth-sveltekit
       '@animelist/client':
         specifier: '*'
         version: link:../../packages/animelist-client
-      '@animelist/core':
-        specifier: workspace:0.0.1-alpha.3
-        version: link:../../packages/animelist-core
       svelte:
         specifier: ^4.0.5
         version: 4.2.1

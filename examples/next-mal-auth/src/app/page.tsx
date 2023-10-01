@@ -1,10 +1,14 @@
 "use client";
 
-import { useSession } from "@animelist/auth-next";
-import { signIn, signOut } from "@animelist/auth/client";
-import { type AnimeObject } from "@animelist/core";
+import {
+  useSession,
+  signIn,
+  signOut,
+  type AnimeObject,
+} from "@animelist/auth-next";
+//import { signIn, signOut } from "@animelist/auth-next/client";
 import { useEffect, useState } from "react";
-import { MALClient } from "../../../../packages/animelist-client/dist";
+import { MALClient } from "@animelist/client";
 
 export default function HomePage() {
   const { user, accessToken, isLoading } = useSession();

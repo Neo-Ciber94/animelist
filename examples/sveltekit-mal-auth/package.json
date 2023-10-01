@@ -13,10 +13,8 @@
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"dependencies": {
-		"@animelist/auth": "*",
 		"@animelist/auth-sveltekit": "*",
 		"@animelist/client": "*",
-		"@animelist/core": "workspace:0.0.1-alpha.3",
 		"svelte": "^4.0.5"
 	},
 	"devDependencies": {
