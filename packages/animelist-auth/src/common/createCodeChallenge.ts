@@ -81,11 +81,14 @@ function hash256(data: string): Promise<string> {
 }
 
 async function hash256_webCrypto(data: string): Promise<string> {
-    const encoder = new TextEncoder();
-    const decoder = new TextDecoder();
-    const encoded = encoder.encode(data);
+    function bufferToHex(arrayBuffer: ArrayBuffer) {
+        const buffer = new Uint8Array(arrayBuffer);
+        return Array.from(buffer, byte => byte.toString(16).padStart(2, '0')).join('');
+    }
+
+    const encoded = new TextEncoder().encode(data);
     const buffer = await crypto.subtle.digest('SHA-256', encoded);
-    return decoder.decode(buffer);
+    return bufferToHex(buffer);
 }
 
 async function hash256_node(data: string): Promise<string> {
@@ -96,7 +99,7 @@ async function hash256_node(data: string): Promise<string> {
 }
 
 async function hash256_crypto_es(data: string): Promise<string> {
-    const { SHA256 } = await import('crypto-es/lib/sha256');
-    return SHA256(data).toString();
+    const { SHA256, } = await import('crypto-es/lib/sha256');
+    return SHA256(data).toString() // by default uses hex
 }
 

@@ -3,8 +3,9 @@ import { COOKIE_AUTH_CSRF, COOKIE_AUTH_CODE_CHALLENGE, COOKIE_AUTH_SESSION, COOK
 import { Auth } from "../server";
 import { HttpError, error, redirect } from "../../common/httpError";
 import type { RequestEvent } from "../../common/types";
-import type { HandleAuthOptions } from "./types";
+import type { HandleAuthOptions, MyAnimeListHandlerOptions } from "./types";
 import { CookieJar } from "../../common/cookieJar";
+import { getApiUrl } from "../../common/getApiUrl";
 
 const ALLOWED_FORWARD_HEADERS = [
     "Authorization",
@@ -14,6 +15,53 @@ const ALLOWED_FORWARD_HEADERS = [
 
 export const MY_ANIME_LIST_API_URL = "https://api.myanimelist.net/v2";
 export const DEFAULT_SESSION_DURATION_SECONDS = 60 * 60 * 24 * 7; // 7 days;
+
+/**
+ * A request handler.
+ */
+export type Handler = (req: Request) => Promise<Response>;
+
+/**
+ * Creates a `Handler` for `MyAnimeList` requests.
+ * @param options The options for the handler.
+ */
+export function createMyAnimeListFetchHandler(options: MyAnimeListHandlerOptions = {}): Handler {
+    const { sessionDurationSeconds = DEFAULT_SESSION_DURATION_SECONDS } = options;
+
+    if (sessionDurationSeconds <= 0) {
+        throw new Error(`Session duration must be greater than zero but was: ${sessionDurationSeconds}`);
+    }
+
+    const apiUrl = getApiUrl();
+    const authPath = `${apiUrl}/auth`;
+
+    if (apiUrl.endsWith("/")) {
+        throw new Error(`api url cannot end with '/'`);
+    }
+
+    return async (request) => {
+        const pathname = new URL(request.url).pathname;
+
+        if (!startsWithPathSegment(pathname, apiUrl)) {
+            return new Response(null, { status: 404 });
+        }
+
+        if (startsWithPathSegment(pathname, authPath)) {
+            return handleAuthFetchRequest(request, {
+                ...options,
+                apiUrl,
+                sessionDurationSeconds,
+            });
+        }
+
+        if (options.callbacks?.onProxyRequest) {
+            const next = (request: Request) => proxyFetchRequestToMyAnimeList(apiUrl, request);
+            return options.callbacks.onProxyRequest(request, next);
+        }
+
+        return proxyFetchRequestToMyAnimeList(apiUrl, request);
+    }
+}
 
 /**
  * Handle an authentication request.
@@ -274,11 +322,27 @@ export async function proxyFetchRequestToMyAnimeList(apiUrl: string, request: Re
     return res;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function json(data: any) {
+function json(data: unknown) {
     return new Response(JSON.stringify(data), {
         headers: {
             'Content-Type': 'application/json'
         }
     })
+}
+
+function startsWithPathSegment(pathname: string, other: string) {
+    const a = pathname.split("/").filter(x => x.length > 0);
+    const b = other.split("/").filter(x => x.length > 0);
+
+    if (a.length < b.length) {
+        return false;
+    }
+
+    for (let i = 0; i < b.length; i++) {
+        if (a[i] !== b[i]) {
+            return false;
+        }
+    }
+
+    return true;
 }

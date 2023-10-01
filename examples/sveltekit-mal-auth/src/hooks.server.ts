@@ -1,9 +1,9 @@
 import type { Handle } from "@sveltejs/kit";
-import { createMyAnimeListHandler } from "@animelist/auth-sveltekit/server";
+import { createMyAnimeListFetchHandler } from "@animelist/auth-sveltekit/server";
 import { getServerSession } from "@animelist/auth/common";
 import { MALClient } from "@animelist/client";
 
-const handler = createMyAnimeListHandler();
+const handler = createMyAnimeListFetchHandler();
 
 export const handle: Handle = async ({ event, resolve }) => {
     const session = await getServerSession(event.cookies);
@@ -21,7 +21,7 @@ export const handle: Handle = async ({ event, resolve }) => {
     }
 
     if (event.url.pathname.startsWith("/api/myanimelist")) {
-        return handler({ event, resolve });
+        return handler(event.request);
     }
 
     return resolve(event);

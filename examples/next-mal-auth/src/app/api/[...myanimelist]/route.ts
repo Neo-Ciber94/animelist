@@ -1,6 +1,6 @@
-import { createMyAnimeListHandler } from '@animelist/auth-next/server'
+import { createMyAnimeListFetchHandler } from '@animelist/auth-next/server'
 
-const handler = createMyAnimeListHandler();
+const handler = createMyAnimeListFetchHandler();
 
 export {
     handler as GET,

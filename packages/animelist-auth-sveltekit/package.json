@@ -21,7 +21,8 @@
   "dependencies": {
     "@animelist/auth": "workspace:*",
     "@animelist/core": "workspace:*",
-    "@sveltejs/kit": "^1.25.0"
+    "@sveltejs/kit": "^1.25.0",
+    "svelte": "^4.0.5"
   },
   "devDependencies": {
     "eslint": "^8.49.0",
