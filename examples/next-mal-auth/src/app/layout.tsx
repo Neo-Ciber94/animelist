@@ -2,10 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { MyAnimeListAuthProvider } from "./providers";
-import { getServerSession } from "@animelist/auth-next/server";
+import { getUser } from "@animelist/auth-next/server";
 import { cookies } from "next/headers";
-import { MALClient } from "@animelist/client";
-import { type Session } from "@animelist/auth-next/client";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,26 +17,12 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession({
-    get: (name) => cookies().get(name)?.value,
-    delete: () => {},
-    set: () => {},
-  });
-
-  let initialSession: Session | undefined = undefined;
-  if (session) {
-    const client = new MALClient({ accessToken: session.accessToken });
-    const user = await client.getMyUserInfo();
-    initialSession = {
-      accessToken: session.accessToken,
-      user,
-    };
-  }
+  const session = await getUser(cookies());
 
   return (
     <html lang="en">
       <body className={inter.className}>
-        <MyAnimeListAuthProvider session={initialSession}>
+        <MyAnimeListAuthProvider session={session}>
           {children}
         </MyAnimeListAuthProvider>
       </body>

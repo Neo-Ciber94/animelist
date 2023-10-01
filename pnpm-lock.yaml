@@ -212,6 +212,9 @@ importers:
       '@animelist/auth':
         specifier: workspace:*
         version: link:../animelist-auth
+      '@animelist/client':
+        specifier: workspace:*
+        version: link:../animelist-client
       '@animelist/core':
         specifier: workspace:*
         version: link:../animelist-core
@@ -243,6 +246,9 @@ importers:
       '@animelist/auth':
         specifier: workspace:*
         version: link:../animelist-auth
+      '@animelist/client':
+        specifier: workspace:*
+        version: link:../animelist-client
       '@animelist/core':
         specifier: workspace:*
         version: link:../animelist-core

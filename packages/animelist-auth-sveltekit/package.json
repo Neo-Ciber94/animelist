@@ -21,6 +21,7 @@
   "dependencies": {
     "@animelist/auth": "workspace:*",
     "@animelist/core": "workspace:*",
+    "@animelist/client": "workspace:*",
     "@sveltejs/kit": "^1.25.0",
     "svelte": "^4.0.5"
   },

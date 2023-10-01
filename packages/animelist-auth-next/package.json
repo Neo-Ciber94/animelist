@@ -19,6 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "@animelist/auth": "workspace:*",
+    "@animelist/client": "workspace:*",
     "@animelist/core": "workspace:*",
     "next": "^13.5.2",
     "react": "^18.2.0"
