@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { session, signIn, signOut } from '@animelist/auth-sveltekit/client';
+	import { session } from '@animelist/auth-sveltekit/client';
 	import { MALClient, type AnimeObject } from '@animelist/client';
 	import { writable } from 'svelte/store';
 	import Auth from './Auth.svelte';
