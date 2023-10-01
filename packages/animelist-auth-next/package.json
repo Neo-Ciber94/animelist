@@ -8,10 +8,9 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "lint": "eslint ./src",
-    "entrypoints": "tsx entrypoints.script.mts",
     "build:types": "tsc --emitDeclarationOnly",
     "build:lib": "tsx esbuild.mts",
-    "build": "rimraf dist && pnpm build:types && pnpm build:lib",
+    "build": "rimraf dist && pnpm build:types && pnpm build:lib && npx ncp dist .",
     "prepublishOnly": "pnpm build"
   },
   "keywords": [],
@@ -40,20 +39,20 @@
     "default": "./server/index.js"
   },
   "./client": {
-    "import": "./client.mjs",
-    "require": "./client.js",
-    "default": "./client.js"
-  },
-  "./session": {
-    "import": "./session.mjs",
-    "require": "./session.js",
-    "default": "./session.js"
+    "import": "./client/index.mjs",
+    "require": "./client/index.js",
+    "default": "./client/index.js"
   },
   "files": [
     "src",
-    "dist",
     "client",
     "server",
+    "*.js",
+    "*.js.map",
+    "*.mjs",
+    "*.mjs.map",
+    "*.d.ts",
+    "*.d.ts.map",
     "package.json",
     "README.MD",
     "!**/*.test.*"

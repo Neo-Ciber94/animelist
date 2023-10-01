@@ -1,12 +1,7 @@
 "use client";
 
-import {
-  useSession,
-  // signIn,
-  // signOut,
-  type AnimeObject,
-} from "@animelist/auth-next";
-import { signIn, signOut } from "@animelist/auth-next/";
+import { type AnimeObject } from "@animelist/auth-next";
+import { signIn, signOut, useSession } from "@animelist/auth-next/client";
 import { useEffect, useState } from "react";
 import { MALClient } from "@animelist/client";
 
