@@ -1,18 +1,21 @@
 import dotenv from 'dotenv';
-import { MALClient } from "@animelist/client";
-import type { AnimeSeason } from "@animelist/core"
+import { MALClient, type AnimeSeason } from "@animelist/client";
 
+// Setup the environment variables
 dotenv.config();
-
-const client = new MALClient({
-    clientId: process.env.MAL_CLIENT_ID!,
-});
 
 function getCurrentSeason(): AnimeSeason {
     const currentMonth = new Date().getMonth();
     const seasons = ["winter", "spring", "summer", "fall"] as const;
     return seasons[Math.floor(currentMonth / 3)];
 }
+
+// Gets a list of 10 anime that are available for this season.
+// Keep in mind this return any anime that still on emission this season like One Piece.
+
+const client = new MALClient({
+    clientId: process.env.MAL_CLIENT_ID!,
+});
 
 const animeList = await client.getSeasonalAnime({
     season: getCurrentSeason(),

@@ -50,9 +50,6 @@ importers:
       '@animelist/client':
         specifier: workspace:*
         version: link:../../packages/animelist-client
-      '@animelist/core':
-        specifier: workspace:*
-        version: link:../../packages/animelist-core
       dotenv:
         specifier: ^16.3.1
         version: 16.3.1

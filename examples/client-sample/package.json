@@ -8,11 +8,10 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "start": "tsx index.ts"
+    "start": "tsx src/index.ts"
   },
   "dependencies": {
     "@animelist/client": "workspace:*",
-    "@animelist/core": "workspace:*",
     "dotenv": "^16.3.1"
   },
   "devDependencies": {
