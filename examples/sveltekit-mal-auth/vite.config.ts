@@ -1,14 +1,22 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vitest/config';
-//import { loadEnv } from 'vite';
-import EnvironmentPlugin from 'vite-plugin-environment'
+import dotenv from 'dotenv';
+
+const defineProcessEnv = () => {
+	dotenv.config();
+	const definedEnvs = Object.fromEntries(
+		Object
+			.entries(process.env || {})
+			.map(([key, value]) => ([`process.env.${key}`, JSON.stringify(value)]))
+	);
+
+	return definedEnvs;
+}
 
 export default defineConfig({
-	plugins: [
-		sveltekit(),
-		EnvironmentPlugin(['MY_ANIME_LIST_CLIENT_ID', 'MY_ANIME_LIST_CLIENT_SECRET'])
-	],
+	plugins: [sveltekit()],
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
-	}
+	},
+	define: defineProcessEnv()
 });
