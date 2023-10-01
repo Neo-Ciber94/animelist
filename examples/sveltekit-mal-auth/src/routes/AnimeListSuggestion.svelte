@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import { session } from '@animelist/auth-sveltekit/client';
 	import { MALClient, type AnimeObject } from '@animelist/client';
 	import { writable } from 'svelte/store';
@@ -6,8 +7,10 @@
 	const animeList = writable<AnimeObject[]>([]);
 	const isLoading = writable<boolean>(false);
 
+	// We fetch the anime list on the client.
+	// This also can be moved to a server `load` function, that we don't need to use the `proxyUrl`
 	$: (async function () {
-		if ($session.accessToken == null) {
+		if ($session.accessToken == null || !browser) {
 			return;
 		}
 

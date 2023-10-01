@@ -1,12 +1,14 @@
 <script lang="ts">
-	import "../app.css";
+	import '../app.css';
 	import { session } from '@animelist/auth-sveltekit/client';
 
-	// Uncomment this and invoke `session.initialize(data.session)` to load the user in SSR
 	// import type { LayoutServerData } from './$types';
 	// export let data: LayoutServerData;
 
-	// This initializes the user store
+	/**
+	 * Initialize the session, you can replace this for `session.initialize(data.session)`
+	 * by uncommenting the above, to load the user server-side and avoid loading it from the client.
+	 */
 	session.initialize().catch(console.error);
 </script>
 
