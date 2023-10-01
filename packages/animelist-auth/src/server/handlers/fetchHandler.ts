@@ -348,11 +348,3 @@ function startsWithPathSegment(pathname: string, other: string) {
 
     return true;
 }
-
-function getEnv(name: string) {
-    if (typeof process === "undefined" || process.env == null) {
-        return undefined;
-    }
-
-    return process.env[name];
-}
