@@ -7,6 +7,6 @@
         "outDir": "./dist",
         "declarationDir": "dist",
         "baseUrl": ".",
-        "jsx": "react",
+        "jsx": "react"
     },
 }

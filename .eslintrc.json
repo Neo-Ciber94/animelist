@@ -21,7 +21,8 @@
         "@typescript-eslint"
     ],
     "ignorePatterns": [
-        "*.test.ts"
+        "*.test.ts",
+        "**/dist"
     ],
     "rules": {
         "require-await": "off",
