@@ -57,7 +57,7 @@ async function handleAuth(event: RequestEvent, options: HandleAuthOptions) {
     switch (action) {
         case '/sign-in': {
             const redirectTo = `${originUrl}/callback`;
-            const { url: authenticationUrl, state, codeChallenge } = Auth.getAuthenticationUrl({ redirectTo });
+            const { url: authenticationUrl, state, codeChallenge } = await Auth.getAuthenticationUrl({ redirectTo });
 
             event.cookies.set(COOKIE_AUTH_CSRF, state, {
                 path: "/",

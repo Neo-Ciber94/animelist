@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { SHA256 } from 'crypto-es/lib/sha256';
 import { decodeJwt } from 'jose';
 import { invariant } from '../common/invariant';
+import { createCodeChallenge } from '../common/createCodeChallenge';
 
 const MY_ANIME_LIST_CLIENT_ID = process.env.MY_ANIME_LIST_CLIENT_ID;
 const MY_ANIME_LIST_CLIENT_SECRET = process.env.MY_ANIME_LIST_CLIENT_SECRET;
@@ -72,12 +72,12 @@ export namespace Auth {
      * 
      * @see https://myanimelist.net/apiconfig/references/authorization#obtaining-oauth-2.0-access-tokens
      */
-    export function getAuthenticationUrl(options: GetAuthenticationUrlOptions) {
+    export async function getAuthenticationUrl(options: GetAuthenticationUrlOptions) {
         invariant(MY_ANIME_LIST_CLIENT_ID, "'MY_ANIME_LIST_CLIENT_ID' environment variable was not set");
 
         const { redirectTo } = options;
         const state = crypto.randomUUID();
-        const codeChallenge = options.codeVerifier ?? createCodeChallenge();
+        const codeChallenge = options.codeVerifier ?? await createCodeChallenge();
         const url = new URL(`${MY_ANIME_LIST_OAUTH2_URL}/authorize`);
         url.searchParams.set("response_type", "code");
         url.searchParams.set("client_id", MY_ANIME_LIST_CLIENT_ID);
@@ -199,33 +199,3 @@ export namespace Auth {
     }
 }
 
-function generateCodeVerifier(length = 43) {
-    if (length < 43 || length > 128) {
-        throw new Error("code verifier length must be between 43 and 128 characters");
-    }
-
-    // Generate a random string of the specified length
-    const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
-    let codeVerifier = '';
-    for (let i = 0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * charset.length);
-        codeVerifier += charset.charAt(randomIndex);
-    }
-
-    return codeVerifier;
-}
-
-// This code should run both on `node` and the `edge`.
-function createCodeChallenge(length = 43) {
-    const codeVerifier = generateCodeVerifier(length);
-
-    // Calculate the SHA-256 hash of the code verifier
-    const hash = SHA256(codeVerifier).toString();
-
-    const hashBase64 = btoa(hash)
-        .replace('+', '-')
-        .replace('/', '_')
-        .replace(/=+$/, '');
-
-    return hashBase64;
-}
