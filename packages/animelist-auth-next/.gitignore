@@ -1,2 +1,8 @@
 /server
 /client
+/*.js
+/*.js.map
+/*.mjs
+/*.mjs.map
+/*.d.ts
+/*.d.ts.map

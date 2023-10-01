@@ -6,7 +6,7 @@ import {
   // signOut,
   type AnimeObject,
 } from "@animelist/auth-next";
-import { signIn, signOut } from "@animelist/auth-next/dist/client";
+import { signIn, signOut } from "@animelist/auth-next/";
 import { useEffect, useState } from "react";
 import { MALClient } from "@animelist/client";
 

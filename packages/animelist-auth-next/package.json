@@ -2,16 +2,16 @@
   "name": "@animelist/auth-next",
   "version": "0.0.1-alpha.3",
   "description": "Integration with the @animelist/auth for NextJS",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "typings": "dist/index.d.ts",
+  "main": "index.js",
+  "module": "index.mjs",
+  "typings": "index.d.ts",
   "scripts": {
     "typecheck": "tsc --noEmit",
     "lint": "eslint ./src",
     "entrypoints": "tsx entrypoints.script.mts",
     "build:types": "tsc --emitDeclarationOnly",
     "build:lib": "tsx esbuild.mts",
-    "build": "rimraf dist && pnpm build:types && pnpm build:lib && pnpm entrypoints",
+    "build": "rimraf dist && pnpm build:types && pnpm build:lib",
     "prepublishOnly": "pnpm build"
   },
   "keywords": [],
@@ -27,6 +27,7 @@
     "@types/react": "^18.2.22",
     "esbuild": "^0.19.3",
     "eslint": "^8.49.0",
+    "ncp": "^2.0.0",
     "typescript": "^5.2.2"
   },
   "publishConfig": {
@@ -34,19 +35,19 @@
   },
   "./package.json": "./package.json",
   "./server": {
-    "import": "./dist/server/index.mjs",
-    "require": "./dist/server/index.js",
-    "default": "./dist/server/index.js"
+    "import": "./server/index.mjs",
+    "require": "./server/index.js",
+    "default": "./server/index.js"
   },
   "./client": {
-    "import": "./dist/client.mjs",
-    "require": "./dist/client.js",
-    "default": "./dist/client.js"
+    "import": "./client.mjs",
+    "require": "./client.js",
+    "default": "./client.js"
   },
   "./session": {
-    "import": "./dist/session.mjs",
-    "require": "./dist/session.js",
-    "default": "./dist/session.js"
+    "import": "./session.mjs",
+    "require": "./session.js",
+    "default": "./session.js"
   },
   "files": [
     "src",
