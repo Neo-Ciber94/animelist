@@ -33,21 +33,12 @@ export type SessionProviderProps = {
    * not be loaded from the server.
    */
   session?: Session | null;
-
-  /**
-   * Called when the session is loaded from the server.
-   */
-  onLoad?: (session: Session) => void;
 };
 
 /**
  * Provides a session for your application.
  */
-export function SessionProvider({
-  session,
-  children,
-  onLoad,
-}: SessionProviderProps) {
+export function SessionProvider({ session, children }: SessionProviderProps) {
   const [isLoading, setIsLoading] = useState(session === undefined);
   const [user, setUser] = useState<User | null>(session?.user ?? null);
   const [accessToken, setAccessToken] = useState<string | null>(
@@ -66,7 +57,6 @@ export function SessionProvider({
         const session = await getSession();
         setUser(session.user);
         setAccessToken(session.accessToken);
-        onLoad?.(session);
 
         // We use 1 day as a threshold because we don't expect an user to stay 24 hours
         // without any interaction. in most cases this is not reached because the default session is 7 days
