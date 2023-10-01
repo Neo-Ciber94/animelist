@@ -292,8 +292,10 @@ export async function proxyFetchRequestToMyAnimeList(apiUrl: string, request: Re
     const search = url.search;
     const myAnimeListApiUrl = `${MY_ANIME_LIST_API_URL}${path}${search}`
 
-    // 🍥 GET: https://api.example.com/users
-    console.log(`🍥 ${request.method}: ${myAnimeListApiUrl}`)
+    if (process.env.NODE_ENV !== 'production' && process.env.MAL_REQUEST_DEBUG) {
+        // 🍥 GET: https://api.myanimelist.net/v2/anime/suggestions
+        console.log(`🍥 ${request.method}: ${myAnimeListApiUrl}`)
+    }
 
     const res = await fetch(myAnimeListApiUrl, {
         method: request.method,
@@ -345,4 +347,12 @@ function startsWithPathSegment(pathname: string, other: string) {
     }
 
     return true;
+}
+
+function getEnv(name: string) {
+    if (typeof process === "undefined" || process.env == null) {
+        return undefined;
+    }
+
+    return process.env[name];
 }

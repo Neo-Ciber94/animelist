@@ -5,6 +5,7 @@ import { signIn, signOut, useSession } from "@animelist/auth-next/client";
 import { useEffect, useState } from "react";
 import { MALClient } from "@animelist/client";
 
+
 export default function HomePage() {
   const { user, accessToken, isLoading } = useSession();
   const [animeList, setAnimeList] = useState<AnimeObject[]>([]);

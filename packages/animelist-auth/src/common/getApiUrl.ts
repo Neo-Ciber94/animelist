@@ -2,11 +2,11 @@
 /**
  * Returns the path of the `MyAnimeList` api.
  * 
- * It returns `PUBLIC_MY_ANIME_LIST_API` environment variable if available.
+ * It returns `PUBLIC_MAL_API_URL` environment variable if available.
  */
 export function getApiUrl() {
-    if (process.env.PUBLIC_MY_ANIME_LIST_API) {
-        return process.env.PUBLIC_MY_ANIME_LIST_API;
+    if (process.env.PUBLIC_MAL_API_URL) {
+        return process.env.PUBLIC_MAL_API_URL;
     }
 
     return "/api/myanimelist";

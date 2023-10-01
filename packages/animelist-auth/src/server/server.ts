@@ -3,8 +3,8 @@ import { decodeJwt } from 'jose';
 import { invariant } from '../common/invariant';
 import { createCodeChallenge } from '../common/createCodeChallenge';
 
-const MY_ANIME_LIST_CLIENT_ID = process.env.MY_ANIME_LIST_CLIENT_ID;
-const MY_ANIME_LIST_CLIENT_SECRET = process.env.MY_ANIME_LIST_CLIENT_SECRET;
+const MAL_CLIENT_ID = process.env.MAL_CLIENT_ID;
+const MAL_CLIENT_SECRET = process.env.MAL_CLIENT_SECRET;
 const MY_ANIME_LIST_OAUTH2_URL = "https://myanimelist.net/v1/oauth2";
 
 /**
@@ -73,14 +73,14 @@ export namespace Auth {
      * @see https://myanimelist.net/apiconfig/references/authorization#obtaining-oauth-2.0-access-tokens
      */
     export async function getAuthenticationUrl(options: GetAuthenticationUrlOptions) {
-        invariant(MY_ANIME_LIST_CLIENT_ID, "'MY_ANIME_LIST_CLIENT_ID' environment variable was not set");
+        invariant(MAL_CLIENT_ID, "'MAL_CLIENT_ID' environment variable was not set");
 
         const { redirectTo } = options;
         const state = crypto.randomUUID();
         const codeChallenge = options.codeVerifier ?? await createCodeChallenge();
         const url = new URL(`${MY_ANIME_LIST_OAUTH2_URL}/authorize`);
         url.searchParams.set("response_type", "code");
-        url.searchParams.set("client_id", MY_ANIME_LIST_CLIENT_ID);
+        url.searchParams.set("client_id", MAL_CLIENT_ID);
         url.searchParams.set("code_challenge", codeChallenge)
         url.searchParams.set("code_challenge_method", "plain");
         url.searchParams.set("state", state);
@@ -101,14 +101,14 @@ export namespace Auth {
      * @returns Returns the tokens to access the `MyAnimeList` API.
      */
     export async function getToken(options: GetTokenOptions) {
-        invariant(MY_ANIME_LIST_CLIENT_ID, "'MY_ANIME_LIST_CLIENT_ID' environment variable was not set");
-        invariant(MY_ANIME_LIST_CLIENT_SECRET, "'MY_ANIME_LIST_CLIENT_SECRET' environment variable was not set");
+        invariant(MAL_CLIENT_ID, "'MAL_CLIENT_ID' environment variable was not set");
+        invariant(MAL_CLIENT_SECRET, "'MAL_CLIENT_SECRET' environment variable was not set");
 
         const { code, redirectTo } = options;
         const url = new URL(`${MY_ANIME_LIST_OAUTH2_URL}/token`);
         const searchParams = new URLSearchParams({
-            client_id: MY_ANIME_LIST_CLIENT_ID,
-            client_secret: MY_ANIME_LIST_CLIENT_SECRET,
+            client_id: MAL_CLIENT_ID,
+            client_secret: MAL_CLIENT_SECRET,
             grant_type: "authorization_code",
             code_verifier: options.codeVerifier,
             code,
@@ -154,7 +154,7 @@ export namespace Auth {
             refresh_token: refreshToken
         });
 
-        const credentials = Buffer.from(`${MY_ANIME_LIST_CLIENT_ID}:${MY_ANIME_LIST_CLIENT_SECRET}`).toString('base64');
+        const credentials = Buffer.from(`${MAL_CLIENT_ID}:${MAL_CLIENT_SECRET}`).toString('base64');
 
         const res = await fetch(url, {
             method: 'POST',
