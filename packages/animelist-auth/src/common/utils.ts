@@ -59,6 +59,10 @@ export type UserSession = {
 }
 
 function getSecretKey() {
+    if (SECRET_KEY.length <= 32) {
+        throw new Error("Secret key must be at least 32 characters");
+    }
+
     const encoder = new TextEncoder();
     const key = encoder.encode(SECRET_KEY);
     return key;
