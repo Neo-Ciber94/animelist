@@ -2,11 +2,11 @@
 
 import {
   useSession,
-  signIn,
-  signOut,
+  // signIn,
+  // signOut,
   type AnimeObject,
 } from "@animelist/auth-next";
-//import { signIn, signOut } from "@animelist/auth-next/client";
+import { signIn, signOut } from "@animelist/auth-next/dist/client";
 import { useEffect, useState } from "react";
 import { MALClient } from "@animelist/client";
 
