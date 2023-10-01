@@ -92,7 +92,7 @@ async function hash256_webCrypto(data: string): Promise<string> {
 }
 
 async function hash256_node(data: string): Promise<string> {
-    const nodeCrypto = await import('node:crypto');
+    const nodeCrypto = await import('crypto');
     const hasher = nodeCrypto.createHash('sha256');
     hasher.update(data);
     return hasher.digest('hex');
