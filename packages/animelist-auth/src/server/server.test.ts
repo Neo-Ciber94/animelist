@@ -3,7 +3,7 @@ import { Auth } from "./server";
 
 describe('Check getAuthenticationUrl', () => {
     test('should return valid authentication url', async () => {
-        const { url } = Auth.getAuthenticationUrl({
+        const { url } = await Auth.getAuthenticationUrl({
             redirectTo: 'http://localhost:5175/api/myanimelist/auth/callback'
         });
 
