@@ -4,8 +4,10 @@
 	import { MALClient, type AnimeObject } from '@animelist/client';
 	import { writable } from 'svelte/store';
 
-	const animeList = writable<AnimeObject[]>([]);
-	const isLoading = writable<boolean>(false);
+	const animeList = writable({
+		isLoading: false,
+		data: [] as AnimeObject[]
+	});
 
 	// We fetch the anime list on the client.
 	// This also can be moved to a server `load` function, that we don't need to use the `proxyUrl`
@@ -14,7 +16,7 @@
 			return;
 		}
 
-		isLoading.set(true);
+		animeList.update((x) => ({ ...x, isLoading: true }));
 
 		try {
 			const client = new MALClient({
@@ -24,14 +26,14 @@
 				accessToken: $session.accessToken
 			});
 			const result = await client.getSuggestedAnime({ limit: 10 });
-			animeList.set(result.data);
+			animeList.set({ data: result.data, isLoading: false });
 		} finally {
-			isLoading.set(false);
+			animeList.update((x) => ({ ...x, isLoading: false }));
 		}
 	})();
 </script>
 
-{#if $session.loading || $isLoading}
+{#if $session.loading || $animeList.isLoading}
 	<p class="mx-auto w-full text-2xl text-center p-10 text-black font-bold animate-pulse">
 		Loading...
 	</p>
@@ -43,7 +45,7 @@
 	<h1 class="font-bold text-3xl mb-4">Anime Suggestions</h1>
 
 	<div class="flex flex-row flex-wrap justify-center w-full h-full gap-2">
-		{#each $animeList as anime (anime.node.id)}
+		{#each $animeList.data as anime (anime.node.id)}
 			<div
 				class="shadow-md p-2 flex flex-col items-center gap-2 w-[200px] bg-black rounded-lg"
 				title={anime.node.title}
