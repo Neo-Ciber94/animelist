@@ -15,6 +15,9 @@ const defineProcessEnv = () => {
 
 export default defineConfig({
 	plugins: [sveltekit()],
+	server: {
+		port: 3000
+	},
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
 	},

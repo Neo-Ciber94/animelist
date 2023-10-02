@@ -1,38 +1,33 @@
-# create-svelte
+# @animelist/auth-sveltekit example
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+An example template on how to use `@animelist/auth-sveltekit`.
 
-## Creating a project
+## How to run
 
-If you're seeing this, you've probably already done this step. Congrats!
+1. Create a `.env.local` with the contents:
+   - `MAL_CLIENT_ID=<client_id>`
+   - `MAL_CLIENT_SECRET=<client_secret>`
+   - `MAL_REQUEST_DEBUG=true` (optional)
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+    To get the **client id** and **client secret** you need to log into your <https://myanimelist.net/> and go to `Preferences > API` and create a new client. When adding the `App Redirect URL` add the same url where your app will run, in this case is `http://localhost:3000`.
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+2. Run your app.
 
 ```bash
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+yarn dev
+pnpm dev
 ```
 
-## Building
+## Contents
 
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+- `src/hooks.server.ts`
+  - Defines the handler that manages all the **MyAnimeList** requests.
+- `src/routes/+layout.svelte`
+  - Root layout where the `session` is initialized.
+- `src/routes/+layout.server.ts`
+  - Passes down the user loaded from the **hook.server.ts**.
+- `src/routes/Auth.svelte`
+  - A header which control the login/logout
+- `src/routes/AnimeListSuggestion.svelte`
+  - Fetches a current user anime suggestion when the user is logged.
