@@ -22,19 +22,34 @@ export type UserFields = (keyof User) | Empty;
 export type AnimeFields = (keyof AnimeNode) | Empty;
 
 /**
- * Options to get user information.
+ * Base options.
  */
-export interface GetMyUserInfoOptions {
+export type GetDataOptions<T> = {
     /**
      * The fields to include.
      */
-    fields?: UserFields[];
+    fields?: ((keyof T) | Empty)[],
+
+    /**
+     * A signal to cancel this request.
+     */
+    signal?: AbortSignal
 }
+
+/**
+ * Options to get user information.
+ */
+export interface GetMyUserInfoOptions extends GetDataOptions<User> { }
+
+/**
+ * Options for get an anime details.
+ */
+export interface GetAnimeDetailsOptions extends GetDataOptions<AnimeNode> { }
 
 /**
  * Options to get anime information.
  */
-export interface GetAnimeListOptions {
+export interface GetAnimeListOptions extends GetDataOptions<AnimeNode> {
     /**
      * The search term.
      */
@@ -51,11 +66,6 @@ export interface GetAnimeListOptions {
     offset?: number;
 
     /**
-     * The fields to include.
-     */
-    fields?: AnimeFields[];
-
-    /**
      * Whether if include nsfw (not safe for work) anime.
      */
     nsfw?: boolean;
@@ -64,7 +74,7 @@ export interface GetAnimeListOptions {
 /**
  * Options to get anime by rank.
  */
-export interface GetAnimeRankingOptions {
+export interface GetAnimeRankingOptions extends GetDataOptions<AnimeNode> {
     /**
      * The ranking.
      */
@@ -81,11 +91,6 @@ export interface GetAnimeRankingOptions {
     offset?: number;
 
     /**
-     * The fields to include.
-     */
-    fields?: AnimeFields[];
-
-    /**
      * Whether if include nsfw (not safe for work) anime.
      */
     nsfw?: boolean;
@@ -94,7 +99,7 @@ export interface GetAnimeRankingOptions {
 /**
  * Options to get anime by season.
  */
-export interface GetSeasonalAnimeOptions {
+export interface GetSeasonalAnimeOptions extends GetDataOptions<AnimeNode> {
     /**
      * The year to search.
      */
@@ -121,11 +126,6 @@ export interface GetSeasonalAnimeOptions {
     offset?: number;
 
     /**
-     * The fields to include.
-     */
-    fields?: AnimeFields[];
-
-    /**
      * Whether if include nsfw (not safe for work) anime.
      */
     nsfw?: boolean;
@@ -134,7 +134,7 @@ export interface GetSeasonalAnimeOptions {
 /**
  * Options to get user suggested anime.
  */
-export interface GetSuggestedAnimeOptions {
+export interface GetSuggestedAnimeOptions extends GetDataOptions<AnimeNode> {
     /**
      * Number of anime to include.
      */
@@ -144,11 +144,6 @@ export interface GetSuggestedAnimeOptions {
      * The number of anime to skip.
      */
     offset?: number;
-
-    /**
-     * The fields to include.
-     */
-    fields?: AnimeFields[];
 
     /**
      * Whether if include nsfw (not safe for work) anime.
@@ -204,12 +199,17 @@ export interface UpdateMyAnimeListStatusOptions {
      * Comments for this anime.
      */
     comments?: string;
+
+    /**
+     * A signal to cancel this request.
+     */
+    signal?: AbortSignal,
 }
 
 /**
  * Options to get the user anime list.
  */
-export interface GetUserAnimeListOptions {
+export interface GetUserAnimeListOptions extends GetDataOptions<AnimeNode> {
     /**
      * The status of the anime to get.
      */
@@ -229,11 +229,6 @@ export interface GetUserAnimeListOptions {
      * The number of anime to skip.
      */
     offset?: number;
-
-    /**
-     * The fields to include.
-     */
-    fields?: AnimeFields[];
 
     /**
      * Whether if include nsfw (not safe for work) anime.
@@ -313,6 +308,11 @@ export interface MALRequestInit {
     headers?: Record<string, string>;
 
     /**
+     * A signal to abort this request.
+     */
+    signal?: AbortSignal,
+
+    /**
      * The request body.
      */
     body?: BodyInit | null | undefined;
@@ -364,6 +364,7 @@ export class MALClient {
             params,
             returnNullOn404 = false,
             headers = {},
+            signal,
         } = init;
 
         const {
@@ -405,6 +406,7 @@ export class MALClient {
         const res = await fetchFunction(url, {
             method,
             headers,
+            signal,
             body,
         });
 
@@ -429,11 +431,12 @@ export class MALClient {
      * @returns 
      */
     async getAnimeList(options: GetAnimeListOptions): Promise<AnimeApiResponse> {
-        const { fields = [], limit, offset, q, ...rest } = options;
+        const { fields = [], limit, offset, q, signal, ...rest } = options;
 
         const result = await this.request<AnimeApiResponse>({
             method: 'GET',
             resource: '/anime',
+            signal,
             params: {
                 q,
                 limit,
@@ -452,13 +455,14 @@ export class MALClient {
      * @param animeId The id of the anime.
      * @param options The options.
      */
-    async getAnimeDetails(animeId: number, options?: { fields?: AnimeFields[] }) {
-        const { fields = [] } = options || {};
+    async getAnimeDetails(animeId: number, options?: GetAnimeDetailsOptions) {
+        const { fields = [], signal } = options || {};
 
         const result = await this.request<AnimeNode>({
             method: 'GET',
             resource: `/anime/${animeId}`,
             returnNullOn404: true,
+            signal,
             params: {
                 fields: fields.length === 0 ? undefined : fields.join(",")
             }
@@ -473,11 +477,12 @@ export class MALClient {
      * @param options The options.
      */
     async getAnimeRanking(options: GetAnimeRankingOptions) {
-        const { fields = [], ...params } = options;
+        const { fields = [], signal, ...params } = options;
 
         const result = await this.request<AnimeRankingApiResponse>({
             method: 'GET',
             resource: `/anime/ranking`,
+            signal,
             params: {
                 fields: fields.length === 0 ? undefined : fields.join(","),
                 ...params
@@ -493,11 +498,12 @@ export class MALClient {
      * @param options The options.
      */
     async getSeasonalAnime(options: GetSeasonalAnimeOptions) {
-        const { fields = [], year, season, ...params } = options;
+        const { fields = [], signal, year, season, ...params } = options;
 
         const result = await this.request<AnimeApiResponse>({
             method: 'GET',
             resource: `/anime/season/${year}/${season}`,
+            signal,
             params: {
                 fields: fields.length === 0 ? undefined : fields.join(","),
                 ...params
@@ -513,11 +519,12 @@ export class MALClient {
      * @param options The options.
      */
     async getSuggestedAnime(options?: GetSuggestedAnimeOptions) {
-        const { fields = [], ...params } = options || {};
+        const { fields = [], signal,...params } = options || {};
 
         const result = await this.request<AnimeApiResponse>({
             method: 'GET',
             resource: `/anime/suggestions`,
+            signal,
             params: {
                 fields: fields.length === 0 ? undefined : fields.join(","),
                 ...params
@@ -534,7 +541,7 @@ export class MALClient {
      * @param options The input options.
      */
     async updateMyAnimeListStatus(animeId: number, options: UpdateMyAnimeListStatusOptions) {
-        const { ...rest } = options;
+        const { signal, ...rest } = options;
 
         const body = new URLSearchParams();
 
@@ -551,6 +558,7 @@ export class MALClient {
             resource: `/anime/${animeId}/my_list_status`,
             returnNullOn404: true,
             body,
+            signal,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
@@ -564,11 +572,13 @@ export class MALClient {
      * @see https://myanimelist.net/apiconfig/references/api/v2#operation/anime_anime_id_my_list_status_delete
      * @param animeId The anime id.
      */
-    async deleteMyAnimeListStatus(animeId: number) {
+    async deleteMyAnimeListStatus(animeId: number, options?: { signal?: AbortSignal }) {
+        const { signal } = options || {};
         const result = await this.request<Empty>({
             method: 'DELETE',
             resource: `/anime/${animeId}/my_list_status`,
             returnNullOn404: true,
+            signal
         });
 
         return result;
@@ -581,11 +591,12 @@ export class MALClient {
      * @param options The options.
      */
     async getUserAnimeList(userName: UserName, options?: GetUserAnimeListOptions) {
-        const { fields = [], ...params } = options || {};
+        const { fields = [], signal, ...params } = options || {};
 
         const result = await this.request<AnimeStatusApiResponse>({
             method: 'GET',
             resource: `/users/${userName}/animelist`,
+            signal,
             params: {
                 fields: fields.length === 0 ? undefined : fields.join(","),
                 ...params
@@ -601,11 +612,12 @@ export class MALClient {
      * @param options The options.
      */
     async getMyUserInfo(options?: GetMyUserInfoOptions, userId = "@me"): Promise<User> {
-        const { fields = [] } = options || {};
+        const { fields = [], signal } = options || {};
 
         const result = await this.request<User>({
             method: 'GET',
             resource: `/users/${userId}`,
+            signal,
             params: {
                 fields: fields.length > 0 ? fields.join(",") : undefined
             },
