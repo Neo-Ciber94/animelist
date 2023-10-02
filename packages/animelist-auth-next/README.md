@@ -9,8 +9,7 @@ You can checkout this [Example](https://github.com/Neo-Ciber94/animelist/tree/ma
 In your `NextJS` project install the packages:
 
 ```bash
-npm install @animelist/auth-next
-npm install @animelist/client
+npm install @animelist/auth-next @animelist/client
 ```
 
 1. Create an `.env.local` with the environment variables:

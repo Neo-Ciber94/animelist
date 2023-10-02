@@ -9,8 +9,7 @@ You can checkout this [Example](https://github.com/Neo-Ciber94/animelist/tree/ma
 In your `Sveltekit` project install the packages:
 
 ```bash
-npm install @animelist/auth-sveltekit
-npm install @animelist/client
+npm install @animelist/auth-sveltekit @animelist/client
 ```
 
 1.  This package reads environment variables from `process.env` so you need to define them in your `vite.config.ts`.
