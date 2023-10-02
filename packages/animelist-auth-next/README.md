@@ -69,7 +69,12 @@ import { createMyAnimeListFetchHandler } from "@animelist/auth-next/server";
 
 const handler = createMyAnimeListFetchHandler();
 
-export { handler as GET, handler as POST, handler as PATCH, handler as DELETE };
+export { 
+  handler as GET, 
+  handler as POST, 
+  handler as PATCH, 
+  handler as DELETE 
+};
 ```
 
 5. Then in your `app/page.tsx` you can start using the api
