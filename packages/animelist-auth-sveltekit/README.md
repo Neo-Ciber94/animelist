@@ -6,7 +6,7 @@ You can checkout this [Example](https://github.com/Neo-Ciber94/animelist/tree/ma
 
 ## Setup
 
-Install the package:
+In your `Sveltekit` project install the packages:
 
 ```bash
 npm install @animelist/auth-sveltekit
