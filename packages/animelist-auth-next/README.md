@@ -80,6 +80,7 @@ export {
 5. Then in your `app/page.tsx` you can start using the api
 
 ```tsx
+'use client';
 import { signIn, signOut, useSession } from "@animelist/auth-next/client";
 
 export default function HomePage() {
