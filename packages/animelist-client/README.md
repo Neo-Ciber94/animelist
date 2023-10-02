@@ -8,7 +8,7 @@ Provides an interface for interact with `MyAnimeList` API:
 
 > Currently this library only implements the related `anime` api.
 
-## Usage
+## Setup
 
 1. Set the environment variable `MAL_CLIENT_ID=<client_id>` or use a package like `dotenv` with a `.env` file.
 
