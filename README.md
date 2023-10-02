@@ -10,12 +10,16 @@ Currently the client is only implementing the `anime` related interface.
 ## Contents
 
 - `@animelist/core` Core functionality and types shared across libraries.
-  - [Learn More](https://github.com/Neo-Ciber94/mal/tree/main/packages/core)
+  - [Learn More](https://github.com/Neo-Ciber94/mal/tree/main/packages/animelist-core)
 - `@animelist/auth` Provides a way to authenticate with `MyAnimeList` using `OAuth2`.
-  - [Learn More](https://github.com/Neo-Ciber94/mal/tree/main/packages/mal-auth)
+  - [Learn More](https://github.com/Neo-Ciber94/mal/tree/main/packages/animelist-auth)
 - `@animelist/client` Provides a client to interact with the `MyAnimeList` API.
   - Currently this only implements the `anime` API.
-  - [Learn More](https://github.com/Neo-Ciber94/mal/tree/main/packages/mal-client)
+  - [Learn More](https://github.com/Neo-Ciber94/mal/tree/main/packages/animelist-client)
+- `@animelist/auth-next` An implementation of the `auth` for `NextJS`.
+  - [Learn More](https://github.com/Neo-Ciber94/mal/tree/main/packages/animelist-auth-next)
+- `@animelist/auth-sveltekit` An implementation of the `auth` for `SvelteKit`.
+  - [Learn More](https://github.com/Neo-Ciber94/mal/tree/main/packages/animelist-auth-sveltekit)
 
 ## License
 
