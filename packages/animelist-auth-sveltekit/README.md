@@ -37,9 +37,6 @@ npm install @animelist/client
 
     export default defineConfig({
       plugins: [sveltekit()],
-      test: {
-        include: ["src/**/*.{test,spec}.{js,ts}"],
-      },
       define: defineProcessEnv(),
     });
     ```
@@ -53,6 +50,8 @@ npm install @animelist/client
     - `MAL_REQUEST_DEBUG=true` (optional)
 
     To get the **client id** and **client secret** you need to log into your <https://myanimelist.net/> go to `Preferences > API` and create a new client. When adding the `App Redirect URL` add the same url where your app will run, for example `http://localhost:3000`.
+
+    If you used the example `vite.config.ts` you can just create a `.env` file and the `dotenv` will load the variables.
 
 3.  Create a `hooks.server.ts` with the contents:
 
@@ -97,6 +96,7 @@ declare global {
 	import { session } from '@animelist/auth-sveltekit/client';
     session.initialize().catch(console.error);
 </script>
+
 </slot>
 ```
 
