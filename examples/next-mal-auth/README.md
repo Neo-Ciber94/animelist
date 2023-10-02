@@ -9,7 +9,7 @@ An example template on how to use `@animelist/auth-next`.
    - `MAL_CLIENT_SECRET=<client_secret>`
    - `MAL_REQUEST_DEBUG=true` (optional)
 
-    To get the **client id** and **client secret** you need to log into your <https://myanimelist.net/> and go to `Preferences > API` and create a new client. When adding the `App Redirect URL` add the same url where your app will run, in this case is `http://localhost:3000`.
+    To get the **client id** and **client secret** you need to log into your <https://myanimelist.net/>, go to `Preferences > API` and create a new client. When adding the `App Redirect URL` add the same url where your app will run, in this case is `http://localhost:3000`.
 
 2. Run your app.
 
