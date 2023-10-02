@@ -7,6 +7,7 @@ type MyAnimeListAuthProviderProps = {
   session?: Session;
 };
 
+// <SessionProvider> cannot be used as a server component, so we wrap it.
 export function MyAnimeListAuthProvider({
   children,
   session,
