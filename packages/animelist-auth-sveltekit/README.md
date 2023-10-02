@@ -20,7 +20,7 @@ npm install @animelist/client
 
     ```ts
     import { sveltekit } from "@sveltejs/kit/vite";
-    import { defineConfig } from "vitest/config";
+    import { defineConfig } from "vite";
     import dotenv from "dotenv"; // install dotenv
     dotenv.config();
 
