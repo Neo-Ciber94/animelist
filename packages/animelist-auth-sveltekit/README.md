@@ -117,6 +117,22 @@ declare global {
 {/if}
 ```
 
+
+You may also notice you are receiving this warning: 
+> ⚠️ 'process.env.MAL_SECRET_KEY' was not set, using a default secret key
+
+To fix that add other environment variable `MAL_SECRET_KEY`, to generate a secret key you can use:
+
+```bash
+openssl rand --base64 32
+```
+
+Or this beauty:
+
+```bash
+echo "console.log(require('crypto').randomBytes(32).toString('base64'))" | node
+```
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
