@@ -97,7 +97,7 @@ declare global {
     session.initialize().catch(console.error);
 </script>
 
-</slot>
+<slot/>
 ```
 
 5. Then you can create a `src/routes/+page.svelte`
