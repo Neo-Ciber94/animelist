@@ -22,12 +22,12 @@
     "@animelist/auth": "workspace:*",
     "@animelist/core": "workspace:*",
     "@animelist/client": "workspace:*",
-    "@sveltejs/kit": "^1.25.0",
     "svelte": "^4.0.5"
   },
   "devDependencies": {
     "eslint": "^8.49.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "@sveltejs/kit": "^1.25.0"
   },
   "publishConfig": {
     "access": "public"

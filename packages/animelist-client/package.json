@@ -19,9 +19,7 @@
   "devDependencies": {
     "@animelist/core": "workspace:*",
     "esbuild": "^0.19.3",
-    "typescript": "5.2.2"
-  },
-  "dependencies": {
+    "typescript": "5.2.2",
     "eslint": "^8.49.0"
   },
   "publishConfig": {

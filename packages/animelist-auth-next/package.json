@@ -21,7 +21,6 @@
     "@animelist/auth": "workspace:*",
     "@animelist/client": "workspace:*",
     "@animelist/core": "workspace:*",
-    "next": "^13.5.2",
     "react": "^18.2.0"
   },
   "devDependencies": {
@@ -29,7 +28,8 @@
     "esbuild": "^0.19.3",
     "eslint": "^8.49.0",
     "ncp": "^2.0.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "next": "^13.5.2"
   },
   "publishConfig": {
     "access": "public"
