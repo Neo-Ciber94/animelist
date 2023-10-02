@@ -8,7 +8,7 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "lint": "eslint ./src",
-    "clean:lib": "rimraf server client && rimraf index.js index.js.map index.mjs index.mjs.ma index.d.ts index.d.ts.map",
+    "clean:lib": "rimraf server client && rimraf index.js index.js.map index.mjs index.mjs.map index.d.ts index.d.ts.map",
     "build:types": "tsc --emitDeclarationOnly",
     "build:lib": "tsx esbuild.mts",
     "build": "rimraf dist && pnpm clean:lib && pnpm build:types && pnpm build:lib && npx ncp dist .",
