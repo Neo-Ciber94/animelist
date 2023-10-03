@@ -1,13 +1,24 @@
 {
   "name": "@animelist/client",
-  "author": "Freddy L. Paredes",
+  "author": "Freddy L.",
   "version": "0.0.1-alpha.7",
-  "description": "",
-  "keywords": [],
+  "description": "Provide an interface to communicate with MyAnimeList API",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "typings": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Neo-Ciber94/animelist.git",
+    "directory": "packages/animelist-client"
+  },
+  "keywords": [
+    "anime",
+    "myanimelist",
+    "api",
+    "node",
+    "typescript"
+  ],
   "scripts": {
     "typecheck": "tsc --noEmit",
     "lint": "eslint ./src",

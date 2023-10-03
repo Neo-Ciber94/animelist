@@ -2,6 +2,7 @@
   "name": "@animelist/auth-sveltekit",
   "version": "0.0.1-alpha.7",
   "description": "Integration with the @animelist/auth for SvelteKit",
+  "author": "Freddy L.",
   "type": "module",
   "module": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -15,8 +16,21 @@
     "build": "rimraf dist && pnpm build:types && pnpm build:lib && pnpm entrypoints",
     "prepublishOnly": "pnpm build"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Neo-Ciber94/animelist.git",
+    "directory": "packages/animelist-client"
+  },
+  "keywords": [
+    "anime",
+    "myanimelist",
+    "svelte",
+    "sveltekit",
+    "authorization",
+    "oauth2",
+    "node",
+    "typescript"
+  ],
   "license": "ISC",
   "dependencies": {
     "@animelist/auth": "workspace:*",

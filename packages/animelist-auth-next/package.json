@@ -2,6 +2,7 @@
   "name": "@animelist/auth-next",
   "version": "0.0.1-alpha.7",
   "description": "Integration with the @animelist/auth for NextJS",
+  "author": "Freddy L.",
   "main": "index.js",
   "module": "index.mjs",
   "typings": "index.d.ts",
@@ -14,8 +15,21 @@
     "build": "rimraf dist && pnpm clean:lib && pnpm build:types && pnpm build:lib && npx ncp dist .",
     "prepublishOnly": "pnpm build"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Neo-Ciber94/animelist.git",
+    "directory": "packages/animelist-auth-next"
+  },
+  "keywords": [
+    "anime",
+    "myanimelist",
+    "nextjs",
+    "react",
+    "authorization",
+    "oauth2",
+    "node",
+    "typescript"
+  ],
   "license": "ISC",
   "dependencies": {
     "@animelist/auth": "workspace:*",
