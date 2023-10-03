@@ -1,6 +1,6 @@
 {
   "name": "@animelist/auth-sveltekit",
-  "version": "0.0.1-alpha.5",
+  "version": "0.0.1-alpha.6",
   "description": "Integration with the @animelist/auth for SvelteKit",
   "type": "module",
   "module": "dist/index.js",
@@ -20,14 +20,14 @@
   "license": "ISC",
   "dependencies": {
     "@animelist/auth": "workspace:*",
-    "@animelist/core": "workspace:*",
     "@animelist/client": "workspace:*",
+    "@animelist/core": "workspace:*",
     "svelte": "^4.0.5"
   },
   "devDependencies": {
+    "@sveltejs/kit": "^1.25.0",
     "eslint": "^8.49.0",
-    "typescript": "^5.2.2",
-    "@sveltejs/kit": "^1.25.0"
+    "typescript": "^5.2.2"
   },
   "publishConfig": {
     "access": "public"

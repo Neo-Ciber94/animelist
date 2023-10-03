@@ -1,6 +1,6 @@
 {
   "name": "@animelist/auth-next",
-  "version": "0.0.1-alpha.5",
+  "version": "0.0.1-alpha.6",
   "description": "Integration with the @animelist/auth for NextJS",
   "main": "index.js",
   "module": "index.mjs",
@@ -28,8 +28,8 @@
     "esbuild": "^0.19.3",
     "eslint": "^8.49.0",
     "ncp": "^2.0.0",
-    "typescript": "^5.2.2",
-    "next": "^13.5.2"
+    "next": "^13.5.2",
+    "typescript": "^5.2.2"
   },
   "publishConfig": {
     "access": "public"
