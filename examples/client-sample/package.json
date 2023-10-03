@@ -1,6 +1,7 @@
 {
   "name": "client-sample",
-  "version": "0.0.1-alpha.6",
+  "version": "0.1.0",
+  "private": true,
   "description": "",
   "type": "module",
   "main": "index.js",
