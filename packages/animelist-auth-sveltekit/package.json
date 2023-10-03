@@ -3,7 +3,7 @@
   "version": "0.0.1-alpha.4",
   "description": "Integration with the @animelist/auth for SvelteKit",
   "type": "module",
-  "module": "dist/index.mjs",
+  "module": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
     "typecheck": "tsc --noEmit",
@@ -35,12 +35,12 @@
   "exports": {
     "./package.json": "./package.json",
     "./client": {
-      "import": "./dist/client/index.mjs",
-      "default": "./dist/client/index.mjs"
+      "import": "./dist/client/index.js",
+      "default": "./dist/client/index.js"
     },
     "./server": {
-      "import": "./dist/server/index.mjs",
-      "default": "./dist/server/index.mjs"
+      "import": "./dist/server/index.js",
+      "default": "./dist/server/index.js"
     }
   },
   "files": [

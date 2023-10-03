@@ -1,4 +1,4 @@
-export * from "./session";
+export * from "./session.js";
 
 // Re-export client related stuff
 export {

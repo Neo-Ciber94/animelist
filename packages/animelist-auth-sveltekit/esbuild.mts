@@ -8,6 +8,6 @@ await esbuildProject({
   inputs: ["src/**/*.ts"],
   exclude: ["**/*.test.ts"],
   formats: ['esm'],
-  //outExtensions: {}, // to override .mjs extension
+  outExtensions: {}, // do not overwrite .mjs extensions
   packageDir,
 });

@@ -12,12 +12,25 @@ function writeFileSync(filePath: string, contents: string) {
     fse.writeFileSync(filePath, contents)
 }
 
+type JsFormat = 'cjs' | 'esm';
+
 type GenerateEntryPointsOptions = {
     packageDir: string;
     additionalInputs?: string[];
+    formats?: JsFormat[],
+    convertJsToEsm?: boolean;
 }
 
-export function generateEntrypoints({ packageDir, additionalInputs }: GenerateEntryPointsOptions) {
+export function generateEntrypoints({
+    packageDir,
+    additionalInputs,
+    formats = ['cjs', 'esm'],
+    convertJsToEsm = true }: GenerateEntryPointsOptions) {
+
+    if (convertJsToEsm === false && formats.includes('cjs')) {
+        throw new Error("'convertJsToEsm' cannot false be used if the format include 'cjs'");
+    }
+
     const timestamp = new Date().toISOString();
     const srcDir = path.resolve(packageDir, 'src');
 
@@ -62,25 +75,33 @@ export function generateEntrypoints({ packageDir, additionalInputs }: GenerateEn
 
         const resolvedModuleExport = path.join(resolvedImport, `${fileName}.js`).replace(/\\/g, '/');
         const resolvedTypesExport = path.join(resolvedImport, `${fileName}.d.ts`).replace(/\\/g, '/');
-        const commonJsExport = `module.exports = require("${resolvedModuleExport}")`;
-        const esmExport = `export * from "${resolvedModuleExport}"`.replace(".js", ".mjs");
         const typesExport = `export * from "${resolvedTypesExport}"`
 
-        const commonJsEntryFilePath = path.join(packageDir, basePath, `index.js`);
-        const esmEntryFilePath = path.join(packageDir, basePath, `index.mjs`);
+        if (formats.includes('cjs')) {
+            const commonJsExport = `module.exports = require("${resolvedModuleExport}")`;
+            const commonJsEntryFilePath = path.join(packageDir, basePath, `index.js`);
+            writeFileSync(commonJsEntryFilePath, commonJsExport);
+            console.log({ commonJsExport, commonJsEntryFilePath })
+        }
+
+        if (formats.includes('esm')) {
+            const ext = convertJsToEsm ? "mjs" : "js";
+            const esmExport = convertJsToEsm ?
+                `export * from "${resolvedModuleExport}"`.replace(/.js$/, ext) :
+                `export * from "${resolvedModuleExport}"`;
+
+            const esmEntryFilePath = path.join(packageDir, basePath, `index.${ext}`);
+            writeFileSync(esmEntryFilePath, esmExport);
+            console.log({ esmExport, esmEntryFilePath })
+        }
+
         const typeEntryPointFilePath = path.join(packageDir, basePath, `index.d.ts`);
         const entryPointMarkerFilePath = path.join(packageDir, basePath, ENTRYPOINT_MARKER);
 
-        writeFileSync(commonJsEntryFilePath, commonJsExport);
-        writeFileSync(esmEntryFilePath, esmExport);
         writeFileSync(typeEntryPointFilePath, typesExport);
         writeFileSync(entryPointMarkerFilePath, timestamp);
 
         console.log({
-            commonJsExport,
-            commonJsEntryFilePath,
-            esmExport,
-            esmEntryFilePath,
             typesExport,
             typeEntryPointFilePath
         })

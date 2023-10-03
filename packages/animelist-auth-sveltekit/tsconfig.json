@@ -8,5 +8,7 @@
         "outDir": "./dist",
         "declarationDir": "dist",
         "emitDeclarationOnly": true,
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext"
     },
 }
