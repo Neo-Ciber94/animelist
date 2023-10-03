@@ -86,9 +86,7 @@ export function generateEntrypoints({
 
         if (formats.includes('esm')) {
             const ext = convertJsToEsm ? "mjs" : "js";
-            const esmExport = convertJsToEsm ?
-                `export * from "${resolvedModuleExport}"`.replace(/.js$/, ext) :
-                `export * from "${resolvedModuleExport}"`;
+            const esmExport = `export * from "${resolvedModuleExport}"`.replace(".js", `.${ext}`);
 
             const esmEntryFilePath = path.join(packageDir, basePath, `index.${ext}`);
             writeFileSync(esmEntryFilePath, esmExport);
