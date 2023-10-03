@@ -9,7 +9,7 @@ Currently the client is only implementing the `anime` related interface.
 
 ## Why?
 
-This library is born from one of my projects: https://myanimestats.pages.dev/
+This library is born from one of my projects: <https://myanimestats.pages.dev/>
 
 Where I required an abstraction layer to communicate with *MyAnimeList*. `MyAnimeStats` was built with `SvelteKit` but
 I decide to extract the logic to be able to implement it in any technology that use the web standard `Request`/`Response`.
