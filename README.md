@@ -1,11 +1,18 @@
 # @animelist
 
-This repository provide a `Javascript` library for interacting with the `MyAnimeList` API,
+This repository provide a `Javascript`/`Typescript` library for interacting with the `MyAnimeList` API,
 both authorization and anime api.
 
 > <https://myanimelist.net/apiconfig/references/api/v2>
 
 Currently the client is only implementing the `anime` related interface.
+
+## Why?
+
+This library is born from one of my projects: https://myanimestats.pages.dev/
+
+Where I required an abstraction layer to comunicate with *MyAnimeList*. `MyAnimeStats` was built with `SvelteKit` but
+I decide to extract the logic to be able to implement it in any technology that use the web standard `Request`/`Response`.
 
 ## Contents
 
