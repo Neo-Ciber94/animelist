@@ -4,15 +4,35 @@
 
 Provides an interface for interact with `MyAnimeList` API:
 
-<https://myanimelist.net/apiconfig/references/api/v2#section/Authentication>
+<https://myanimelist.net/apiconfig/references/api/v2>
 
-> Currently this library only implements the related `anime` api.
+> Currently this library only implements the `anime` related API.
 
 ## Setup
 
+Install the package:
+
+*npm*
+
+```bash
+npm install @animelist/client
+```
+
+*yarn*
+
+```bash
+yarn add @animelist/client
+```
+
+*pnpm*
+
+```bash
+pnpm install @animelist/client
+```
+
 1. Set the environment variable `MAL_CLIENT_ID=<client_id>` or use a package like `dotenv` with a `.env` file.
 
-   To get the **client id** you need to log into your <https://myanimelist.net/> and go to `Preferences > API` and create a new client.
+   To get the **client id** you need to log into your <https://myanimelist.net/> and go to `Preferences > API` and create a new client. For the redirection url you can use `http://localhost:3000/api/myanimelist/auth/callback` which is used in other examples.
 
 2. After that just import and make requests.
 

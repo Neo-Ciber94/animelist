@@ -8,8 +8,22 @@ You can checkout this [Example](https://github.com/Neo-Ciber94/animelist/tree/ma
 
 In your `NextJS` project install the packages:
 
+*npm*
+
 ```bash
 npm install @animelist/auth-next @animelist/client
+```
+
+*yarn*
+
+```bash
+yarn add @animelist/auth-next @animelist/client
+```
+
+*pnpm*
+
+```bash
+pnpm install @animelist/auth-next @animelist/client
 ```
 
 1. Create an `.env.local` with the environment variables:
@@ -18,7 +32,11 @@ npm install @animelist/auth-next @animelist/client
    - `MAL_CLIENT_SECRET=<client_secret>`
    - `MAL_REQUEST_DEBUG=true` (optional)
 
-   To get the **client id** and **client secret** you need to log into your <https://myanimelist.net/> go to `Preferences > API` and create a new client. When adding the `App Redirect URL` add the same url where your app will run, for example `http://localhost:3000`.
+     To get the **client id** and **client secret** you need to log into your <https://myanimelist.net/>:
+
+     - Go to `Preferences > API` and create a new client.
+     - On the `App Redirect URL` use `<url>/api/myanimelist/auth/callback`.
+       - For example `http://localhost:3000/api/myanimelist/auth/callback` if your app is running on `localhost:3000`.
 
 2. Create a component `MyAnimeListAuthProvider` to wrap the `SessionProvider`, this is required because the session provider cannot run as a server component.
 
@@ -61,7 +79,7 @@ export default function RootLayout({
 }
 ```
 
-4. Add an `app/api/[...myanimelist]/route.ts` to handle all the _MyAnimeList_ requests:
+4. Add an `app/api/[...myanimelist]/route.ts` to handle all the *MyAnimeList* requests:
 
 ```ts
 import { createMyAnimeListFetchHandler } from "@animelist/auth-next/server";
@@ -76,10 +94,10 @@ export {
 };
 ```
 
-5. Then in your `app/page.tsx` you can start using the api
+5. You are ready! In your `app/page.tsx` you can start using the api
 
 ```tsx
-'use client';
+"use client";
 import { signIn, signOut, useSession } from "@animelist/auth-next/client";
 
 export default function HomePage() {
@@ -104,9 +122,29 @@ export default function HomePage() {
 }
 ```
 
-____
+6. The `useSession` also returns an `accessToken` that can use used with the client to make requests.
 
-You may also notice you are receiving this warning: 
+```ts
+ // import { MALClient } from `@animelist/client`;
+
+ const { user, isLoading, accessToken } = useSession();
+
+ useEffect(() => {
+  if (!accessToken) {
+    return;
+  }
+
+  const client = new MALClient({ accessToken });
+  client.getSuggestedAnime()
+    .then(console.log)
+    .catch(console.error);
+ }, [accessToken])
+```
+
+---
+
+You may also notice you are receiving this warning:
+
 > ⚠️ 'process.env.MAL_SECRET_KEY' was not set, using a default secret key
 
 To fix that add other environment variable `MAL_SECRET_KEY`, to generate a secret key you can use:

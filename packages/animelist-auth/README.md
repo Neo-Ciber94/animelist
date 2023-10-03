@@ -11,6 +11,28 @@ You may want to use one of the implementations of this package instead:
 
 If you want to use other framework or want to implement your own, we also provide a handler that uses the web standard `Request`/`Response` [createMyAnimeListFetchHandler](https://github.com/Neo-Ciber94/animelist/blob/main/packages/animelist-auth/src/server/handlers/fetchHandler.ts) the same handler is just reexported from the `nextjs` and `sveltekit` implementations.
 
+## Install
+
+In case you want to use this package directly, install it with your favorite package manager:
+
+*npm*
+
+```bash
+npm install @animelist/auth
+```
+
+*yarn*
+
+```bash
+yarn add @animelist/auth
+```
+
+*pnpm*
+
+```bash
+pnpm install @animelist/auth
+```
+
 ## Environment variables
 
 These are the environment variables are used by the `@animelist/auth`
