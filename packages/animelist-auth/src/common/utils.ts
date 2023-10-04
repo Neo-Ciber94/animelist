@@ -14,7 +14,7 @@ function getGlobalSecretKey() {
   // We will just throw an error here, but when using `vite` this throw during the build process
   if (process.env.NODE_ENV === "production") {
     console.error(
-      "❌ You must generate a secret key and set it to 'process.env.MAL_SECRET_KEY'"
+      "❌ You must generate a secret key and set it to the environment variable 'MAL_SECRET_KEY'"
     );
   } else {
     warnOnce(
