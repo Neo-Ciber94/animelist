@@ -108,7 +108,7 @@ declare global {
 
 4. In your `src/routes/+layout.svelte` initializes the session
 
-```html
+```svelte
 <script lang="ts">
   import { session } from "@animelist/auth-sveltekit/client";
   session.initialize().catch(console.error);
@@ -119,7 +119,7 @@ declare global {
 
 5. You are ready! in a `src/routes/+page.svelte` you can add this:
 
-```html
+```svelte
 <script lang="ts">
   import { signIn, signOut, session } from "@animelist/auth-sveltekit/client";
 </script>
@@ -155,7 +155,6 @@ $: (async function(){
     const result = await client.getSuggestedAnime();
     console.log(result);
 })()
-
 </script>
 ```
 
