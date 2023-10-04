@@ -132,6 +132,7 @@ declare global {
   <p>Hello {$session.user.name}</p>
   <button on:click="{signOut}">Sign Out</button>
 {/if}
+```
 
 6. `$session` also returns an `accessToken` that can be used to make requests.
 
@@ -139,23 +140,23 @@ declare global {
 <script lang="ts">
   import { signIn, signOut, session } from "@animelist/auth-sveltekit/client";
   import { MALClient } from "@animelist/client";
-</script>
 
 $: (async function(){
     if (!$session.accessToken) {
       return;
     }
 
-
     // We need the 'proxyUrl' because we are running on the client
     const client = new MALClient({ 
       proxyUrl: "/api/myanimelist",
-      accessToken, 
+      accessToken: $session.accessToken, 
     });
     
-    const result = client.getSuggestedAnime();
+    const result = await client.getSuggestedAnime();
     console.log(result);
 })()
+
+</script>
 ```
 
 You may also notice you are receiving this warning:
