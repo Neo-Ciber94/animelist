@@ -122,10 +122,12 @@ export default function HomePage() {
 }
 ```
 
+> Finally, `npm run dev` make sure to run in the same port that your redirection url, otherwise you will receive an error when trying to login.
+
 6. The `useSession` also returns an `accessToken` that can use used with the client to make requests.
 
 ```ts
- // import { MALClient } from `@animelist/client`;
+ // import { MALClient } from "@animelist/client";
 
  const { user, isLoading, accessToken } = useSession();
 
@@ -134,7 +136,12 @@ export default function HomePage() {
     return;
   }
 
-  const client = new MALClient({ accessToken });
+  // We need the 'proxyUrl' because we are running on the client
+  const client = new MALClient({ 
+    proxyUrl: "/api/myanimelist",
+    accessToken, 
+  });
+
   client.getSuggestedAnime()
     .then(console.log)
     .catch(console.error);

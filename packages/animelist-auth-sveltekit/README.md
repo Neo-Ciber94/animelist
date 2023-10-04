@@ -146,7 +146,13 @@ $: (async function(){
       return;
     }
 
-    const client = new MALClient({ accessToken: $session.accessToken });
+
+    // We need the 'proxyUrl' because we are running on the client
+    const client = new MALClient({ 
+      proxyUrl: "/api/myanimelist",
+      accessToken, 
+    });
+    
     const result = client.getSuggestedAnime();
     console.log(result);
 })()
