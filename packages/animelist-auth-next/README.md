@@ -28,11 +28,13 @@ pnpm install @animelist/auth-next @animelist/client
 
 1. Create an `.env.local` with the environment variables:
 
-   - `MAL_CLIENT_ID=<client_id>`
-   - `MAL_CLIENT_SECRET=<client_secret>`
-   - `MAL_REQUEST_DEBUG=true` (optional)
+    ```bash
+    MAL_CLIENT_ID = <client_id>
+    MAL_CLIENT_SECRET = <client_secret>
+    MAL_REQUEST_DEBUG = true # optional
+    ```
 
-     To get the **client id** and **client secret** you need to log into your <https://myanimelist.net/>:
+    To get the **client id** and **client secret** you need to log into your <https://myanimelist.net/>:
 
      - Go to `Preferences > API` and create a new client.
      - On the `App Redirect URL` use `<url>/api/myanimelist/auth/callback`.

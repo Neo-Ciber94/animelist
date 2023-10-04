@@ -8,19 +8,19 @@ You can checkout this [Example](https://github.com/Neo-Ciber94/animelist/tree/ma
 
 In your `Sveltekit` project install the packages:
 
-*npm*
+_npm_
 
 ```bash
 npm install @animelist/auth-sveltekit @animelist/client
 ```
 
-*yarn*
+_yarn_
 
 ```bash
 yarn add @animelist/auth-sveltekit @animelist/client
 ```
 
-*pnpm*
+_pnpm_
 
 ```bash
 pnpm install @animelist/auth-sveltekit @animelist/client
@@ -34,7 +34,7 @@ pnpm install @animelist/auth-sveltekit @animelist/client
     ```ts
     import { sveltekit } from "@sveltejs/kit/vite";
     import { defineConfig } from "vite";
-    import dotenv from "dotenv"; // install dotenv
+    import dotenv from "dotenv"; // npm install dotenv
     dotenv.config();
 
     const defineProcessEnv = () => {
@@ -53,20 +53,21 @@ pnpm install @animelist/auth-sveltekit @animelist/client
       define: defineProcessEnv(),
     });
     ```
-
     </details>
 
 2.  You need to provide the following environment variables:
 
-    - `MAL_CLIENT_ID=<client_id>`
-    - `MAL_CLIENT_SECRET=<client_secret>`
-    - `MAL_REQUEST_DEBUG=true` (optional)
+    ```bash
+    MAL_CLIENT_ID = <client_id>
+    MAL_CLIENT_SECRET = <client_secret>
+    MAL_REQUEST_DEBUG = true # optional
+    ```
 
-      To get the **client id** and **client secret** you need to log into your <https://myanimelist.net/>:
+    To get the **client id** and **client secret** you need to log into your <https://myanimelist.net/>:
 
-      - Go to `Preferences > API` and create a new client.
-      - On the `App Redirect URL` use `<url>/api/myanimelist/auth/callback`.
-        - For example `http://localhost:3000/api/myanimelist/auth/callback` if your app is running on `localhost:3000`.
+    - Go to `Preferences > API` and create a new client.
+    - On the `App Redirect URL` use `<url>/api/myanimelist/auth/callback`.
+      - For example `http://localhost:3000/api/myanimelist/auth/callback` if your app is running on `localhost:3000`.
 
     If you used the example `vite.config.ts` you can just create a `.env` file and the `dotenv` will load the variables.
 
@@ -147,11 +148,11 @@ $: (async function(){
     }
 
     // We need the 'proxyUrl' because we are running on the client
-    const client = new MALClient({ 
+    const client = new MALClient({
       proxyUrl: "/api/myanimelist",
-      accessToken: $session.accessToken, 
+      accessToken: $session.accessToken,
     });
-    
+
     const result = await client.getSuggestedAnime();
     console.log(result);
 })()
