@@ -1,17 +1,18 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vitest/config';
 import dotenv from 'dotenv';
+dotenv.config();
 
 const defineProcessEnv = () => {
-	dotenv.config();
 	const definedEnvs = Object.fromEntries(
-		Object
-			.entries(process.env || {})
-			.map(([key, value]) => ([`process.env.${key}`, JSON.stringify(value)]))
+		Object.entries(process.env || {}).map(([key, value]) => [
+			`process.env.${key}`,
+			JSON.stringify(value)
+		])
 	);
 
 	return definedEnvs;
-}
+};
 
 export default defineConfig({
 	plugins: [sveltekit()],
@@ -21,5 +22,5 @@ export default defineConfig({
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
 	},
-	define: defineProcessEnv()
+	define: defineProcessEnv(),
 });

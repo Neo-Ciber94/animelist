@@ -11,15 +11,16 @@ function getGlobalSecretKey() {
     return process.env.MAL_SECRET_KEY;
   }
 
+  // We will just throw an error here, but when using `vite` this throw during the build process
   if (process.env.NODE_ENV === "production") {
-    throw new Error(
-      "You must generate a secret key and set it to 'process.env.MAL_SECRET_KEY'"
+    console.error(
+      "❌ You must generate a secret key and set it to 'process.env.MAL_SECRET_KEY'"
+    );
+  } else {
+    warnOnce(
+      `⚠️ 'process.env.MAL_SECRET_KEY' was not set, using a default secret key`
     );
   }
-
-  warnOnce(
-    `⚠️ 'process.env.MAL_SECRET_KEY' was not set, using a default secret key`
-  );
 
   return "nsuI9j2wnlH2dQ4I23g/0Ou/kCAwS8jhWh/lNcU7Yd1DS4wdNCQ5Nso+P/zukcIelBsZ9gomJhqichVYvKasaA==";
 }
