@@ -1,5 +1,6 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vitest/config';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -15,12 +16,16 @@ const defineProcessEnv = () => {
 };
 
 export default defineConfig({
-	plugins: [sveltekit()],
+	plugins: [sveltekit(), nodePolyfills()],
 	server: {
 		port: 3000
 	},
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
 	},
-	define: defineProcessEnv(),
+	//define: defineProcessEnv()
+	define: {
+		'process.versions': JSON.stringify(process.versions),
+		...defineProcessEnv()
+	}
 });
