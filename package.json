@@ -33,6 +33,7 @@
     "entrypoints": "npx lerna run --scope '@animelist/*' entrypoints",
     "typecheck": "npx lerna run --scope '@animelist/*' typecheck",
     "lint": "npx lerna run --scope '@animelist/*' lint",
-    "test": "npx lerna run --scope '@animelist/*' test"
+    "test": "npx lerna run --scope '@animelist/*' test",
+    "publish:npm": "npx lerna publish --no-private"
   }
 }
