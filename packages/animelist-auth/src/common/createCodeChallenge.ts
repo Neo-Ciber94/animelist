@@ -40,7 +40,6 @@ function getCryptoLibrary(): CryptoLibrary | undefined {
     return process.env.MAL_CRYPTO_LIBRARY as CryptoLibrary;
 }
 
-
 function hash256(data: string): Promise<string> {
     const HASHER: Record<CryptoLibrary, (data: string) => Promise<string>> = {
         'web_crypto': hash256_webCrypto,
