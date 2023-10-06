@@ -13,8 +13,8 @@
     "build:types": "tsc --emitDeclarationOnly",
     "build:lib": "tsx esbuild.mts",
     "build": "rimraf dist && pnpm build:types && pnpm build:lib && pnpm entrypoints",
-    "prepublishOnly": "pnpm build",
-    "rollup": "rimraf dist && pnpm build:types && rollup --config rollup.config.ts --configPlugin rollup-plugin-swc3 && pnpm entrypoints"
+    "rollup": "rimraf dist && pnpm build:types && rollup --config rollup.config.ts --configPlugin rollup-plugin-swc3 && pnpm entrypoints",
+    "prepublishOnly": "pnpm rollup"
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
