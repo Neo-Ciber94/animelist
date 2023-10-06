@@ -25,7 +25,8 @@
     "build:types": "tsc --emitDeclarationOnly",
     "build:lib": "tsx esbuild.mts",
     "build": "rimraf dist && pnpm build:types && pnpm build:lib",
-    "prepublishOnly": "pnpm build"
+    "prepublishOnly": "pnpm build",
+    "rollup": "rollup --config rollup.config.ts --configPlugin rollup-plugin-swc3"
   },
   "devDependencies": {
     "@animelist/core": "workspace:*",
