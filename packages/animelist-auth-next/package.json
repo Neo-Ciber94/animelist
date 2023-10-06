@@ -13,7 +13,8 @@
     "build:types": "tsc --emitDeclarationOnly",
     "build:lib": "tsx esbuild.mts",
     "build": "rimraf dist && pnpm clean:lib && pnpm build:types && pnpm build:lib && npx ncp dist .",
-    "prepublishOnly": "pnpm build"
+    "prepublishOnly": "pnpm build",
+    "rollup": "rimraf dist && pnpm build:types && rollup --config rollup.config.ts --configPlugin rollup-plugin-swc3"
   },
   "repository": {
     "type": "git",

@@ -24,10 +24,8 @@
     "prettier-eslint": "^15.0.1",
     "rimraf": "^5.0.1",
     "rollup": "^4.0.0",
-    "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-node-externals": "^6.1.2",
     "rollup-plugin-swc3": "^0.10.1",
-    "rollup-plugin-typescript2": "^0.36.0",
     "tsx": "^3.13.0",
     "typescript": "^5.2.2"
   },
