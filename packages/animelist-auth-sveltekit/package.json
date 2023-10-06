@@ -15,7 +15,7 @@
     "build:svelte": "svelte-package -i src/client -o dist/client",
     "build": "rimraf dist && pnpm build:types && pnpm build:lib && pnpm entrypoints",
     "prepublishOnly": "pnpm build",
-    "rollup": "rimraf dist && pnpm build:types && rollup --config rollup.config.ts --configPlugin rollup-plugin-swc3"
+    "rollup": "rimraf dist && pnpm build:types && rollup --config rollup.config.ts --configPlugin rollup-plugin-swc3 && pnpm entrypoints"
   },
   "repository": {
     "type": "git",
