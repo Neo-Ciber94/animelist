@@ -6,7 +6,7 @@ const packageDir = path.dirname(fileURLToPath(import.meta.url));
 
 export default function rollup() {
   return rollupConfig({
-    input: ["src/**/*.ts"],
+    input: ["src/**/*.ts", "src/**/*.tsx"],
     packageDir,
   });
 }
