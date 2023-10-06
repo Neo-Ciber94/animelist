@@ -8,6 +8,7 @@ export default function rollup() {
   return rollupConfig({
     input: ["src/**/*.ts"],
     exclude: ["**/*.test.ts"],
+    formats: ["esm"],
     packageDir,
     esmOutputOverride: {
       entryFileNames: "[name].js",
