@@ -36,6 +36,7 @@
     "clean": "tsx ./scripts/cleanUpEntrypoints.ts && npm run clean:dist && npm run clean:node_modules",
     "clean:all": "pnpm clean && pnpm clean:root",
     "build": "npx lerna run --scope '@animelist/*' build",
+    "rollup": "npx lerna run --scope '@animelist/*' rollup",
     "entrypoints": "npx lerna run --scope '@animelist/*' entrypoints",
     "typecheck": "npx lerna run --scope '@animelist/*' typecheck",
     "lint": "npx lerna run --scope '@animelist/*' lint",
