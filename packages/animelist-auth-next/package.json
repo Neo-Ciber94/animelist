@@ -14,7 +14,7 @@
     "build:lib": "tsx esbuild.mts",
     "build": "pnpm clean:lib && pnpm build:types && pnpm build:lib && npx ncp dist .",
     "prepublishOnly": "pnpm build",
-    "rollup": "pnpm clean:lib && pnpm build:types && rollup --config rollup.config.ts --configPlugin rollup-plugin-swc3 && pnpm entrypoints && npx ncp dist ."
+    "rollup": "pnpm clean:lib && pnpm build:types && rollup --config rollup.config.ts --configPlugin rollup-plugin-swc3 && npx ncp dist ."
   },
   "repository": {
     "type": "git",
