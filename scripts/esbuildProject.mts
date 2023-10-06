@@ -1,6 +1,7 @@
 import * as esbuild from "esbuild";
 import path from "path";
 import * as glob from "glob";
+import { replaceImportExtensions } from "./replaceImportExtensions.mjs";
 
 const DEFINE: Record<string, string> = {
   // this prevent esbuild to overwrite the NODE_ENV
@@ -45,7 +46,7 @@ export async function esbuildProject({
       sourcemap: true,
       format: "cjs",
       define: DEFINE,
-      outExtension: rest.outExtensions,
+      //outExtension: rest.outExtensions,
     });
   }
 
@@ -58,9 +59,14 @@ export async function esbuildProject({
       sourcemap: true,
       format: "esm",
       define: DEFINE,
-      outExtension: rest.outExtensions ?? {
+      outExtension: {
         ".js": ".mjs",
       },
     });
+
+    // We replace the import extensions to `.mjs`, this method is not 100% tested at all,
+    // we may need to drop `esbuild` for `rollup` which can handle this case
+    const files = glob.sync(`${outdir}/**/*.mjs`, { absolute: true });
+    await replaceImportExtensions(files, ".mjs");
   }
 }

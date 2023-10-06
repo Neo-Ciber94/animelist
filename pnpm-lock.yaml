@@ -44,6 +44,9 @@ importers:
       tsx:
         specifier: ^3.13.0
         version: 3.13.0
+      typescript:
+        specifier: ^5.2.2
+        version: 5.2.2
 
   examples/client-sample:
     dependencies:

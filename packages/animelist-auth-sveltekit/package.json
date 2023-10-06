@@ -4,7 +4,7 @@
   "description": "Integration with the @animelist/auth for SvelteKit",
   "author": "Freddy L.",
   "type": "module",
-  "module": "dist/index.js",
+  "module": "dist/index.mjs",
   "typings": "dist/index.d.ts",
   "scripts": {
     "typecheck": "tsc --noEmit",
@@ -49,12 +49,12 @@
   "exports": {
     "./package.json": "./package.json",
     "./client": {
-      "import": "./dist/client/index.js",
-      "default": "./dist/client/index.js"
+      "import": "./dist/client/index.mjs",
+      "default": "./dist/client/index.mjs"
     },
     "./server": {
-      "import": "./dist/server/index.js",
-      "default": "./dist/server/index.js"
+      "import": "./dist/server/index.mjs",
+      "default": "./dist/server/index.mjs"
     }
   },
   "files": [

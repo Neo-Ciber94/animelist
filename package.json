@@ -22,7 +22,8 @@
     "lerna": "^7.3.0",
     "prettier-eslint": "^15.0.1",
     "rimraf": "^5.0.1",
-    "tsx": "^3.13.0"
+    "tsx": "^3.13.0",
+    "typescript": "^5.2.2"
   },
   "scripts": {
     "clean:root": "rimraf node_modules",
