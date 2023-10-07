@@ -93,7 +93,7 @@ function lib({
               useBuiltins: true,
             },
           },
-          externalHelpers: true,
+          externalHelpers: false,
         },
       }),
     ],
