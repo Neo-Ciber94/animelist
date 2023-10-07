@@ -11,10 +11,8 @@
     "lint": "eslint ./src",
     "entrypoints": "tsx entrypoints.script.mts",
     "build:types": "tsc --emitDeclarationOnly",
-    "build:lib": "tsx esbuild.mts",
-    "build": "rimraf dist && pnpm build:types && pnpm build:lib && pnpm entrypoints",
-    "rollup": "rimraf dist && pnpm build:types && rollup --config rollup.config.ts --configPlugin rollup-plugin-swc3 && pnpm entrypoints",
-    "prepublishOnly": "pnpm rollup"
+    "build": "rimraf dist && pnpm build:types && rollup --config rollup.config.ts --configPlugin rollup-plugin-swc3 && pnpm entrypoints",
+    "prepublishOnly": "pnpm build"
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -44,7 +42,6 @@
     "@types/cookie": "^0.5.2",
     "@types/node": "20.6.2",
     "dotenv": "^16.3.1",
-    "esbuild": "^0.19.3",
     "eslint": "^8.49.0",
     "typescript": "^5.2.2",
     "vitest": "^0.34.4"

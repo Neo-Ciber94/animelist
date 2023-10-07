@@ -11,11 +11,8 @@
     "lint": "eslint ./src",
     "entrypoints": "tsx entrypoints.script.mts",
     "build:types": "tsc --emitDeclarationOnly",
-    "build:lib": "tsx esbuild.mts",
-    "build:svelte": "svelte-package -i src/client -o dist/client",
-    "build": "rimraf dist && pnpm build:types && pnpm build:lib && pnpm entrypoints",
-    "rollup": "rimraf dist && pnpm build:types && rollup --config rollup.config.ts --configPlugin rollup-plugin-swc3 && pnpm entrypoints",
-    "prepublishOnly": "pnpm rollup"
+    "build": "rimraf dist && pnpm build:types && rollup --config rollup.config.ts --configPlugin rollup-plugin-swc3 && pnpm entrypoints",
+    "prepublishOnly": "pnpm build"
   },
   "repository": {
     "type": "git",
