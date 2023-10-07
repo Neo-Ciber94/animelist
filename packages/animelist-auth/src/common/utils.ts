@@ -1,5 +1,5 @@
 import { SignJWT, jwtVerify } from "jose";
-import { DEFAULT_SESSION_DURATION_SECONDS } from "../server/handlers/fetchHandler";
+import { DEFAULT_SESSION_DURATION_SECONDS } from "./constants";
 import type { Cookies } from "./types";
 import { error } from "./httpError";
 import { warnOnce } from "./logger";
