@@ -139,8 +139,7 @@ export async function getServerSession(
     }
 
     return { refreshToken, userId, accessToken };
-  } catch (err) {
-    console.error(err);
+  } catch {
     return null;
   }
 }
