@@ -1,6 +1,7 @@
 {
 	"name": "sveltekit-mal-auth",
 	"version": "0.1.0",
+	"type": "module",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
@@ -38,6 +39,5 @@
 		"vite": "^4.4.2",
 		"vite-plugin-node-polyfills": "^0.15.0",
 		"vitest": "^0.34.0"
-	},
-	"type": "module"
+	}
 }

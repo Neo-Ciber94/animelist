@@ -11,5 +11,8 @@ export default defineConfig({
 	},
 	test: {
 		include: ['src/**/*.{test,spec}.{js,ts}']
+	},
+	define: {
+		'process.versions': JSON.stringify(process.versions)
 	}
 });
