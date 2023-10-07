@@ -1,6 +1,6 @@
 import { SignJWT, jwtVerify } from "jose";
 import { DEFAULT_SESSION_DURATION_SECONDS } from "./constants";
-import type { Cookies } from "./types";
+import type { ReadonlyCookies } from "./types";
 import { error } from "./httpError";
 import { warnOnce } from "./logger";
 
@@ -106,7 +106,7 @@ export async function generateJwt(
  * @returns The user refresh token and user id.
  */
 export async function getServerSession(
-  cookies: Cookies
+  cookies: ReadonlyCookies
 ): Promise<UserSession | null> {
   const key = getSecretKey();
 
@@ -151,7 +151,7 @@ export async function getServerSession(
  * @returns The user refresh token and id.
  */
 export async function getRequiredServerSession(
-  cookies: Cookies,
+  cookies: ReadonlyCookies,
   message = "unable to get user session"
 ): Promise<UserSession> {
   const session = await getServerSession(cookies);
