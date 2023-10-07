@@ -121,10 +121,10 @@ importers:
   examples/sveltekit-mal-auth:
     dependencies:
       '@animelist/auth-sveltekit':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../packages/animelist-auth-sveltekit
       '@animelist/client':
-        specifier: '*'
+        specifier: workspace:*
         version: link:../../packages/animelist-client
       svelte:
         specifier: ^4.0.5

@@ -14,8 +14,8 @@
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"dependencies": {
-		"@animelist/auth-sveltekit": "*",
-		"@animelist/client": "*",
+		"@animelist/auth-sveltekit": "workspace:*",
+		"@animelist/client": "workspace:*",
 		"svelte": "^4.0.5"
 	},
 	"devDependencies": {
