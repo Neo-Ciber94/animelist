@@ -41,8 +41,7 @@ export async function getRequiredServerSession(cookies: NextCookies) {
  * Fetches the user using the token in the session cookies.
  *
  * @remarks This function will make a request each time to fetch the user,
- * if you want to check if the user is logged prefer to use `getServerSession` or `getRequiredServerSession` instead,
- * or add a caching logic on top of this function.
+ * if you want to check if the user is logged prefer to use `getServerSession` or `getRequiredServerSession` instead.
  *
  * @param cookies The cookies to extract the user token.
  * @param options Additional options to pass to retrieve the user.
