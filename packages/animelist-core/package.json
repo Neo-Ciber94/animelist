@@ -1,6 +1,6 @@
 {
   "name": "@animelist/core",
-  "version": "0.0.1-alpha.8",
+  "version": "0.0.1-alpha.11",
   "description": "Common functionality of @animelist",
   "license": "MIT",
   "author": "Freddy L.",
@@ -22,12 +22,10 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint ./src",
     "build:types": "tsc --emitDeclarationOnly",
-    "build:lib": "tsx esbuild.mts",
-    "build": "rimraf dist && pnpm build:types && pnpm build:lib",
+    "build": "rimraf dist && pnpm build:types && rollup --config rollup.config.ts --configPlugin rollup-plugin-swc3",
     "prepublishOnly": "pnpm build"
   },
   "devDependencies": {
-    "esbuild": "^0.19.3",
     "eslint": "^8.49.0",
     "typescript": "5.2.2"
   },

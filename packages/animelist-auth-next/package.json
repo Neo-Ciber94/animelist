@@ -1,6 +1,6 @@
 {
   "name": "@animelist/auth-next",
-  "version": "0.0.1-alpha.8",
+  "version": "0.0.1-alpha.11",
   "description": "Integration with the @animelist/auth for NextJS",
   "author": "Freddy L.",
   "main": "index.js",
@@ -9,10 +9,9 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "lint": "eslint ./src",
-    "clean:lib": "rimraf server client && rimraf index.js index.js.map index.mjs index.mjs.map index.d.ts index.d.ts.map",
+    "clean:lib": "rimraf dist server client index.js index.mjs index.d.ts index.d.ts.map",
     "build:types": "tsc --emitDeclarationOnly",
-    "build:lib": "tsx esbuild.mts",
-    "build": "rimraf dist && pnpm clean:lib && pnpm build:types && pnpm build:lib && npx ncp dist .",
+    "build": "pnpm clean:lib && pnpm build:types && rollup --config rollup.config.ts --configPlugin rollup-plugin-swc3 && npx ncp dist .",
     "prepublishOnly": "pnpm build"
   },
   "repository": {
@@ -39,7 +38,6 @@
   },
   "devDependencies": {
     "@types/react": "^18.2.22",
-    "esbuild": "^0.19.3",
     "eslint": "^8.49.0",
     "ncp": "^2.0.0",
     "next": "^13.5.2",

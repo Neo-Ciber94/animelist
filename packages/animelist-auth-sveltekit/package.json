@@ -1,19 +1,17 @@
 {
   "name": "@animelist/auth-sveltekit",
-  "version": "0.0.1-alpha.8",
+  "version": "0.0.1-alpha.11",
   "description": "Integration with the @animelist/auth for SvelteKit",
   "author": "Freddy L.",
   "type": "module",
-  "module": "dist/index.mjs",
+  "module": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
     "typecheck": "tsc --noEmit",
     "lint": "eslint ./src",
     "entrypoints": "tsx entrypoints.script.mts",
     "build:types": "tsc --emitDeclarationOnly",
-    "build:lib": "tsx esbuild.mts",
-    "build:svelte": "svelte-package -i src/client -o dist/client",
-    "build": "rimraf dist && pnpm build:types && pnpm build:lib && pnpm entrypoints",
+    "build": "rimraf dist && pnpm build:types && rollup --config rollup.config.ts --configPlugin rollup-plugin-swc3 && pnpm entrypoints",
     "prepublishOnly": "pnpm build"
   },
   "repository": {
@@ -49,12 +47,12 @@
   "exports": {
     "./package.json": "./package.json",
     "./client": {
-      "import": "./dist/client/index.mjs",
-      "default": "./dist/client/index.mjs"
+      "import": "./dist/client/index.js",
+      "default": "./dist/client/index.js"
     },
     "./server": {
-      "import": "./dist/server/index.mjs",
-      "default": "./dist/server/index.mjs"
+      "import": "./dist/server/index.js",
+      "default": "./dist/server/index.js"
     }
   },
   "files": [
