@@ -107,10 +107,12 @@ export async function handleAuthFetchRequest(
 }
 
 async function handleAuth(event: RequestEvent, options: HandleAuthOptions) {
+  const isDev = process.env.NODE_ENV === 'development';
+
   const {
     apiUrl,
     sessionDurationSeconds = DEFAULT_SESSION_DURATION_SECONDS,
-    dev = true,
+    dev = isDev,
   } = options;
 
   const url = new URL(event.request.url);
