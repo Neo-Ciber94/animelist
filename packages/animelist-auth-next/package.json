@@ -47,6 +47,11 @@
     "access": "public"
   },
   "./package.json": "./package.json",
+  ".": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js",
+    "default": "./dist/index.js"
+  },
   "./server": {
     "import": "./server/index.mjs",
     "require": "./server/index.js",

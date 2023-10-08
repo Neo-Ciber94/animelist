@@ -46,6 +46,10 @@
   },
   "exports": {
     "./package.json": "./package.json",
+    ".": {
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
     "./client": {
       "import": "./dist/client/index.js",
       "default": "./dist/client/index.js"

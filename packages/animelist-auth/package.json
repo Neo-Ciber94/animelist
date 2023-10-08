@@ -50,6 +50,11 @@
     "access": "public"
   },
   "./package.json": "./package.json",
+  ".": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js",
+    "default": "./dist/index.js"
+  },
   "./client": {
     "import": "./dist/client/index.mjs",
     "require": "./dist/client/index.js",
