@@ -6,14 +6,14 @@ dotenv.config();
 
 const defineProcessEnv = () => {
 	const definedEnvs = Object.fromEntries(
-	  Object.entries(process.env || {}).map(([key, value]) => [
-		`process.env.${key}`,
-		JSON.stringify(value),
-	  ])
+		Object.entries(process.env || {}).map(([key, value]) => [
+			`process.env.${key}`,
+			JSON.stringify(value)
+		])
 	);
 
 	return definedEnvs;
-  };
+};
 
 export default defineConfig({
 	plugins: [sveltekit(), nodePolyfills()],
