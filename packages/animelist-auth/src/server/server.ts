@@ -72,13 +72,8 @@ export namespace Auth {
    *
    * @see https://myanimelist.net/apiconfig/references/authorization#obtaining-oauth-2.0-access-tokens
    */
-  export async function getAuthenticationUrl(
-    options: GetAuthenticationUrlOptions
-  ) {
-    invariant(
-      MAL_CLIENT_ID,
-      "'MAL_CLIENT_ID' environment variable was not set"
-    );
+  export async function getAuthenticationUrl(options: GetAuthenticationUrlOptions) {
+    invariant(MAL_CLIENT_ID, "'MAL_CLIENT_ID' environment variable was not set");
 
     const { redirectTo } = options;
     const state = crypto.randomUUID();
@@ -106,14 +101,8 @@ export namespace Auth {
    * @returns Returns the tokens to access the `MyAnimeList` API.
    */
   export async function getToken(options: GetTokenOptions) {
-    invariant(
-      MAL_CLIENT_ID,
-      "'MAL_CLIENT_ID' environment variable was not set"
-    );
-    invariant(
-      MAL_CLIENT_SECRET,
-      "'MAL_CLIENT_SECRET' environment variable was not set"
-    );
+    invariant(MAL_CLIENT_ID, "'MAL_CLIENT_ID' environment variable was not set");
+    invariant(MAL_CLIENT_SECRET, "'MAL_CLIENT_SECRET' environment variable was not set");
 
     const { code, redirectTo } = options;
     const url = new URL(`${MY_ANIME_LIST_OAUTH2_URL}/token`);
@@ -165,9 +154,7 @@ export namespace Auth {
       refresh_token: refreshToken,
     });
 
-    const credentials = Buffer.from(
-      `${MAL_CLIENT_ID}:${MAL_CLIENT_SECRET}`
-    ).toString("base64");
+    const credentials = Buffer.from(`${MAL_CLIENT_ID}:${MAL_CLIENT_SECRET}`).toString("base64");
 
     const res = await fetch(url, {
       method: "POST",
