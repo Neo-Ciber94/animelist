@@ -58,7 +58,7 @@ export class CookieJar {
             }
         }
 
-        return serializedCookies.join(", ");
+        return serializedCookies;
     }
 
     toJSON() {

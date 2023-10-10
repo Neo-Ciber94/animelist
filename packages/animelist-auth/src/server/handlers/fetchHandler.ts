@@ -99,8 +99,9 @@ export async function handleAuthFetchRequest(
     }
   }
 
-  if (cookies.size > 0) {
-    response.headers.set("Set-Cookie", cookies.serialize());
+  // Set the cookies
+  for (const cookie of cookies.serialize()) {
+      response.headers.append("Set-Cookie", cookie);
   }
 
   return response;
