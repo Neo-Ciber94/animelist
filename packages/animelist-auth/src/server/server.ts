@@ -154,7 +154,7 @@ export namespace Auth {
       refresh_token: refreshToken,
     });
 
-    const credentials = Buffer.from(`${MAL_CLIENT_ID}:${MAL_CLIENT_SECRET}`).toString("base64");
+    const credentials = convertToBase64(`${MAL_CLIENT_ID}:${MAL_CLIENT_SECRET}`);
 
     const res = await fetch(url, {
       method: "POST",
@@ -197,4 +197,16 @@ export namespace Auth {
     const userId = Number(claims.sub);
     return Number.isNaN(userId) ? null : userId;
   }
+}
+
+function convertToBase64(s: string): string {
+  if (typeof Buffer !== "undefined") {
+    return Buffer.from(s).toString("base64");
+  }
+
+  if (typeof btoa !== "undefined") {
+    return btoa(s);
+  }
+
+  throw new Error("Unable to convert string to base64, 'Buffer' and 'btoa' are not supported");
 }
