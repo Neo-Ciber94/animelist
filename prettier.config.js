@@ -2,6 +2,7 @@
 const config = {
   printWidth: 120,
   trailingComma: "all",
+  endOfLine: "auto",
 };
 
 module.exports = config;
