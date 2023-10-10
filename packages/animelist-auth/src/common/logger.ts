@@ -1,24 +1,23 @@
-
 function getWarnOnceMessages() {
-    const globalWithWarnOnceMessage = globalThis as { warnOnceMessages?: Set<unknown> }
+  const globalWithWarnOnceMessage = globalThis as { warnOnceMessages?: Set<unknown> };
 
-    if (globalWithWarnOnceMessage.warnOnceMessages) {
-        return globalWithWarnOnceMessage.warnOnceMessages;
-    }
-
-    globalWithWarnOnceMessage.warnOnceMessages = new Set();
+  if (globalWithWarnOnceMessage.warnOnceMessages) {
     return globalWithWarnOnceMessage.warnOnceMessages;
+  }
+
+  globalWithWarnOnceMessage.warnOnceMessages = new Set();
+  return globalWithWarnOnceMessage.warnOnceMessages;
 }
 
-/** 
- * @internal 
+/**
+ * @internal
  * */
 export function warnOnce(...message: unknown[]) {
-    const warnOnceMessages = getWarnOnceMessages();
+  const warnOnceMessages = getWarnOnceMessages();
 
-    if (!warnOnceMessages.has(message[0])) {
-        warnOnceMessages.add(message.join(' '))
+  if (!warnOnceMessages.has(message[0])) {
+    warnOnceMessages.add(message.join(" "));
 
-        console.warn(...message)
-    }
+    console.warn(...message);
+  }
 }

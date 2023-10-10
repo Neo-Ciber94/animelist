@@ -8,13 +8,9 @@ export default function Auth() {
     <header className="bg-black">
       <div className="w-full flex flex-row mx-auto container p-4 justify-between items-center h-16">
         {user ? (
-          <span className="text-white font-semibold text-lg cursor-pointer">
-            Welcome {user.name}!
-          </span>
+          <span className="text-white font-semibold text-lg cursor-pointer">Welcome {user.name}!</span>
         ) : (
-          <span className="text-white font-semibold text-lg cursor-pointer">
-            MyAnimeList - NextJS
-          </span>
+          <span className="text-white font-semibold text-lg cursor-pointer">MyAnimeList - NextJS</span>
         )}
 
         <div className="ml-auto">

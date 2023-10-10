@@ -218,12 +218,7 @@ export interface GetUserAnimeListOptions extends GetDataOptions<AnimeNode> {
   /**
    * How to sort the anime list.
    */
-  sort?:
-    | "list_score"
-    | "list_updated_at"
-    | "anime_title"
-    | "anime_start_date"
-    | "anime_id";
+  sort?: "list_score" | "list_updated_at" | "anime_title" | "anime_start_date" | "anime_id";
 
   /**
    * Number of anime to include.
@@ -257,8 +252,7 @@ type WithClientId = {
   accessToken?: undefined;
 };
 
-type WithAccessTokenAndClientId = Pick<WithClientId, "clientId"> &
-  Pick<WithAccessToken, "accessToken">;
+type WithAccessTokenAndClientId = Pick<WithClientId, "clientId"> & Pick<WithAccessToken, "accessToken">;
 
 /**
  * Configuration of the client.
@@ -266,11 +260,7 @@ type WithAccessTokenAndClientId = Pick<WithClientId, "clientId"> &
  * You will need an `access token` or `client id` to use this client.
  * @see https://myanimelist.net/apiconfig/references/authorization
  */
-export type MALClientConfig = (
-  | WithAccessToken
-  | WithClientId
-  | WithAccessTokenAndClientId
-) & {
+export type MALClientConfig = (WithAccessToken | WithClientId | WithAccessTokenAndClientId) & {
   /**
    * Fetch implementation to use.
    *
@@ -340,11 +330,7 @@ export class MalHttpError extends Error {
    * @param message The message of the error.
    * @param cause The cause of the error.
    */
-  constructor(
-    public readonly status: number,
-    message: string,
-    cause?: unknown
-  ) {
+  constructor(public readonly status: number, message: string, cause?: unknown) {
     super(message, { cause });
   }
 }
@@ -368,31 +354,15 @@ export class MALClient {
    * Sends a request to `MyAnimeList` api.
    * @param init Request initialization.
    */
-  public request<T extends object>(
-    init: MALRequestInit & { returnNullOn404: true }
-  ): Promise<T | null>;
-  public request<T extends object>(
-    init: MALRequestInit & { returnNullOn404?: undefined }
-  ): Promise<T>;
-  public async request<T extends object>(
-    init: MALRequestInit
-  ): Promise<T | null> {
-    const {
-      resource,
-      method,
-      body,
-      params,
-      returnNullOn404 = false,
-      headers = {},
-      signal,
-    } = init;
+  public request<T extends object>(init: MALRequestInit & { returnNullOn404: true }): Promise<T | null>;
+  public request<T extends object>(init: MALRequestInit & { returnNullOn404?: undefined }): Promise<T>;
+  public async request<T extends object>(init: MALRequestInit): Promise<T | null> {
+    const { resource, method, body, params, returnNullOn404 = false, headers = {}, signal } = init;
 
     const {
       accessToken,
       clientId,
-      fetch: fetchFunction = typeof window !== "undefined"
-        ? window.fetch
-        : globalThis.fetch,
+      fetch: fetchFunction = typeof window !== "undefined" ? window.fetch : globalThis.fetch,
       proxyUrl,
     } = this.config;
 
@@ -562,10 +532,7 @@ export class MALClient {
    * @param animeId The anime id.
    * @param options The input options.
    */
-  async updateMyAnimeListStatus(
-    animeId: number,
-    options: UpdateMyAnimeListStatusOptions
-  ) {
+  async updateMyAnimeListStatus(animeId: number, options: UpdateMyAnimeListStatusOptions) {
     const { signal, ...rest } = options;
 
     const body = new URLSearchParams();
@@ -597,10 +564,7 @@ export class MALClient {
    * @see https://myanimelist.net/apiconfig/references/api/v2#operation/anime_anime_id_my_list_status_delete
    * @param animeId The anime id.
    */
-  async deleteMyAnimeListStatus(
-    animeId: number,
-    options?: { signal?: AbortSignal }
-  ) {
+  async deleteMyAnimeListStatus(animeId: number, options?: { signal?: AbortSignal }) {
     const { signal } = options || {};
     const result = await this.request<Empty>({
       method: "DELETE",
@@ -618,10 +582,7 @@ export class MALClient {
    * @param userName The username.
    * @param options The options.
    */
-  async getUserAnimeList(
-    userName: UserName,
-    options?: GetUserAnimeListOptions
-  ) {
+  async getUserAnimeList(userName: UserName, options?: GetUserAnimeListOptions) {
     const { fields = [], signal, ...params } = options || {};
 
     const result = await this.request<AnimeStatusApiResponse>({
@@ -642,10 +603,7 @@ export class MALClient {
    * @see https://myanimelist.net/apiconfig/references/api/v2#operation/users_user_id_get
    * @param options The options.
    */
-  async getMyUserInfo(
-    options?: GetMyUserInfoOptions,
-    userId = "@me"
-  ): Promise<User> {
+  async getMyUserInfo(options?: GetMyUserInfoOptions, userId = "@me"): Promise<User> {
     const { fields = [], signal } = options || {};
 
     const result = await this.request<User>({

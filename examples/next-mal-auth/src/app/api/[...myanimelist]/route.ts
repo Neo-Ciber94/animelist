@@ -1,10 +1,5 @@
-import { createMyAnimeListFetchHandler } from '@animelist/auth-next/server'
+import { createMyAnimeListFetchHandler } from "@animelist/auth-next/server";
 
 const handler = createMyAnimeListFetchHandler();
 
-export {
-    handler as GET,
-    handler as POST,
-    handler as PATCH,
-    handler as DELETE
-}
+export { handler as GET, handler as POST, handler as PATCH, handler as DELETE };

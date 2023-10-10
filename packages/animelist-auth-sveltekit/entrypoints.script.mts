@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 
 const packageDir = path.dirname(fileURLToPath(import.meta.url));
 generateEntrypoints({
-    packageDir,
-    formats: ['esm'],
-    convertJsToEsm: false
-})
+  packageDir,
+  formats: ["esm"],
+  convertJsToEsm: false,
+});

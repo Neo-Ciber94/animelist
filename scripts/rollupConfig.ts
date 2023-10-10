@@ -44,12 +44,7 @@ export function rollupConfig({
   return [lib(opts)];
 }
 
-function lib({
-  files,
-  packageDir,
-  formats,
-  esmOutputOverride,
-}: Options): RollupOptions {
+function lib({ files, packageDir, formats, esmOutputOverride }: Options): RollupOptions {
   const outDir = path.join(packageDir, "dist");
   const output: OutputOptions[] = [];
 

@@ -47,10 +47,7 @@ export async function getRequiredServerSession(cookies: NextCookies) {
  * @param options Additional options to pass to retrieve the user.
  * @returns The current user if found.
  */
-export async function getUser(
-  cookies: NextCookies,
-  options?: GetMyUserInfoOptions
-) {
+export async function getUser(cookies: NextCookies, options?: GetMyUserInfoOptions) {
   const session = await getServerSession(cookies);
 
   if (session == null) {

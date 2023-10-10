@@ -14,43 +14,18 @@
     "moduleResolution": "node",
     "module": "esnext",
     "outDir": "./dist",
-    "lib": [
-      "esnext",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["esnext", "DOM", "DOM.Iterable"],
     "paths": {
-      "@animelist/core/*": [
-        "packages/animelist-core/src/*"
-      ],
-      "@animelist/core": [
-        "packages/animelist-core/src"
-      ],
-      "@animelist/client/*": [
-        "packages/animelist-client/src/*"
-      ],
-      "@animelist/client": [
-        "packages/animelist-client/src"
-      ],
-      "@animelist/auth/*": [
-        "packages/animelist-auth/src/*"
-      ],
-      "@animelist/auth": [
-        "packages/animelist-auth/src"
-      ],
-      "@animelist/auth-sveltekit/*": [
-        "packages/animelist-auth-sveltekit/src/*"
-      ],
-      "@animelist/auth-sveltekit": [
-        "packages/animelist-auth-sveltekit/src"
-      ],
-      "tslib": [
-        "./node_modules/tslib/tslib.d.ts"
-      ]
+      "@animelist/core/*": ["packages/animelist-core/src/*"],
+      "@animelist/core": ["packages/animelist-core/src"],
+      "@animelist/client/*": ["packages/animelist-client/src/*"],
+      "@animelist/client": ["packages/animelist-client/src"],
+      "@animelist/auth/*": ["packages/animelist-auth/src/*"],
+      "@animelist/auth": ["packages/animelist-auth/src"],
+      "@animelist/auth-sveltekit/*": ["packages/animelist-auth-sveltekit/src/*"],
+      "@animelist/auth-sveltekit": ["packages/animelist-auth-sveltekit/src"],
+      "tslib": ["./node_modules/tslib/tslib.d.ts"]
     }
   },
-  "exclude": [
-    "**/**/*.test.ts",
-    "**/**/*.spec.ts"
-  ]
+  "exclude": ["**/**/*.test.ts", "**/**/*.spec.ts"]
 }

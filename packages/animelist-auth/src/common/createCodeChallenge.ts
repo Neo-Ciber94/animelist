@@ -5,24 +5,18 @@ export async function createCodeChallenge(length = 43) {
   // Calculate the SHA-256 hash of the code verifier
   const hash = await hash256(codeVerifier);
 
-  const hashBase64 = btoa(hash)
-    .replace("+", "-")
-    .replace("/", "_")
-    .replace(/=+$/, "");
+  const hashBase64 = btoa(hash).replace("+", "-").replace("/", "_").replace(/=+$/, "");
 
   return hashBase64;
 }
 
 function generateCodeVerifier(length = 43) {
   if (length < 43 || length > 128) {
-    throw new Error(
-      "code verifier length must be between 43 and 128 characters"
-    );
+    throw new Error("code verifier length must be between 43 and 128 characters");
   }
 
   // Generate a random string of the specified length
-  const charset =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
+  const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
   let codeVerifier = "";
   for (let i = 0; i < length; i++) {
     const randomIndex = Math.floor(Math.random() * charset.length);
@@ -43,9 +37,7 @@ function hash256(data: string): Promise<string> {
 async function hash256_webCrypto(data: string): Promise<string> {
   function bufferToHex(arrayBuffer: ArrayBuffer) {
     const buffer = new Uint8Array(arrayBuffer);
-    return Array.from(buffer, (byte) =>
-      byte.toString(16).padStart(2, "0")
-    ).join("");
+    return Array.from(buffer, (byte) => byte.toString(16).padStart(2, "0")).join("");
   }
 
   const encoded = new TextEncoder().encode(data);

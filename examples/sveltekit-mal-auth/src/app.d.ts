@@ -1,6 +1,6 @@
 // See https://kit.svelte.dev/docs/types#app
 
-import type { Session } from "@animelist/auth-sveltekit/client";
+import type { Session } from '@animelist/auth-sveltekit/client';
 
 // for information about these interfaces
 declare global {
@@ -15,4 +15,4 @@ declare global {
 	}
 }
 
-export { };
+export {};

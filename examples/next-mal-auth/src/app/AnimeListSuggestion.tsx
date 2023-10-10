@@ -35,11 +35,7 @@ export default function AnimeSuggestions() {
   }, [accessToken, isLoading]);
 
   if (isLoading || animeList.isLoading) {
-    return (
-      <p className="mx-auto w-full text-2xl text-center p-10 text-black font-bold animate-pulse">
-        Loading...
-      </p>
-    );
+    return <p className="mx-auto w-full text-2xl text-center p-10 text-black font-bold animate-pulse">Loading...</p>;
   } else if (!accessToken) {
     return (
       <p className="mx-auto w-full text-2xl text-center p-10 text-black font-bold">
@@ -64,9 +60,7 @@ export default function AnimeSuggestions() {
                 height="200"
                 className="object-cover aspect-square"
               />
-              <p className="font-semibold italic text-center text-white">
-                {anime.node.title}
-              </p>
+              <p className="font-semibold italic text-center text-white">{anime.node.title}</p>
             </div>
           ))}
         </div>

@@ -4,10 +4,7 @@ import cookie from "cookie";
 
 describe("Handle fetch authentication requests", () => {
   test("Should return redirect to myanimelist for sign-in", async () => {
-    const req = new Request(
-      "http://localhost:5600/api/myanimelist/auth/sign-in",
-      {}
-    );
+    const req = new Request("http://localhost:5600/api/myanimelist/auth/sign-in", {});
     const res = await handleAuthFetchRequest(req, {
       apiUrl: "/api/myanimelist",
     });
@@ -23,10 +20,7 @@ describe("Handle fetch authentication requests", () => {
   });
 
   test("Should remove cookies on sign-out", async () => {
-    const req = new Request(
-      "http://localhost:5600/api/myanimelist/auth/sign-out",
-      {}
-    );
+    const req = new Request("http://localhost:5600/api/myanimelist/auth/sign-out", {});
     const res = await handleAuthFetchRequest(req, {
       apiUrl: "/api/myanimelist",
     });
@@ -35,10 +29,7 @@ describe("Handle fetch authentication requests", () => {
   });
 
   test("Should remove cookies on sign-out", async () => {
-    const req = new Request(
-      "http://localhost:5600/api/myanimelist/auth/sign-out",
-      {}
-    );
+    const req = new Request("http://localhost:5600/api/myanimelist/auth/sign-out", {});
     const res = await handleAuthFetchRequest(req, {
       apiUrl: "/api/myanimelist",
     });

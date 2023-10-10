@@ -13,13 +13,9 @@ function getGlobalSecretKey() {
 
   // We will just throw an error here, but when using `vite` this throw during the build process
   if (process.env.NODE_ENV === "production") {
-    console.error(
-      "❌ You must generate a secret key and set it to the environment variable 'MAL_SECRET_KEY'"
-    );
+    console.error("❌ You must generate a secret key and set it to the environment variable 'MAL_SECRET_KEY'");
   } else {
-    warnOnce(
-      `⚠️ 'process.env.MAL_SECRET_KEY' was not set, using a default secret key`
-    );
+    warnOnce(`⚠️ 'process.env.MAL_SECRET_KEY' was not set, using a default secret key`);
   }
 
   return "nsuI9j2wnlH2dQ4I23g/0Ou/kCAwS8jhWh/lNcU7Yd1DS4wdNCQ5Nso+P/zukcIelBsZ9gomJhqichVYvKasaA==";
@@ -85,10 +81,7 @@ function getSecretKey() {
  * @param refreshToken The MyAnimeList refresh token.
  * @returns A jwt token with the refresh token and user id.
  */
-export async function generateJwt(
-  userId: number,
-  refreshToken: string
-): Promise<string> {
+export async function generateJwt(userId: number, refreshToken: string): Promise<string> {
   const signJwt = new SignJWT({ refreshToken, sub: String(userId) })
     .setExpirationTime(Date.now() + DEFAULT_SESSION_DURATION_SECONDS)
     .setAudience(JWT_AUDIENCE)
@@ -105,9 +98,7 @@ export async function generateJwt(
  * @param cookies The cookies to extract the user token.
  * @returns The user refresh token and user id.
  */
-export async function getServerSession(
-  cookies: ReadonlyCookies
-): Promise<UserSession | null> {
+export async function getServerSession(cookies: ReadonlyCookies): Promise<UserSession | null> {
   const key = getSecretKey();
 
   const sessionToken = cookies.get(COOKIE_AUTH_SESSION);
@@ -152,7 +143,7 @@ export async function getServerSession(
  */
 export async function getRequiredServerSession(
   cookies: ReadonlyCookies,
-  message = "unable to get user session"
+  message = "unable to get user session",
 ): Promise<UserSession> {
   const session = await getServerSession(cookies);
 

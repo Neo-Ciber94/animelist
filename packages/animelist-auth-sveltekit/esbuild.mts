@@ -7,7 +7,7 @@ const packageDir = path.dirname(fileURLToPath(import.meta.url));
 await esbuildProject({
   inputs: ["src/**/*.ts"],
   exclude: ["**/*.test.ts"],
-  formats: ['esm'],
+  formats: ["esm"],
   outExtensions: {}, // do not overwrite .mjs extensions
   packageDir,
 });

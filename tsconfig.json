@@ -1,13 +1,9 @@
 {
-    "extends": "./tsconfig.build.json",
-    "include": [
-        "packages",
-        "examples",
-        "scripts"
-    ],
-    "compilerOptions": {
-        "baseUrl": ".",
-        "esModuleInterop": true,
-        "moduleResolution": "node"
-    }
+  "extends": "./tsconfig.build.json",
+  "include": ["packages", "examples", "scripts"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "moduleResolution": "node"
+  }
 }

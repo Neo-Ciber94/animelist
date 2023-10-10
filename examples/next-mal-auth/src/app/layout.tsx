@@ -12,11 +12,7 @@ export const metadata: Metadata = {
   title: "MyAnimeList - NextJS",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   /**
    * To load the session entirely server side uncomment this line,
    * make this component async and pass the session to the auth provider.
@@ -26,9 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <MyAnimeListAuthProvider /* session={session} */>
-          {children}
-        </MyAnimeListAuthProvider>
+        <MyAnimeListAuthProvider /* session={session} */>{children}</MyAnimeListAuthProvider>
       </body>
     </html>
   );

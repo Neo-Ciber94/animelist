@@ -1,14 +1,12 @@
 {
-    "extends": "../../tsconfig.build.json",
-    "include": [
-        "src",
-    ],
-    "compilerOptions": {
-        "baseUrl": ".",
-        "outDir": "./dist",
-        "declarationDir": "dist",
-        "emitDeclarationOnly": true,
-        "module": "NodeNext",
-        "moduleResolution": "NodeNext"
-    },
+  "extends": "../../tsconfig.build.json",
+  "include": ["src"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "./dist",
+    "declarationDir": "dist",
+    "emitDeclarationOnly": true,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext"
+  }
 }

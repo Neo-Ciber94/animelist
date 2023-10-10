@@ -13,16 +13,9 @@ import type { RequestEvent } from "../../common/types";
 import type { HandleAuthOptions, MyAnimeListHandlerOptions } from "./types";
 import { CookieJar } from "../../common/cookieJar";
 import { getApiUrl } from "../../common/getApiUrl";
-import {
-  DEFAULT_SESSION_DURATION_SECONDS,
-  MY_ANIME_LIST_API_URL,
-} from "../../common/constants";
+import { DEFAULT_SESSION_DURATION_SECONDS, MY_ANIME_LIST_API_URL } from "../../common/constants";
 
-const ALLOWED_FORWARD_HEADERS = [
-  "Authorization",
-  "X-MAL-CLIENT-ID",
-  "Content-Type",
-];
+const ALLOWED_FORWARD_HEADERS = ["Authorization", "X-MAL-CLIENT-ID", "Content-Type"];
 
 /**
  * A request handler.
@@ -33,15 +26,11 @@ export type Handler = (req: Request) => Promise<Response>;
  * Creates a `Handler` for `MyAnimeList` requests.
  * @param options The options for the handler.
  */
-export function createMyAnimeListFetchHandler(
-  options: MyAnimeListHandlerOptions = {}
-): Handler {
+export function createMyAnimeListFetchHandler(options: MyAnimeListHandlerOptions = {}): Handler {
   const { sessionDurationSeconds = DEFAULT_SESSION_DURATION_SECONDS } = options;
 
   if (sessionDurationSeconds <= 0) {
-    throw new Error(
-      `Session duration must be greater than zero but was: ${sessionDurationSeconds}`
-    );
+    throw new Error(`Session duration must be greater than zero but was: ${sessionDurationSeconds}`);
   }
 
   const apiUrl = getApiUrl();
@@ -67,8 +56,7 @@ export function createMyAnimeListFetchHandler(
     }
 
     if (options.callbacks?.onProxyRequest) {
-      const next = (request: Request) =>
-        proxyFetchRequestToMyAnimeList(apiUrl, request);
+      const next = (request: Request) => proxyFetchRequestToMyAnimeList(apiUrl, request);
       return options.callbacks.onProxyRequest(request, next);
     }
 
@@ -82,10 +70,7 @@ export function createMyAnimeListFetchHandler(
  * @param options The authentication options.
  * @returns The response object.
  */
-export async function handleAuthFetchRequest(
-  request: Request,
-  options: HandleAuthOptions
-) {
+export async function handleAuthFetchRequest(request: Request, options: HandleAuthOptions) {
   const cookies = new CookieJar(request.headers.get("cookie"));
   let response: Response;
 
@@ -101,20 +86,16 @@ export async function handleAuthFetchRequest(
 
   // Set the cookies
   for (const cookie of cookies.serialize()) {
-      response.headers.append("Set-Cookie", cookie);
+    response.headers.append("Set-Cookie", cookie);
   }
 
   return response;
 }
 
 async function handleAuth(event: RequestEvent, options: HandleAuthOptions) {
-  const isDev = process.env.NODE_ENV === 'development';
+  const isDev = process.env.NODE_ENV === "development";
 
-  const {
-    apiUrl,
-    sessionDurationSeconds = DEFAULT_SESSION_DURATION_SECONDS,
-    dev = isDev,
-  } = options;
+  const { apiUrl, sessionDurationSeconds = DEFAULT_SESSION_DURATION_SECONDS, dev = isDev } = options;
 
   const url = new URL(event.request.url);
   const action = getAuthAction(url.pathname);
@@ -123,11 +104,7 @@ async function handleAuth(event: RequestEvent, options: HandleAuthOptions) {
   switch (action) {
     case "/sign-in": {
       const redirectTo = `${originUrl}/callback`;
-      const {
-        url: authenticationUrl,
-        state,
-        codeChallenge,
-      } = await Auth.getAuthenticationUrl({ redirectTo });
+      const { url: authenticationUrl, state, codeChallenge } = await Auth.getAuthenticationUrl({ redirectTo });
 
       event.cookies.set(COOKIE_AUTH_CSRF, state, {
         path: "/",
@@ -204,9 +181,7 @@ async function handleAuth(event: RequestEvent, options: HandleAuthOptions) {
         maxAge: sessionDurationSeconds,
       });
 
-      const { access_token: accessToken, expires_in } = await Auth.refreshToken(
-        { refreshToken: tokens.refresh_token }
-      );
+      const { access_token: accessToken, expires_in } = await Auth.refreshToken({ refreshToken: tokens.refresh_token });
 
       event.cookies.set(COOKIE_AUTH_ACCESS_TOKEN, accessToken, {
         path: "/",
@@ -235,8 +210,7 @@ async function handleAuth(event: RequestEvent, options: HandleAuthOptions) {
     }
     case "/session": {
       const { accessToken, expiresAt } = await getMyAnimeListAuthToken(event);
-      const includeStatistics =
-        url.searchParams.get("include_anime_statistics") === "true";
+      const includeStatistics = url.searchParams.get("include_anime_statistics") === "true";
 
       const malClient = new MALClient({ accessToken });
       const user = await malClient.getMyUserInfo({
@@ -305,16 +279,11 @@ function getAuthAction(pathname: string) {
  * @param apiUrl The path to the current API endpoint. `/api/myanimelist`
  * @param request The current request event.
  */
-export async function proxyFetchRequestToMyAnimeList(
-  apiUrl: string,
-  request: Request
-) {
+export async function proxyFetchRequestToMyAnimeList(apiUrl: string, request: Request) {
   const forwardHeaders: Record<string, string> = {};
 
   for (const [key, value] of request.headers.entries()) {
-    if (
-      ALLOWED_FORWARD_HEADERS.some((x) => x.toLowerCase() === key.toLowerCase())
-    ) {
+    if (ALLOWED_FORWARD_HEADERS.some((x) => x.toLowerCase() === key.toLowerCase())) {
       forwardHeaders[key] = value;
     }
   }
@@ -350,9 +319,7 @@ export async function proxyFetchRequestToMyAnimeList(
 
   if (!res.ok) {
     // ❌ GET (404) Not Found: https://api.example.com/users
-    console.error(
-      `❌ ${request.method} (${res.status}) ${res.statusText}: ${myAnimeListApiUrl}`
-    );
+    console.error(`❌ ${request.method} (${res.status}) ${res.statusText}: ${myAnimeListApiUrl}`);
   }
 
   return res;

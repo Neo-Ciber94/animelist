@@ -5,13 +5,7 @@ import type { User } from "@animelist/core";
 import { getSession } from "@animelist/auth/client";
 
 // Re-export client related stuff
-export {
-  signIn,
-  signOut,
-  getSession,
-  getUserToken,
-  type GetSessionOptions,
-} from "@animelist/auth/client";
+export { signIn, signOut, getSession, getUserToken, type GetSessionOptions } from "@animelist/auth/client";
 
 const DAY_MILLIS = 1000 * 60 * 60 * 24;
 
@@ -41,9 +35,7 @@ export type SessionProviderProps = {
 export function SessionProvider({ session, children }: SessionProviderProps) {
   const [isLoading, setIsLoading] = useState(session === undefined);
   const [user, setUser] = useState<User | null>(session?.user ?? null);
-  const [accessToken, setAccessToken] = useState<string | null>(
-    session?.accessToken ?? null
-  );
+  const [accessToken, setAccessToken] = useState<string | null>(session?.accessToken ?? null);
 
   useEffect(() => {
     if (session !== undefined) {
@@ -98,7 +90,7 @@ export function useSession() {
 
   if (ctx == null) {
     throw new Error(
-      `'useSession' cannot be called in a Server Component or without a <SessionProvider> in the react tree`
+      `'useSession' cannot be called in a Server Component or without a <SessionProvider> in the react tree`,
     );
   }
 

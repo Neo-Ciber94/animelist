@@ -1,12 +1,10 @@
 {
-    "extends": "../../tsconfig.build.json",
-    "compilerOptions": {
-        "declarationDir": "dist",
-        "baseUrl": ".",
-        "moduleResolution": "node",
-        "esModuleInterop": true
-    },
-    "include": [
-        "src"
-    ]
+  "extends": "../../tsconfig.build.json",
+  "compilerOptions": {
+    "declarationDir": "dist",
+    "baseUrl": ".",
+    "moduleResolution": "node",
+    "esModuleInterop": true
+  },
+  "include": ["src"]
 }

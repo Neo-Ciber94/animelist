@@ -2,10 +2,7 @@ import fs from "fs/promises";
 import fse from "fs-extra";
 import nodePath from "path";
 
-export async function replaceImportExtensions(
-  files: string[],
-  extension: `.${string}`
-) {
+export async function replaceImportExtensions(files: string[], extension: `.${string}`) {
   const promises: Promise<void>[] = [];
   for (const filePath of files) {
     const task = async () => {
@@ -16,17 +13,13 @@ export async function replaceImportExtensions(
           const dir = nodePath.dirname(filePath);
           const importFilePath = nodePath.join(dir, `${path}.js`);
           const exists = fse.existsSync(importFilePath);
-          const isDirectory =
-            exists && fse.statSync(importFilePath).isDirectory();
+          const isDirectory = exists && fse.statSync(importFilePath).isDirectory();
 
           const importPath = path.replace(/(.mjs|.js|.cjs)/, "");
-          const updatedPath =
-            isDirectory && exists
-              ? `${importPath}/index${extension}"`
-              : `${importPath}${extension}"`;
+          const updatedPath = isDirectory && exists ? `${importPath}/index${extension}"` : `${importPath}${extension}"`;
 
           return `${statement} ${variable} from ${updatedPath}`;
-        }
+        },
       );
 
       await fs.writeFile(filePath, updatedContent, "utf8");

@@ -1,23 +1,23 @@
 import * as glob from "glob";
-import fse from 'fs-extra';
+import fse from "fs-extra";
 import path from "path";
 import { ENTRYPOINT_MARKER } from "./entrypoints.mjs";
 
 function main() {
-    console.log("Removing entry points...")
-    const entryPointMarkers = glob.sync(`**/**/${ENTRYPOINT_MARKER}`, {
-        ignore: ["**/node_modules"]
-    });
+  console.log("Removing entry points...");
+  const entryPointMarkers = glob.sync(`**/**/${ENTRYPOINT_MARKER}`, {
+    ignore: ["**/node_modules"],
+  });
 
-    for (const entryPointFile of entryPointMarkers) {
-        if (!fse.exists(entryPointFile)) {
-            continue;
-        }
-
-        const dir = path.dirname(entryPointFile);
-        fse.removeSync(dir);
-        console.log(`Removed: ${dir}`)
+  for (const entryPointFile of entryPointMarkers) {
+    if (!fse.exists(entryPointFile)) {
+      continue;
     }
+
+    const dir = path.dirname(entryPointFile);
+    fse.removeSync(dir);
+    console.log(`Removed: ${dir}`);
+  }
 }
 
 main();
