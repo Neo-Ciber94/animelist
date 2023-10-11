@@ -220,8 +220,8 @@ export default function middleware(req: NextRequest) {
 ## Load user from server
 
 Each time we load a page we will fetch the user from the client side,
-so you may need to show a spinner while the user is loading,
-to prevent this we can fetch the user from the server side.
+so you may need to show a spinner while the user is loading.
+To prevent this we can fetch the user from the server side.
 
 Following our **setup** example we can do this:
 

@@ -4,6 +4,14 @@ Implementation of the `@animelist/auth` for `SvelteKit`.
 
 You can checkout this [Example](https://github.com/Neo-Ciber94/animelist/tree/main/examples/sveltekit-mal-auth).
 
+## Table of Contents
+
+1. [Setup](#setup)
+2. [Get Current User](#get-current-user)
+3. [Load user from server](#load-user-from-server)
+4. [License](#license)
+
+
 ## Setup
 
 In your `Sveltekit` project install the packages:
@@ -28,10 +36,12 @@ pnpm install @animelist/auth-sveltekit @animelist/client
 
 1.  This package reads environment variables from `process.env` so you need to define them in your `vite.config.ts`.
 
-    <details>
-    <summary>Example vite.config.ts</summary>
+You can define them directly, `dotenv` or any other plugin that do the job.
 
-    ```ts
+This is an example on how can be done:
+
+
+  ```ts
     import { sveltekit } from "@sveltejs/kit/vite";
     import { defineConfig } from "vite";
     import dotenv from "dotenv"; // npm install -D dotenv
@@ -52,8 +62,7 @@ pnpm install @animelist/auth-sveltekit @animelist/client
       plugins: [sveltekit()],
       define: defineProcessEnv(),
     });
-    ```
-    </details>
+  ```
 
 2.  You need to provide the following environment variables:
 
@@ -158,6 +167,112 @@ $: (async function(){
 })()
 </script>
 ```
+
+## Get Current User
+
+After the user is logged you can get the current user information using `getServerSession`.
+
+Which returns `null` if the user is not logged or `UserSession`:
+
+```ts
+type UserSession = {
+  userId: number;
+  refreshToken: string;
+  accessToken: string;
+};
+```
+
+```ts
+import { getServerSession } from "@animelist/auth-next/server";
+
+const session = await getServerSession(cookies);
+
+if (session) {
+  console.log("User is logged in");
+}
+```
+
+You can also use `getRequiredServerSession(cookies)` which throws an error if the user is not logged in.
+
+> If you want to get the user information you can use the `getUser`, keep in mind this fetches the user,
+instead of just retrieve the information from the cookie.
+
+```ts
+import { getUser } from "@animelist/auth-next/server";
+
+const user = await getUser(cookies);
+
+if (user) {
+  console.log("User is logged in");
+}
+```
+
+## Load user from server
+
+Each time we load a page `session.initialize` will fetch the user from the client side,
+so you may need to show a spinner while the user is loading.
+To prevent this we can fetch the user from the server side.
+
+Following our **setup** example, we can add a `+layout.server.ts` to load the user to all our pages.
+
+```ts
+import type { LayoutServerLoad } from './$types';
+
+// `hooks.server.ts` already set the session
+export const load: LayoutServerLoad = async ({ locals }) => {
+  return { session: locals.session };
+};
+
+```
+
+```svelte
+<script lang="ts">
+  import { session } from "@animelist/auth-sveltekit/client";
+  import type { LayoutServerData } from './$types';
+
+  export let data: LayoutServerData;
+
+  session.initialize(data.session).catch(console.error);
+</script>
+
+<slot />
+```
+
+Alternatively you can drop the usage of `$session` and just access the `$page.data.session`.
+
+```svelte
+<script lang="ts">
+import { page } from '$app/stores';
+</script>
+
+<div>{$page.data.session?.user.name}</div>
+```
+
+Remember to also update your `app.d.ts` for type safety.
+
+```ts
+// app.d.ts
+import type { Session } from '@animelist/auth-sveltekit/client';
+
+declare global {
+  namespace App {
+    interface Locals {
+      session?: Session | null;
+    }
+
+    interface PageData {
+      session?: Session | null;
+    }
+    
+    // interface Error {}
+    // interface Platform {}
+  }
+}
+```
+
+---
+
+## Good to know
 
 You may also notice you are receiving this warning:
 
