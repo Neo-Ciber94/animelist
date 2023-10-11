@@ -1,4 +1,15 @@
+<!-- omit in toc -->
 # @animelist/auth
+
+<!-- omit in toc -->
+## Table of Contents
+
+- [Contents](#contents)
+- [Install](#install)
+- [Environment variables](#environment-variables)
+- [Get Current User](#get-current-user)
+- [License](#license)
+
 
 ## Contents
 
@@ -44,7 +55,45 @@ These are the environment variables are used by the `@animelist/auth`
 - `MAL_SECRET_KEY` The secret key used for encode/decode the user session.
 - `PUBLIC_MAL_API_URL` The url of the endpoint that handlers the requests, by default is `/api/myanimelist` 
   
+
+## Get Current User
+
+After the user is logged you can get the current user information using `getServerSession`.
+
+Which returns `null` if the user is not logged or `UserSession`:
+
+```ts
+type UserSession = {
+  userId: number;
+  refreshToken: string;
+  accessToken: string;
+};
+```
+
+```ts
+import { getServerSession } from "@animelist/auth/server";
+
+const session = await getServerSession(cookies);
+
+if (session) {
+  console.log("User is logged in");
+}
+```
+
+You can also use `getRequiredServerSession(cookies)` which throws an error if the user is not logged in.
+
+> If you want to get the user information you can use the `@animelist/client`.
+
+```ts
+import { MALClient } from "@animelist/client";
+
+const client = new MALClient({ accessToken });
+const user = await client.getMyUserInfo();
+```
+
 ____
+
+## Good to know
 
 If the `MAL_SECRET_KEY` is not set you will receive this warning: 
 > ⚠️ 'process.env.MAL_SECRET_KEY' was not set, using a default secret key

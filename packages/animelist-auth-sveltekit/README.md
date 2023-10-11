@@ -34,7 +34,7 @@ pnpm install @animelist/auth-sveltekit @animelist/client
     ```ts
     import { sveltekit } from "@sveltejs/kit/vite";
     import { defineConfig } from "vite";
-    import dotenv from "dotenv"; // npm install dotenv
+    import dotenv from "dotenv"; // npm install -D dotenv
     dotenv.config();
 
     const defineProcessEnv = () => {

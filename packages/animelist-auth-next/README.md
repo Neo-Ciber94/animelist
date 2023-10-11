@@ -4,6 +4,14 @@ Implementation of the `@animelist/auth` for `NextJS`.
 
 You can checkout this [Example](https://github.com/Neo-Ciber94/animelist/tree/main/examples/next-mal-auth).
 
+## Table of Contents
+
+1. [Setup](#setup)
+2. [Get Current User](#get-current-user)
+3. [Middleware](#middleware)
+4. [Load user from server](#load-user-from-server)
+5. [License](#license)
+
 ## Setup
 
 In your `NextJS` project install the packages:
@@ -150,7 +158,100 @@ export default function HomePage() {
  }, [accessToken])
 ```
 
+## Get Current User
+
+After the user is logged you can get the current user information using `getServerSession`.
+
+Which returns `null` if the user is not logged or `UserSession`:
+
+```ts
+type UserSession = {
+  userId: number;
+  refreshToken: string;
+  accessToken: string;
+};
+```
+
+```ts
+import { getServerSession } from "@animelist/auth-next/server";
+
+const session = await getServerSession(cookies);
+
+if (session) {
+  console.log("User is logged in");
+}
+```
+
+You can also use `getRequiredServerSession(cookies)` which throws an error if the user is not logged in.
+
+> If you want to get the user information you can use the `getUser`, keep in mind this fetches the user,
+instead of just retrieve the information from the cookie.
+
+```ts
+import { getUser } from "@animelist/auth-next/server";
+
+const user = await getUser(cookies);
+
+if (user) {
+  console.log("User is logged in");
+}
+```
+
+## Middleware
+
+Using the `getServerSession` you can define a middleware for redirect users.
+
+```ts
+import { getServerSession } from "@animelist/auth-next/server";
+import { NextRequest, NextResponse } from "next/server";
+
+export default function middleware(req: NextRequest) {
+  const session = getServerSession(req.cookies);
+
+  if (!session) {
+    return NextResponse.redirect("/login");
+  }
+
+  return NextResponse.next();
+}
+
+```
+
+## Load user from server
+
+Each time we load a page we will fetch the user from the client side,
+so you may need to show a spinner while the user is loading,
+to prevent this we can fetch the user from the server side.
+
+Following our **setup** example we can do this:
+
+```ts
+import { cookies } from "next/headers";
+import { getUser } from "@animelist/auth-next/server";
+
+export default async function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+
+  const session = await getUser(cookies());
+
+  return (
+    <html lang="en">
+      <body>
+        <MyAnimeListAuthProvider session={session}>
+          {children}
+        </MyAnimeListAuthProvider>
+      </body>
+    </html>
+  );
+}
+```
+
 ---
+
+## Good to know
 
 You may also notice you are receiving this warning:
 
