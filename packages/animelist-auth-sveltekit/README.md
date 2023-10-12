@@ -34,7 +34,7 @@ _pnpm_
 pnpm install @animelist/auth-sveltekit @animelist/client
 ```
 
-1.  This package reads environment variables from `process.env` so you need to define them in your `vite.config.ts`.
+1.  This package reads environment variables from `process.env`, which is not available for some targets, for that you need to define them in your `vite.config.ts`.
 
 You can define them directly, `dotenv` or any other plugin that do the job.
 
@@ -63,6 +63,16 @@ This is an example on how can be done:
       define: defineProcessEnv(),
     });
   ```
+
+  > You may need to mark `@animelist/auth` as external to allow vite to replace the values correctly.
+  >```ts
+  >    export default defineConfig({
+  >      ssr: {
+  >        noExternal: ["@animelist/auth"]
+  >      },
+  >      // ...
+  >  });
+  >```
 
 2.  You need to provide the following environment variables:
 
