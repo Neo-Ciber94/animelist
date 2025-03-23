@@ -1,6 +1,6 @@
 {
   "name": "@animelist/auth-next",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Integration with the @animelist/auth for NextJS",
   "author": "Freddy L.",
   "main": "index.js",

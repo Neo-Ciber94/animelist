@@ -1,7 +1,7 @@
 {
   "name": "@animelist/client",
   "author": "Freddy L.",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Provide an interface to communicate with MyAnimeList API",
   "license": "MIT",
   "main": "dist/index.js",

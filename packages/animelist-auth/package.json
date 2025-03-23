@@ -1,6 +1,6 @@
 {
   "name": "@animelist/auth",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Provides an API to authenticate users with `MyAnimeList`",
   "author": "Freddy L.",
   "license": "MIT",
